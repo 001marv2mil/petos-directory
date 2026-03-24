@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1080">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #ffffff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Background gradient ── */
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, #f0fdf4 0%, #ffffff 40%, #ecfdf5 100%);
+  }
+
+  /* ── Decorative elements ── */
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    background: #1a6b4a;
+  }
+  .deco-1 { width: 400px; height: 400px; top: -120px; right: -80px; }
+  .deco-2 { width: 300px; height: 300px; bottom: -60px; left: -60px; }
+  .deco-3 { width: 200px; height: 200px; bottom: 200px; right: 100px; opacity: 0.04; }
+
+  /* ── Content container ── */
+  .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 72px 64px;
+  }
+
+  /* ── Top bar ── */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a6b4a;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: #111827; }
+  .badge {
+    background: #1a6b4a;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── Type badge (city spotlight vs listing) ── */
+  .type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0fdf4;
+    border: 2px solid #bbf7d0;
+    color: #166534;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+  .type-badge .emoji { font-size: 20px; }
+
+  /* ── Main headline ── */
+  .headline {
+    font-size: 64px;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    max-width: 800px;
+  }
+  .headline .highlight {
+    color: #1a6b4a;
+  }
+
+  /* ── Subtext ── */
+  .subtext {
+    font-size: 24px;
+    font-weight: 400;
+    color: #6b7280;
+    line-height: 1.5;
+    max-width: 700px;
+    margin-bottom: auto;
+  }
+
+  /* ── Bottom section ── */
+  .bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .cta-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #1a6b4a;
+    color: #ffffff;
+    padding: 20px 36px;
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .cta-box .arrow {
+    font-size: 24px;
+  }
+
+  .url-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #9ca3af;
+    text-align: right;
+  }
+
+  /* ── Accent line ── */
+  .accent-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #1a6b4a, #16a34a, #1a6b4a);
+  }
+
+  /* ── LISTING SPOTLIGHT variant ── */
+  body.listing .bg-gradient {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 40%, #111827 100%);
+  }
+  body.listing .deco-circle { background: #16a34a; opacity: 0.12; }
+  body.listing .headline { color: #ffffff; }
+  body.listing .subtext { color: #9ca3af; }
+  body.listing .type-badge {
+    background: rgba(22, 163, 74, 0.15);
+    border-color: rgba(22, 163, 74, 0.3);
+    color: #4ade80;
+  }
+  body.listing .url-text { color: #6b7280; }
+</style>
+</head>
+<body class="__POST_TYPE__">
+  <div class="bg-gradient"></div>
+  <div class="deco-circle deco-1"></div>
+  <div class="deco-circle deco-2"></div>
+  <div class="deco-circle deco-3"></div>
+
+  <div class="content">
+    <div class="top-bar">
+      <div class="logo">Pet<span>OS</span></div>
+      <div class="badge">Verified Listings</div>
+    </div>
+
+    <div class="type-badge">
+      <span class="emoji">__EMOJI__</span>
+      __TYPE_LABEL__
+    </div>
+
+    <div class="headline">
+      __HEADLINE__
+    </div>
+
+    <div class="subtext">
+      __SUBTEXT__
+    </div>
+
+    <div class="bottom">
+      <div class="cta-box">
+        Explore on PetOS <span class="arrow">→</span>
+      </div>
+      <div class="url-text">petoshealth.com</div>
+    </div>
+  </div>
+
+  <div class="accent-line"></div>
+</body>
+</html>

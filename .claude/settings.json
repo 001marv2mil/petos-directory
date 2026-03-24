@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(while ! grep -q \"All new cities complete\" \"c:\\\\Users\\\\m1uva\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-m1uva-OneDrive-Desktop-Petos-directory\\\\5f7934aa-43f7-4128-b696-4daae43610cd\\\\tasks\\\\bltp1o6t2.output\")"
+    ]
+  }
+}
