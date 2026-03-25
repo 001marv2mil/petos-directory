@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --config vite.ssr.config.ts && node scripts/prerender.mjs",
+    "build:client": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "seed": "tsx --env-file=.env.local scripts/seed-providers.ts",

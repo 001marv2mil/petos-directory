@@ -8,7 +8,13 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Missing Supabase environment variables. Check your .env.local file.')
 }
 
-export const supabase = createClient(supabaseUrl ?? '', supabaseAnonKey ?? '')
+// During SSR/prerender the env vars may be absent; use placeholders so the
+// module initialises without throwing. renderToString is synchronous and
+// React Query never actually invokes Supabase during a server render.
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder-anon-key',
+)
 
 // Database type alias
 export type ProviderRow = Provider
