@@ -12,6 +12,7 @@ import { BreadcrumbJsonLd, ItemListJsonLd } from '@/components/common/JsonLd'
 import { CategorySeoCopy } from '@/components/seo/CategorySeoCopy'
 import { CityAlertBanner } from '@/components/common/CityAlertBanner'
 import { isOpenNow } from '@/lib/utils'
+import { CITY_COORDS } from '@/lib/cityCoords'
 import type { CategorySlug, SortOption } from '@/types'
 import { useState } from 'react'
 
@@ -48,6 +49,7 @@ export default function CategoryPage() {
     : (data?.providers ?? [])
 
   const bannerImage = getCategoryBannerImage(categoryMeta.slug as CategorySlug)
+  const cityCoords = CITY_COORDS[cityMeta.citySlug]
 
   return (
     <div>
@@ -152,7 +154,12 @@ export default function CategoryPage() {
         )}
 
         {/* Grid */}
-        <ProviderGrid providers={filteredProviders} loading={isLoading} />
+        <ProviderGrid
+          providers={filteredProviders}
+          loading={isLoading}
+          refLat={cityCoords?.lat}
+          refLng={cityCoords?.lng}
+        />
 
         {/* Pagination */}
         {data && data.total > 24 && (
