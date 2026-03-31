@@ -5,9 +5,9 @@ export function EmergencyCTA() {
     <section className="bg-blue-900 text-white py-14 mx-4 sm:mx-8 lg:mx-16 mb-12 rounded-2xl">
       <div className="max-w-4xl mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
-          <h2 className="text-2xl font-bold mb-2">Urgent Pet Care?</h2>
+          <h2 className="text-2xl font-bold mb-2">Pet Emergency?</h2>
           <p className="text-blue-200 text-sm">
-            Need help fast? Find 24/7 emergency vet clinics near you.
+            Find open 24/7 emergency vets in your area right now.
           </p>
         </div>
         <Link

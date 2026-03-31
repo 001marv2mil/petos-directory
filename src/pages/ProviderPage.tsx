@@ -345,16 +345,23 @@ export default function ProviderPage() {
 
           {/* Claim listing */}
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-            <h2 className="font-semibold text-gray-900 mb-1">Is this your business?</h2>
-            <p className="text-sm text-gray-500 mb-3">
-              Claim this listing to update your hours, photos, and contact info.
-            </p>
-            <a
-              href={`mailto:hello@petos.directory?subject=Claim Listing: ${encodeURIComponent(provider.business_name)}&body=Business: ${encodeURIComponent(provider.business_name)}%0AAddress: ${encodeURIComponent(provider.address + ', ' + provider.city + ', ' + provider.state)}`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:border-green-400 hover:text-green-700 transition-colors"
-            >
-              Claim this listing →
-            </a>
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+                <Shield className="w-4 h-4 text-blue-700" />
+              </div>
+              <div>
+                <h2 className="font-semibold text-gray-900 mb-1">Own this business?</h2>
+                <p className="text-sm text-gray-500 mb-3">
+                  Claim your listing to add photos, update your hours, respond to reviews, and get a verified badge.
+                </p>
+                <Link
+                  to={`/claim/${provider.slug}?name=${encodeURIComponent(provider.business_name)}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-sm font-semibold transition-colors"
+                >
+                  Claim Your Listing
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 

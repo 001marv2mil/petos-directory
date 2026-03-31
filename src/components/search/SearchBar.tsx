@@ -154,7 +154,7 @@ export function SearchBar({
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder="Search by name..."
+            placeholder="Search by name or service..."
             className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -173,7 +173,7 @@ export function SearchBar({
           <CityAutocomplete
             displayValue={cityDisplay}
             onSelect={(c, d) => { setCity(c); setCityDisplay(d) }}
-            placeholder="City or state..."
+            placeholder="e.g. Tampa, FL..."
             className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -211,7 +211,7 @@ export function SearchBar({
             <CityAutocomplete
               displayValue={cityDisplay}
               onSelect={(c, d) => { setCity(c); setCityDisplay(d) }}
-              placeholder="City or state..."
+              placeholder="e.g. Tampa, FL..."
               className="w-full pl-9 pr-4 py-3 border border-gray-200 rounded-xl text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
             />
           </div>

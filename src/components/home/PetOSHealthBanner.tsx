@@ -12,12 +12,12 @@ export function PetOSHealthBanner() {
 
         {/* Copy */}
         <div className="flex-1 text-center md:text-left">
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2">Trusted Partner</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2">From the PetOS Team</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-            Manage your pet's health with PetOS Health
+            Keep your pet's health records in one place
           </h2>
           <p className="text-gray-500 text-sm sm:text-base leading-relaxed max-w-xl">
-            Track vet visits, store vaccination records, set medication reminders, and share health history with any provider — all in one place.
+            Store vaccination records, vet visit history, medications, and notes. Share everything with your vet instantly.
           </p>
         </div>
 

@@ -16,10 +16,10 @@ export function HeroSection() {
 
       <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight drop-shadow">
-          Your Trusted Partner in Pet Care
+          Find a Vet You Can Actually Trust
         </h1>
         <p className="text-blue-100 text-base sm:text-lg mb-10 max-w-xl mx-auto">
-          Easily find the best local vets, groomers, boarding, and more for your furry family members.
+          Real pet services. Real ratings. Real pet owners in your area.
         </p>
 
         <SearchBar variant="hero" />
@@ -27,20 +27,20 @@ export function HeroSection() {
         {/* Trust badges */}
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-8 text-sm text-white/90">
           <span className="flex items-center gap-1.5">
-            <CheckCircle className="w-4 h-4 text-green-400" />
-            Verified Pet Professionals
+            <Star className="w-4 h-4 text-yellow-300" />
+            Real Reviews & Ratings
           </span>
           <span className="flex items-center gap-1.5">
             <MapPin className="w-4 h-4 text-yellow-300" />
-            Serving Your Community
+            Local Pet Care Professionals
           </span>
           <span className="flex items-center gap-1.5">
-            <Star className="w-4 h-4 text-yellow-300" />
-            Trusted by Thousands of Pet Owners
+            <CheckCircle className="w-4 h-4 text-green-400" />
+            Verified Hours & Phone
           </span>
           <span className="flex items-center gap-1.5">
             <Heart className="w-4 h-4 text-red-400" />
-            24/7 Emergency Support
+            24/7 Emergency Vets Available
           </span>
         </div>
       </div>

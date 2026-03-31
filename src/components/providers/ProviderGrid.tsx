@@ -27,9 +27,9 @@ export function ProviderGrid({ providers, loading = false }: ProviderGridProps) 
 
   if (providers.length === 0) {
     return (
-      <div className="text-center py-16 text-gray-500">
-        <p className="text-lg">No providers found.</p>
-        <p className="text-sm mt-1">Try adjusting your search or browse a different city.</p>
+      <div className="text-center py-16">
+        <p className="text-lg font-semibold text-gray-900 mb-2">No listings found</p>
+        <p className="text-sm text-gray-500">Try a different location or category, or check back soon.</p>
       </div>
     )
   }

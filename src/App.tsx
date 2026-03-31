@@ -11,6 +11,7 @@ import ProviderPage from '@/pages/ProviderPage'
 import StatePage from '@/pages/StatePage'
 import PrivacyPage from '@/pages/PrivacyPage'
 import AccountPage from '@/pages/AccountPage'
+import ClaimPage from '@/pages/ClaimPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/:state/:city/:category" element={<CategoryPage />} />
             <Route path="/provider/:slug" element={<ProviderPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/claim/:slug" element={<ClaimPage />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/not-found" element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />

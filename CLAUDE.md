@@ -316,3 +316,41 @@ Structure
 UI
 
 NOT the other way around
+## gstack
+
+Use the `/browse` skill from gstack for all web browsing. Never use `mcp__claude-in-chrome__*` tools directly.
+
+If gstack skills aren't working, run `cd .claude/skills/gstack && ./setup` to rebuild.
+
+Available skills:
+- `/office-hours` — describe what you're building, get structured guidance
+- `/plan-ceo-review` — product/strategy review of a feature idea
+- `/plan-eng-review` — architecture and technical review
+- `/plan-design-review` — design and UX review
+- `/design-consultation` — design advice and direction
+- `/design-shotgun` — rapid design exploration
+- `/design-html` — generate HTML/CSS designs
+- `/design-review` — review existing designs
+- `/review` — code review on current branch changes
+- `/ship` — prepare and ship a PR
+- `/land-and-deploy` — land PR and deploy
+- `/canary` — canary deploy
+- `/qa` — QA against a staging URL (opens browser)
+- `/qa-only` — QA without deploy steps
+- `/browse` — web browsing skill
+- `/connect-chrome` — connect to Chrome for browser automation
+- `/setup-browser-cookies` — set up browser cookies
+- `/setup-deploy` — configure deployment
+- `/investigate` — deep investigation of a bug or issue
+- `/retro` — retrospective on recent work
+- `/document-release` — generate release notes
+- `/autoplan` — auto-generate a plan from context
+- `/careful` — careful mode for risky changes
+- `/freeze` — freeze dependencies or config
+- `/unfreeze` — unfreeze dependencies or config
+- `/guard` — add guards/safeguards to code
+- `/benchmark` — run benchmarks
+- `/codex` — OpenAI Codex integration
+- `/cso` — chief security officer review (OWASP + STRIDE)
+- `/learn` — learn from the codebase
+- `/gstack-upgrade` — upgrade gstack to latest

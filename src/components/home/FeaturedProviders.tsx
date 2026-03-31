@@ -51,7 +51,8 @@ export function FeaturedProviders() {
     <section className="py-14 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900">Featured Pet Care Providers</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Top-Rated Pet Services</h2>
+          <p className="text-sm text-gray-500 mt-2">Trusted by pet owners across the country</p>
           <div className="w-16 h-0.5 bg-gray-300 mx-auto mt-3" />
         </div>
 

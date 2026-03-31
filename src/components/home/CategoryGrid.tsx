@@ -27,7 +27,8 @@ export function CategoryGrid() {
     <section className="py-14 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse Pet Services</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Find What You Need</h2>
+          <p className="text-sm text-gray-500">Local vets, groomers, boarding, and more</p>
           <div className="w-16 h-0.5 bg-gray-300 mx-auto mt-3" />
         </div>
 
