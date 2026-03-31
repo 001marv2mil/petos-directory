@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { SearchBar } from '@/components/search/SearchBar'
-import { CheckCircle, MapPin, Star, Heart } from 'lucide-react'
+import { CheckCircle, MapPin, Star, Heart, Calculator } from 'lucide-react'
 
 const QUICK_CITIES = [
   { label: 'Tampa', path: '/florida/tampa' },
@@ -50,8 +50,18 @@ export function HeroSection() {
           ))}
         </div>
 
+        <div className="mt-3">
+          <Link
+            to="/calculator"
+            className="inline-flex items-center gap-1.5 text-sm text-blue-200 hover:text-white transition-colors"
+          >
+            <Calculator className="w-4 h-4" />
+            Estimate your pet care costs →
+          </Link>
+        </div>
+
         {/* Trust badges */}
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-8 text-sm text-white/90">
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-6 text-sm text-white/90">
           <span className="flex items-center gap-1.5">
             <Star className="w-4 h-4 text-yellow-300" />
             Real Reviews & Ratings
