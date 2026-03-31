@@ -123,6 +123,7 @@ export function Footer() {
         <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500">
           <span>© {new Date().getFullYear()} PetOS Directory. All rights reserved.</span>
           <div className="flex items-center gap-4">
+            <Link to="/faq" className="hover:text-gray-300 transition-colors">FAQ</Link>
             <Link to="/privacy" className="hover:text-gray-300 transition-colors">Privacy</Link>
             <Link to="/contact" className="hover:text-gray-300 transition-colors">Contact</Link>
             <Link to="/about" className="hover:text-gray-300 transition-colors">About</Link>

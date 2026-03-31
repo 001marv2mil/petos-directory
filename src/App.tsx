@@ -13,6 +13,7 @@ import PrivacyPage from '@/pages/PrivacyPage'
 import AccountPage from '@/pages/AccountPage'
 import ClaimPage from '@/pages/ClaimPage'
 import NotFoundPage from '@/pages/NotFoundPage'
+import FaqPage from '@/pages/FaqPage'
 
 export default function App() {
   return (
@@ -27,6 +28,8 @@ export default function App() {
             <Route path="/:state/:city" element={<CityPage />} />
             <Route path="/:state/:city/:category" element={<CategoryPage />} />
             <Route path="/provider/:slug" element={<ProviderPage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/:state/:city/faq" element={<FaqPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/claim/:slug" element={<ClaimPage />} />
             <Route path="/account" element={<AccountPage />} />
