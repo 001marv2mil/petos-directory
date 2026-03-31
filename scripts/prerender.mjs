@@ -79,14 +79,18 @@ const CATEGORIES = [
 function buildRouteList() {
   const routes = [...STATIC_ROUTES]
 
+  // Global FAQ page
+  routes.push('/faq')
+
   // State pages
   for (const state of STATES) {
     routes.push(`/${state}`)
   }
 
-  // City pages
+  // City pages + city FAQ pages
   for (const [state, city] of CITIES) {
     routes.push(`/${state}/${city}`)
+    routes.push(`/${state}/${city}/faq`)
   }
 
   // Category pages (city × category)
