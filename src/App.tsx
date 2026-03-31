@@ -12,6 +12,7 @@ import StatePage from '@/pages/StatePage'
 import PrivacyPage from '@/pages/PrivacyPage'
 import AccountPage from '@/pages/AccountPage'
 import ClaimPage from '@/pages/ClaimPage'
+import CostCalculatorPage from '@/pages/CostCalculatorPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
           <Route element={<PageShell />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/calculator" element={<CostCalculatorPage />} />
             <Route path="/:state" element={<StatePage />} />
             <Route path="/:state/:city" element={<CityPage />} />
             <Route path="/:state/:city/:category" element={<CategoryPage />} />

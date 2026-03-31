@@ -40,6 +40,17 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li className="pt-3 mt-1 border-t border-gray-800">
+                <span className="text-xs text-gray-600 uppercase tracking-wide font-semibold">Tools</span>
+              </li>
+              <li>
+                <Link
+                  to="/calculator"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
+                >
+                  Pet Cost Calculator
+                </Link>
+              </li>
             </ul>
           </div>
 
