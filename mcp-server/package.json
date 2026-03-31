@@ -1,0 +1,37 @@
+{
+  "name": "@petosdirectory/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for PetOS Directory — find trusted pet services across the US",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "petos-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "@supabase/supabase-js": "^2.49.8",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "pet-services",
+    "veterinarian",
+    "pet-directory",
+    "model-context-protocol"
+  ],
+  "license": "MIT"
+}
