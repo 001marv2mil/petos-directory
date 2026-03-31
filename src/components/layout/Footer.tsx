@@ -40,6 +40,14 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/calculator"
+                  className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  Pet Cost Calculator
+                </Link>
+              </li>
             </ul>
           </div>
 
