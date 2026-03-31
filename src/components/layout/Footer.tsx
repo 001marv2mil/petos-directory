@@ -85,8 +85,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-6 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} PetOS Directory. All rights reserved.
+        <div className="border-t border-gray-800 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500">
+          <span>© {new Date().getFullYear()} PetOS Directory. All rights reserved.</span>
+          <div className="flex items-center gap-4">
+            <Link to="/faq" className="hover:text-white transition-colors">FAQ</Link>
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+          </div>
         </div>
       </div>
     </footer>
