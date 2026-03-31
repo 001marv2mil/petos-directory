@@ -10,9 +10,10 @@ import { useFavorite } from '@/hooks/useFavorite'
 interface ProviderCardProps {
   provider: Provider
   precomputedImage?: string
+  distanceMiles?: number
 }
 
-export function ProviderCard({ provider, precomputedImage }: ProviderCardProps) {
+export function ProviderCard({ provider, precomputedImage, distanceMiles }: ProviderCardProps) {
   const navigate = useNavigate()
   const { user, openModal } = useAuth()
   const { isFavorited, toggle: toggleFavorite } = useFavorite(provider.id)
@@ -56,7 +57,7 @@ export function ProviderCard({ provider, precomputedImage }: ProviderCardProps) 
               24/7
             </span>
           )}
-          {provider.verified && provider.source === 'google_places' && (
+          {provider.verified && (
             <span className="flex items-center gap-1 bg-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
               <Shield className="w-3 h-3" />
               Verified
@@ -96,7 +97,12 @@ export function ProviderCard({ provider, precomputedImage }: ProviderCardProps) 
 
         <div className="flex items-start gap-1.5 text-sm text-gray-500 min-w-0">
           <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gray-400" />
-          <span className="truncate">{provider.address.split(',')[0]}</span>
+          <span className="truncate flex-1">{provider.address.split(',')[0]}</span>
+          {distanceMiles !== undefined && (
+            <span className="shrink-0 text-xs text-gray-400 ml-auto">
+              {distanceMiles < 0.1 ? '<0.1' : distanceMiles.toFixed(1)} mi
+            </span>
+          )}
         </div>
 
         {provider.services.length > 0 && (

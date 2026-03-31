@@ -11,8 +11,8 @@ export default function HomePage() {
   return (
     <div>
       <PageMeta
-        title="Find Trusted Pet Care Near You"
-        description="PetOS Directory — find veterinarians, groomers, pet boarding, dog daycare, trainers, and emergency vets across 50 states. Real listings, real reviews."
+        title="Find Trusted Pet Services Near You"
+        description="PetOS Directory — find veterinarians, groomers, pet boarding, dog daycare, trainers, and emergency vets across 160+ cities. Real listings, real reviews."
         path="/"
       />
       <WebSiteJsonLd />

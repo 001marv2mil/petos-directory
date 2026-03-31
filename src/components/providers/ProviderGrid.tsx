@@ -1,13 +1,16 @@
 import type { Provider } from '@/types'
 import { ProviderCard } from './ProviderCard'
 import { assignProviderImages } from '@/lib/images'
+import { haversineDistance } from '@/lib/utils'
 
 interface ProviderGridProps {
   providers: Provider[]
   loading?: boolean
+  refLat?: number
+  refLng?: number
 }
 
-export function ProviderGrid({ providers, loading = false }: ProviderGridProps) {
+export function ProviderGrid({ providers, loading = false, refLat, refLng }: ProviderGridProps) {
   if (loading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -35,12 +38,24 @@ export function ProviderGrid({ providers, loading = false }: ProviderGridProps) 
   }
 
   const images = assignProviderImages(providers)
+  const hasRef = refLat !== undefined && refLng !== undefined
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {providers.map((p, i) => (
-        <ProviderCard key={p.id} provider={p} precomputedImage={images[i]} />
-      ))}
+      {providers.map((p, i) => {
+        const distanceMiles =
+          hasRef && p.lat !== null && p.lng !== null
+            ? haversineDistance(refLat!, refLng!, p.lat, p.lng)
+            : undefined
+        return (
+          <ProviderCard
+            key={p.id}
+            provider={p}
+            precomputedImage={images[i]}
+            distanceMiles={distanceMiles}
+          />
+        )
+      })}
     </div>
   )
 }
