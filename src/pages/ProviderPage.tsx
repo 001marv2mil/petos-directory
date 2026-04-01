@@ -166,14 +166,6 @@ export default function ProviderPage() {
     }
   }
 
-  const handleNativeShare = () => {
-    if (navigator.share) {
-      navigator.share({ title: shareText, url: pageUrl })
-    } else {
-      navigator.clipboard.writeText(pageUrl)
-    }
-  }
-
   const handleInstagramShare = () => {
     navigator.clipboard.writeText(pageUrl)
     setIgCopied(true)
@@ -576,17 +568,6 @@ export default function ProviderPage() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Copy toast */}
-      <div
-        className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-5 py-3 bg-gray-900 text-white text-sm font-semibold rounded-xl shadow-xl transition-all duration-300 ${
-          shareCopied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
-        }`}
-        aria-live="polite"
-      >
-        <Check className="w-4 h-4 text-green-400" />
-        Copied to clipboard!
       </div>
     </div>
   )
