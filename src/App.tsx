@@ -15,12 +15,14 @@ import ClaimPage from '@/pages/ClaimPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import FaqPage from '@/pages/FaqPage'
 import CostCalculatorPage from '@/pages/CostCalculatorPage'
+import ScrollToTop from '@/components/common/ScrollToTop'
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
       <AuthProvider>
+        <ScrollToTop />
         <Routes>
           <Route element={<PageShell />}>
             <Route path="/" element={<HomePage />} />
