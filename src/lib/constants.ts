@@ -105,6 +105,10 @@ export const CITIES: CityMeta[] = [
   { city: 'New York',       state: 'New York',       stateAbbr: 'NY', stateSlug: 'ny', citySlug: 'new-york',       heroImage: img('1499092346589-b9b6be3e94b2') },
   { city: 'Brooklyn',       state: 'New York',       stateAbbr: 'NY', stateSlug: 'ny', citySlug: 'brooklyn',       heroImage: img('1499092346589-b9b6be3e94b2') },
   { city: 'Buffalo',        state: 'New York',       stateAbbr: 'NY', stateSlug: 'ny', citySlug: 'buffalo',        heroImage: img('1499092346589-b9b6be3e94b2') },
+  { city: 'Manhattan',      state: 'New York',       stateAbbr: 'NY', stateSlug: 'ny', citySlug: 'manhattan',      heroImage: img('1499092346589-b9b6be3e94b2') },
+  { city: 'Queens',         state: 'New York',       stateAbbr: 'NY', stateSlug: 'ny', citySlug: 'queens',         heroImage: img('1499092346589-b9b6be3e94b2') },
+  { city: 'Bronx',          state: 'New York',       stateAbbr: 'NY', stateSlug: 'ny', citySlug: 'bronx',          heroImage: img('1499092346589-b9b6be3e94b2') },
+  { city: 'Staten Island',  state: 'New York',       stateAbbr: 'NY', stateSlug: 'ny', citySlug: 'staten-island',  heroImage: img('1499092346589-b9b6be3e94b2') },
   // North Carolina
   { city: 'Charlotte',      state: 'North Carolina', stateAbbr: 'NC', stateSlug: 'nc', citySlug: 'charlotte',      heroImage: img('1570461226513-e08b58a52c53') },
   { city: 'Raleigh',        state: 'North Carolina', stateAbbr: 'NC', stateSlug: 'nc', citySlug: 'raleigh',        heroImage: img('1570461226513-e08b58a52c53') },
