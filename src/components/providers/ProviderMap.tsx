@@ -17,6 +17,7 @@ export function ProviderMap({ address, name }: ProviderMapProps) {
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         title={`Map showing location of ${name}`}
+        tabIndex={-1}
         className="block"
       />
     </div>
