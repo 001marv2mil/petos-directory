@@ -16,7 +16,6 @@ import {
   Pill,
   Shield,
   Info,
-  Copy,
   Check,
 } from 'lucide-react'
 
