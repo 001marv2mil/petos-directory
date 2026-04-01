@@ -124,7 +124,7 @@ async function fetchDataset(datasetId: string): Promise<any[]> {
   if (!res.ok) {
     throw new Error(`Failed to fetch dataset ${datasetId}: ${res.status}`)
   }
-  return res.json()
+  return res.json() as Promise<any[]>
 }
 
 async function importBorough(boroughKey: string): Promise<number> {
