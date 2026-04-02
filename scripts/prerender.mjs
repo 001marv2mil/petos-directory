@@ -32,37 +32,123 @@ const STATIC_ROUTES = [
   '/privacy',
 ]
 
-// Top states to generate state landing pages for
+// All states with city data
 const STATES = [
-  'fl', 'tx', 'ca', 'ny', 'ga', 'nc', 'wa', 'il', 'pa', 'oh',
-  'tn', 'co', 'az', 'nv', 'or', 'mn', 'mo', 'in', 'ma', 'va',
+  'al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga',
+  'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md',
+  'ma', 'mi', 'mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj',
+  'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc',
+  'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy',
 ]
 
-// Top cities per state: [stateSlug, citySlug]
+// All cities per state: [stateSlug, citySlug] — mirrors src/lib/constants.ts CITIES
 const CITIES = [
-  ['fl', 'tampa'],        ['fl', 'miami'],         ['fl', 'orlando'],
-  ['fl', 'jacksonville'], ['fl', 'fort-lauderdale'],['fl', 'sarasota'],
-  ['tx', 'houston'],      ['tx', 'dallas'],         ['tx', 'austin'],
-  ['tx', 'san-antonio'],  ['tx', 'fort-worth'],
-  ['ca', 'los-angeles'],  ['ca', 'san-diego'],      ['ca', 'san-francisco'],
-  ['ca', 'sacramento'],   ['ca', 'san-jose'],
-  ['ny', 'new-york'],     ['ny', 'brooklyn'],       ['ny', 'buffalo'],
-  ['ga', 'atlanta'],      ['ga', 'savannah'],
-  ['nc', 'charlotte'],    ['nc', 'raleigh'],        ['nc', 'durham'],
-  ['wa', 'seattle'],      ['wa', 'spokane'],
-  ['il', 'chicago'],
-  ['pa', 'philadelphia'], ['pa', 'pittsburgh'],
-  ['oh', 'columbus'],     ['oh', 'cleveland'],      ['oh', 'cincinnati'],
-  ['tn', 'nashville'],    ['tn', 'memphis'],
-  ['co', 'denver'],       ['co', 'boulder'],
-  ['az', 'phoenix'],      ['az', 'scottsdale'],     ['az', 'tucson'],
-  ['nv', 'las-vegas'],    ['nv', 'reno'],
-  ['or', 'portland'],
-  ['mn', 'minneapolis'],
-  ['mo', 'kansas-city'],  ['mo', 'st-louis'],
-  ['ma', 'boston'],
-  ['va', 'virginia-beach'], ['va', 'richmond'],
-  ['in', 'indianapolis'],
+  // Alabama
+  ['al', 'birmingham'],     ['al', 'huntsville'],
+  // Alaska
+  ['ak', 'anchorage'],
+  // Arizona
+  ['az', 'phoenix'],        ['az', 'scottsdale'],     ['az', 'tucson'],
+  // Arkansas
+  ['ar', 'little-rock'],    ['ar', 'fayetteville'],
+  // California
+  ['ca', 'los-angeles'],    ['ca', 'san-diego'],      ['ca', 'san-francisco'],
+  ['ca', 'sacramento'],     ['ca', 'san-jose'],
+  // Colorado
+  ['co', 'denver'],         ['co', 'colorado-springs'], ['co', 'boulder'],
+  // Connecticut
+  ['ct', 'hartford'],       ['ct', 'stamford'],
+  // Delaware
+  ['de', 'wilmington'],
+  // Florida
+  ['fl', 'tampa'],          ['fl', 'st-petersburg'],  ['fl', 'clearwater'],
+  ['fl', 'orlando'],        ['fl', 'miami'],           ['fl', 'jacksonville'],
+  ['fl', 'fort-lauderdale'], ['fl', 'sarasota'],
+  // Georgia
+  ['ga', 'atlanta'],        ['ga', 'savannah'],        ['ga', 'augusta'],
+  // Hawaii
+  ['hi', 'honolulu'],
+  // Idaho
+  ['id', 'boise'],
+  // Illinois
+  ['il', 'chicago'],        ['il', 'naperville'],
+  // Indiana
+  ['in', 'indianapolis'],   ['in', 'fort-wayne'],
+  // Iowa
+  ['ia', 'des-moines'],     ['ia', 'cedar-rapids'],
+  // Kansas
+  ['ks', 'wichita'],        ['ks', 'overland-park'],
+  // Kentucky
+  ['ky', 'louisville'],     ['ky', 'lexington'],
+  // Louisiana
+  ['la', 'new-orleans'],    ['la', 'baton-rouge'],
+  // Maine
+  ['me', 'portland'],
+  // Maryland
+  ['md', 'baltimore'],      ['md', 'rockville'],
+  // Massachusetts
+  ['ma', 'boston'],         ['ma', 'worcester'],
+  // Michigan
+  ['mi', 'detroit'],        ['mi', 'grand-rapids'],
+  // Minnesota
+  ['mn', 'minneapolis'],    ['mn', 'st-paul'],
+  // Mississippi
+  ['ms', 'jackson'],
+  // Missouri
+  ['mo', 'kansas-city'],    ['mo', 'st-louis'],
+  // Montana
+  ['mt', 'billings'],       ['mt', 'missoula'],
+  // Nebraska
+  ['ne', 'omaha'],          ['ne', 'lincoln'],
+  // Nevada
+  ['nv', 'las-vegas'],      ['nv', 'reno'],
+  // New Hampshire
+  ['nh', 'manchester'],
+  // New Jersey
+  ['nj', 'newark'],         ['nj', 'jersey-city'],
+  // New Mexico
+  ['nm', 'albuquerque'],    ['nm', 'santa-fe'],
+  // New York
+  ['ny', 'new-york'],       ['ny', 'brooklyn'],       ['ny', 'buffalo'],
+  ['ny', 'manhattan'],      ['ny', 'queens'],          ['ny', 'bronx'],
+  ['ny', 'staten-island'],
+  // North Carolina
+  ['nc', 'charlotte'],      ['nc', 'raleigh'],         ['nc', 'durham'],
+  // North Dakota
+  ['nd', 'fargo'],
+  // Ohio
+  ['oh', 'columbus'],       ['oh', 'cleveland'],       ['oh', 'cincinnati'],
+  // Oklahoma
+  ['ok', 'oklahoma-city'],  ['ok', 'tulsa'],
+  // Oregon
+  ['or', 'portland'],       ['or', 'eugene'],
+  // Pennsylvania
+  ['pa', 'philadelphia'],   ['pa', 'pittsburgh'],
+  // Rhode Island
+  ['ri', 'providence'],
+  // South Carolina
+  ['sc', 'charleston'],     ['sc', 'columbia'],
+  // South Dakota
+  ['sd', 'sioux-falls'],
+  // Tennessee
+  ['tn', 'nashville'],      ['tn', 'memphis'],         ['tn', 'knoxville'],
+  // Texas
+  ['tx', 'houston'],        ['tx', 'dallas'],           ['tx', 'austin'],
+  ['tx', 'san-antonio'],    ['tx', 'fort-worth'],       ['tx', 'el-paso'],
+  // Utah
+  ['ut', 'salt-lake-city'], ['ut', 'provo'],
+  // Vermont
+  ['vt', 'burlington'],
+  // Virginia
+  ['va', 'virginia-beach'], ['va', 'richmond'],         ['va', 'arlington'],
+  // Washington
+  ['wa', 'seattle'],        ['wa', 'spokane'],
+  // West Virginia
+  ['wv', 'charleston'],
+  // Wisconsin
+  ['wi', 'milwaukee'],      ['wi', 'madison'],
+  // Wyoming
+  ['wy', 'cheyenne'],
 ]
 
 // Categories to generate per city
