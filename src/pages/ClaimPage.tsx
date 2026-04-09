@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useParams, useSearchParams, Link } from 'react-router-dom'
-import { supabase } from '@/lib/supabase'
 import { Shield, CheckCircle, Building2, Mail, Phone, User, ChevronDown } from 'lucide-react'
 
 export default function ClaimPage() {
@@ -24,35 +23,31 @@ export default function ClaimPage() {
     setError(null)
     setLoading(true)
 
-    // Look up the provider id from the slug
-    const { data: provider, error: lookupErr } = await supabase
-      .from('providers')
-      .select('id, business_name')
-      .eq('slug', slug)
-      .single()
+    try {
+      const res = await fetch('/api/claim-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          slug,
+          owner_name: form.owner_name,
+          owner_email: form.owner_email,
+          owner_phone: form.owner_phone || null,
+          role: form.role,
+          message: form.message || null,
+        }),
+      })
 
-    if (lookupErr || !provider) {
-      setError('Could not find this listing. Please try again.')
-      setLoading(false)
-      return
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setError(data.error || 'Something went wrong. Please try again.')
+      } else {
+        setSuccess(true)
+      }
+    } catch {
+      setError('Something went wrong. Please try again.')
     }
-
-    const { error: insertErr } = await supabase.from('claim_requests').insert({
-      provider_id: provider.id,
-      business_name: provider.business_name,
-      owner_name: form.owner_name,
-      owner_email: form.owner_email,
-      owner_phone: form.owner_phone || null,
-      role: form.role,
-      message: form.message || null,
-    })
 
     setLoading(false)
-    if (insertErr) {
-      setError('Something went wrong. Please try again.')
-    } else {
-      setSuccess(true)
-    }
   }
 
   if (success) {

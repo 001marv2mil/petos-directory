@@ -23,3 +23,4 @@ export function ProviderMap({ address, name }: ProviderMapProps) {
     </div>
   )
 }
+      
