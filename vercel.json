@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/outreach-cron",
+      "schedule": "0 14 * * *"
+    }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
