@@ -29,7 +29,7 @@ const resend = new Resend(RESEND_API_KEY)
 
 const SITE = 'https://petosdirectory.com'
 const FROM = 'Malak from PetOS Directory <malak@petosdirectory.com>'
-const REPLY_TO = 'mrsoursops@gmail.com'
+const REPLY_TO = 'info@petoshealth.com'
 const DELAY_MS = 500 // 500ms between sends to respect rate limits
 
 const CATEGORY_LABELS: Record<string, string> = {
