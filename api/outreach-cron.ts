@@ -215,13 +215,13 @@ async function fetchEmail1Targets(): Promise<Provider[]> {
 
 async function fetchFollowUpTargets(emailNum: number): Promise<Provider[]> {
   const prevEmailNum = emailNum - 1
-  const fiveDaysAgo = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+  const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
 
   const { data: eligible } = await supabase
     .from('outreach_log')
     .select('provider_id')
     .eq('email_num', prevEmailNum)
-    .lt('sent_at', fiveDaysAgo)
+    .lt('sent_at', threeDaysAgo)
 
   if (!eligible || eligible.length === 0) return []
 

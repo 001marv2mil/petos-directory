@@ -211,13 +211,13 @@ async function fetchTargets(): Promise<Provider[]> {
     // For email 2/3: find providers who got the previous email 5+ days ago
     // and haven't received this email yet
     const prevEmailNum = EMAIL_NUM - 1
-    const fiveDaysAgo = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+    const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
 
     const { data: eligible } = await supabase
       .from('outreach_log')
       .select('provider_id')
       .eq('email_num', prevEmailNum)
-      .lt('sent_at', fiveDaysAgo)
+      .lt('sent_at', threeDaysAgo)
 
     if (!eligible || eligible.length === 0) return []
 
