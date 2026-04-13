@@ -16,6 +16,7 @@ const FROM = 'Malak from PetOS Directory <malak@petosdirectory.com>'
 const REPLY_TO = 'info@petoshealth.com'
 const BATCH_PER_EMAIL = 50 // per email number per run
 const DELAY_MS = 500
+const FEATURED_URL = 'YOUR_STRIPE_PAYMENT_LINK_HERE' // Replace with $99/mo Stripe payment link
 
 const CATEGORY_LABELS: Record<string, string> = {
   veterinarians: 'veterinarian',
@@ -80,7 +81,7 @@ function getSubject(emailNum: number, p: Provider): string {
   switch (emailNum) {
     case 1: return `${p.business_name} is now on petosdirectory.com`
     case 2: return `Your listing on petosdirectory.com`
-    case 3: return `One last thing about your listing`
+    case 3: return `Want to be the top ${p.city} ${CATEGORY_LABELS[p.category] || 'pet service'}?`
     default: return ''
   }
 }
@@ -139,16 +140,32 @@ function getHtml(emailNum: number, p: Provider): string {
         </p>
         <p style="text-align:center;margin:24px 0;">
           <a href="${claimUrl}" style="display:inline-block;background:#2563eb;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
-            Claim Your Listing
+            Claim Your Listing (Free)
           </a>
         </p>
-        <p style="font-size:15px;line-height:1.6;">You can add:</p>
-        <ul style="font-size:14px;line-height:1.8;padding-left:20px;">
-          <li>Updated hours</li>
-          <li>Photos of your space</li>
-          <li>A special offer for new clients</li>
-        </ul>
-        <p style="font-size:15px;line-height:1.6;">Still free, always.</p>
+
+        <div style="border-top:1px solid #e5e7eb;margin:28px 0;padding-top:24px;">
+          <p style="font-size:15px;line-height:1.6;font-weight:600;color:#111827;">
+            Want to stand out from other ${catLabel}s in ${p.city}?
+          </p>
+          <p style="font-size:14px;line-height:1.6;color:#374151;">
+            Some businesses are upgrading to <strong>Featured</strong> — here's what you get:
+          </p>
+          <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#374151;">
+            <li>Top placement on the ${p.city} ${catLabel} page</li>
+            <li>Highlighted card with your photo &amp; call-to-action</li>
+            <li>Priority in search results</li>
+          </ul>
+          <p style="text-align:center;margin:20px 0;">
+            <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
+              Get Featured — $99/mo
+            </a>
+          </p>
+          <p style="font-size:13px;color:#6b7280;text-align:center;">
+            Cancel anytime. Your basic listing stays free, always.
+          </p>
+        </div>
+
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`
 
@@ -156,22 +173,34 @@ function getHtml(emailNum: number, p: Provider): string {
       return `${base}
         <p style="font-size:15px;line-height:1.6;">Hi,</p>
         <p style="font-size:15px;line-height:1.6;">
-          Last note from me — just wanted to make sure you saw that
-          <strong>${p.business_name}</strong> is listed on
-          <a href="${SITE}" style="color:#16a34a;">petosdirectory.com</a>.
+          Quick question — do you want <strong>${p.business_name}</strong> to be the first
+          ${catLabel} pet owners see when they search in ${p.city}?
         </p>
         <p style="font-size:15px;line-height:1.6;">
-          If you ever want to update it or add your contact info, just reply to this
-          email or claim it here:
+          Right now your listing is live on
+          <a href="${SITE}" style="color:#16a34a;">petosdirectory.com</a> alongside other
+          ${catLabel}s in the area. <strong>Featured businesses appear first</strong> — with a
+          highlighted card, photo, and a direct call-to-action button.
         </p>
+        <p style="font-size:15px;line-height:1.6;">
+          We're featuring <strong>5 ${catLabel}s per city</strong>. Here's what's included:
+        </p>
+        <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#374151;">
+          <li><strong>Top placement</strong> on the ${p.city} ${catLabel} page</li>
+          <li><strong>Highlighted card</strong> with your photo &amp; call button</li>
+          <li><strong>Priority</strong> in search results across the directory</li>
+        </ul>
         <p style="text-align:center;margin:24px 0;">
-          <a href="${claimUrl}" style="display:inline-block;background:#2563eb;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
-            Claim Your Listing
+          <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">
+            Get Featured — $99/mo
           </a>
         </p>
-        <p style="font-size:15px;line-height:1.6;">
-          Otherwise, the listing stays up as-is and sends you referrals at no cost.
-          Either way, thanks for being part of ${p.city}'s pet community.
+        <p style="font-size:13px;color:#6b7280;text-align:center;margin-bottom:24px;">
+          Cancel anytime. No contracts.
+        </p>
+        <p style="font-size:13px;color:#9ca3af;">
+          Not interested in Featured? Your free listing stays up —
+          <a href="${claimUrl}" style="color:#16a34a;">claim it here</a> to update your info anytime.
         </p>
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`

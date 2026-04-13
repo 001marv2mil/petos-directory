@@ -14,6 +14,7 @@ import { CATEGORIES, CITIES } from '@/lib/constants'
 import { useAuth } from '@/context/AuthContext'
 import { useFavorite } from '@/hooks/useFavorite'
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed'
+import { trackEvent } from '@/lib/track'
 import type { CategorySlug } from '@/types'
 import {
   Star, Phone, Globe, MapPin, Shield, AlertCircle,
@@ -77,6 +78,7 @@ export default function ProviderPage() {
       city: provider.city,
       image: provider.hero_image,
     })
+    trackEvent(provider.id, 'view')
   }, [provider?.slug])
 
   if (isLoading) {
@@ -311,6 +313,7 @@ export default function ProviderPage() {
                 href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${provider.address}, ${provider.city}, ${provider.state}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent(provider.id, 'click_directions')}
                 className="shrink-0 ml-3 flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded-lg transition-colors"
               >
                 <Navigation className="w-3.5 h-3.5" />
@@ -450,6 +453,7 @@ export default function ProviderPage() {
                 {provider.phone && (
                   <a
                     href={`tel:${provider.phone.replace(/\D/g, '')}`}
+                    onClick={() => trackEvent(provider.id, 'click_phone')}
                     className="flex items-center gap-3 text-sm p-3 bg-blue-50 border border-blue-100 rounded-lg hover:bg-blue-100 transition-colors"
                   >
                     <Phone className="w-4 h-4 text-blue-700 shrink-0" />
@@ -462,6 +466,7 @@ export default function ProviderPage() {
                     href={provider.website}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackEvent(provider.id, 'click_website')}
                     className="flex items-center gap-3 text-sm p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     <Globe className="w-4 h-4 text-gray-500 shrink-0" />
