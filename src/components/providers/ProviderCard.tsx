@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { Star, MapPin, Phone, Shield, AlertCircle, Globe, Lock, Heart } from 'lucide-react'
+import { Star, MapPin, Phone, Shield, AlertCircle, Globe, Heart } from 'lucide-react'
 import type { Provider } from '@/types'
 import { getProviderImage } from '@/lib/images'
 import { formatPhone, formatRating, isOpenNow } from '@/lib/utils'
 import { CATEGORIES } from '@/lib/constants'
-import { useAuth } from '@/context/AuthContext'
 import { useFavorite } from '@/hooks/useFavorite'
 
 interface ProviderCardProps {
@@ -15,7 +14,6 @@ interface ProviderCardProps {
 
 export function ProviderCard({ provider, precomputedImage, distanceMiles }: ProviderCardProps) {
   const navigate = useNavigate()
-  const { user, openModal } = useAuth()
   const { isFavorited, toggle: toggleFavorite } = useFavorite(provider.id)
   const img = precomputedImage ?? getProviderImage(provider.hero_image, provider.category, provider.slug)
   const categoryMeta = CATEGORIES.find(c => c.slug === provider.category)
@@ -121,26 +119,14 @@ export function ProviderCard({ provider, precomputedImage, distanceMiles }: Prov
         {/* Contact row — stop propagation so clicks don't navigate */}
         <div className="flex items-center gap-3 mt-1 border-t border-gray-100 pt-2">
           {formattedPhone && (
-            user ? (
-              <a
-                href={`tel:${provider.phone?.replace(/\D/g, '')}`}
-                onClick={e => e.stopPropagation()}
-                className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 transition-colors"
-              >
-                <Phone className="w-3 h-3" />
-                {formattedPhone}
-              </a>
-            ) : (
-              <button
-                onClick={e => { e.stopPropagation(); openModal('phone') }}
-                className="flex items-center gap-1 text-xs text-gray-400 hover:text-blue-600 transition-colors"
-              >
-                <Lock className="w-3 h-3" />
-                <span className="blur-[4px] select-none">
-                  {formattedPhone}
-                </span>
-              </button>
-            )
+            <a
+              href={`tel:${provider.phone?.replace(/\D/g, '')}`}
+              onClick={e => e.stopPropagation()}
+              className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 transition-colors"
+            >
+              <Phone className="w-3 h-3" />
+              {formattedPhone}
+            </a>
           )}
           {provider.website && (
             <a
