@@ -41,7 +41,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const signUp = useCallback(async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({ email, password })
+    // Tag source in user_metadata so Directory users stay distinguishable from PetOS Health users
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { signup_source: 'petos_directory' } },
+    })
     if (!error && data.user) {
       await supabase.from('profiles').insert({ id: data.user.id, signup_source: 'directory' })
     }

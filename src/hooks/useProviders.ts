@@ -4,6 +4,16 @@ import type { Provider, SearchParams, SearchResult } from '@/types'
 
 const PAGE_SIZE = 24
 
+async function fetchFeaturedProviderIds(): Promise<Set<string>> {
+  const { data } = await supabase
+    .from('featured_payments')
+    .select('provider_id')
+    .eq('status', 'active')
+  const ids = new Set<string>()
+  if (data) data.forEach(p => ids.add(p.provider_id))
+  return ids
+}
+
 async function fetchProviders(params: SearchParams): Promise<SearchResult> {
   const { city, state, category, query, zip, emergency, verified, minRating, sort = 'rating', page = 1 } = params
   const offset = (page - 1) * PAGE_SIZE
@@ -36,8 +46,18 @@ async function fetchProviders(params: SearchParams): Promise<SearchResult> {
   const { data, count, error } = await qb
   if (error) throw error
 
-  const providers = (data ?? []) as Provider[]
+  let providers = (data ?? []) as Provider[]
   const total = count ?? 0
+
+  // Paid featured listings go to the top (level playing field otherwise)
+  if (providers.length > 0 && page === 1) {
+    const featuredIds = await fetchFeaturedProviderIds()
+    if (featuredIds.size > 0) {
+      const featured = providers.filter(p => featuredIds.has(p.id))
+      const rest = providers.filter(p => !featuredIds.has(p.id))
+      providers = [...featured, ...rest]
+    }
+  }
 
   // Fallback: fewer than 5 exact results → show nearby city results
   if (total < 5 && city && state && category && !query && !zip) {

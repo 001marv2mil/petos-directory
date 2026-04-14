@@ -6,25 +6,23 @@ import type { Provider } from '@/types'
 import { getProviderImage } from '@/lib/images'
 import { CATEGORIES } from '@/lib/constants'
 
-const FEATURED_CATEGORIES = ['veterinarians', 'groomers', 'boarding'] as const
-
 async function fetchFeatured(): Promise<Provider[]> {
-  // Fetch top-rated provider for each of the 3 featured categories
-  const results = await Promise.all(
-    FEATURED_CATEGORIES.map(cat =>
-      supabase
-        .from('providers')
-        .select('*')
-        .eq('category', cat)
-        .order('rating', { ascending: false, nullsFirst: false })
-        .order('review_count', { ascending: false })
-        .limit(1)
-        .single()
-    )
-  )
-  return results
-    .filter(r => r.data && !r.error)
-    .map(r => r.data as Provider)
+  // Only show businesses that have paid for featured listing — level playing field for everyone else
+  const { data: payments } = await supabase
+    .from('featured_payments')
+    .select('provider_id')
+    .eq('status', 'active')
+
+  if (!payments || payments.length === 0) return []
+
+  const providerIds = payments.map(p => p.provider_id)
+  const { data } = await supabase
+    .from('providers')
+    .select('*')
+    .in('id', providerIds)
+    .limit(6)
+
+  return (data || []) as Provider[]
 }
 
 function StarRating({ rating }: { rating: number }) {
@@ -47,12 +45,15 @@ export function FeaturedProviders() {
     staleTime: 1000 * 60 * 10,
   })
 
+  // Hide section entirely when there are no paid featured listings — level playing field
+  if (!isLoading && providers.length === 0) return null
+
   return (
     <section className="py-14 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900">Top-Rated Pet Services</h2>
-          <p className="text-sm text-gray-500 mt-2">Trusted by pet owners across the country</p>
+          <h2 className="text-2xl font-bold text-gray-900">Featured Pet Services</h2>
+          <p className="text-sm text-gray-500 mt-2">Sponsored by local pet businesses</p>
           <div className="w-16 h-0.5 bg-gray-300 mx-auto mt-3" />
         </div>
 
@@ -69,7 +70,7 @@ export function FeaturedProviders() {
               </div>
             ))}
           </div>
-        ) : providers.length === 0 ? null : (
+        ) : (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {providers.map(provider => {
               const img = getProviderImage(provider.hero_image, provider.category, provider.slug)
