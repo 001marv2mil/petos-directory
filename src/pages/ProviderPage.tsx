@@ -11,14 +11,14 @@ import { BreadcrumbJsonLd } from '@/components/common/JsonLd'
 import { getProviderImage } from '@/lib/images'
 import { formatPhone } from '@/lib/utils'
 import { CATEGORIES, CITIES } from '@/lib/constants'
-import { useAuth } from '@/context/AuthContext'
 import { useFavorite } from '@/hooks/useFavorite'
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed'
 import { trackEvent } from '@/lib/track'
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import type { CategorySlug } from '@/types'
 import {
   Star, Phone, Globe, MapPin, Shield, AlertCircle,
-  Clock, ChevronRight, ExternalLink, Share2, Lock, Heart, Navigation, Check, Copy,
+  Clock, ChevronRight, ExternalLink, Share2, Heart, Navigation, Check, Copy,
 } from 'lucide-react'
 
 function XLogo({ className }: { className?: string }) {
@@ -63,7 +63,6 @@ export default function ProviderPage() {
   const { slug } = useParams<{ slug: string }>()
   const { data: provider, isLoading, isError } = useProvider(slug ?? '')
   const { data: nearby = [] } = useNearbyProviders(provider)
-  const { user, openModal } = useAuth()
   const { isFavorited, toggle: toggleFavorite } = useFavorite(provider?.id ?? '')
   const [igCopied, setIgCopied] = useState(false)
   const [shareCopied, setShareCopied] = useState(false)
@@ -428,129 +427,83 @@ export default function ProviderPage() {
               </div>
             </div>
 
-            {user ? (
-              /* ── Signed-in: full contact card ── */
-              <div className="p-5 space-y-3">
-                {/* Address + Directions */}
-                <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
-                  <MapPin className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-gray-700 font-medium">{provider.address}</p>
-                    <p className="text-gray-500">{provider.city}, {provider.state} {provider.zip ?? ''}</p>
-                  </div>
-                  <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${provider.address}, ${provider.city}, ${provider.state}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 flex items-center gap-1 text-xs font-semibold text-green-600 hover:text-green-700 transition-colors"
-                    onClick={e => e.stopPropagation()}
-                  >
-                    <Navigation className="w-3.5 h-3.5" />
-                    Directions
-                  </a>
+            {/* Contact card — visible to everyone */}
+            <div className="p-5 space-y-3">
+              {/* Address + Directions */}
+              <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
+                <MapPin className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-gray-700 font-medium">{provider.address}</p>
+                  <p className="text-gray-500">{provider.city}, {provider.state} {provider.zip ?? ''}</p>
                 </div>
-
-                {provider.phone && (
-                  <a
-                    href={`tel:${provider.phone.replace(/\D/g, '')}`}
-                    onClick={() => trackEvent(provider.id, 'click_phone')}
-                    className="flex items-center gap-3 text-sm p-3 bg-blue-50 border border-blue-100 rounded-lg hover:bg-blue-100 transition-colors"
-                  >
-                    <Phone className="w-4 h-4 text-blue-700 shrink-0" />
-                    <span className="font-semibold text-blue-800">{formatPhone(provider.phone)}</span>
-                  </a>
-                )}
-
-                {provider.website && (
-                  <a
-                    href={provider.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackEvent(provider.id, 'click_website')}
-                    className="flex items-center gap-3 text-sm p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    <Globe className="w-4 h-4 text-gray-500 shrink-0" />
-                    <span className="text-gray-700 font-medium truncate">Visit Website</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-gray-400 ml-auto shrink-0" />
-                  </a>
-                )}
-
-                {provider.rating !== null && (
-                  <div className="border-t border-gray-100 pt-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                        <StarRating rating={provider.rating} size="sm" />
-                        <span className="font-bold text-gray-900">{provider.rating.toFixed(1)}</span>
-                      </div>
-                      <span className="text-xs text-gray-500">{provider.review_count.toLocaleString()} reviews</span>
-                    </div>
-                  </div>
-                )}
-
-                {categoryMeta && cityMeta && (
-                  <Link
-                    to={`/${cityMeta.stateSlug}/${cityMeta.citySlug}/${provider.category as CategorySlug}`}
-                    className="flex items-center justify-center gap-1.5 w-full py-2.5 border border-blue-200 text-blue-700 rounded-lg text-sm font-semibold hover:bg-blue-50 transition-colors"
-                  >
-                    More {categoryMeta.pluralLabel} in {provider.city}
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
-                )}
-
-                {isGoogleListed && provider.last_synced_at && (
-                  <p className="text-xs text-gray-400 text-center">
-                    Data from Google Places · Updated {new Date(provider.last_synced_at).toLocaleDateString()}
-                  </p>
-                )}
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${provider.address}, ${provider.city}, ${provider.state}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 flex items-center gap-1 text-xs font-semibold text-green-600 hover:text-green-700 transition-colors"
+                  onClick={e => e.stopPropagation()}
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  Directions
+                </a>
               </div>
-            ) : (
-              /* ── Guest: blurred card + unlock CTA ── */
-              <div className="relative">
-                {/* Blurred preview */}
-                <div className="p-5 space-y-3 select-none pointer-events-none blur-sm">
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
-                    <MapPin className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
-                    <div>
-                      <p className="text-gray-700 font-medium">{provider.address.split(',')[0]}</p>
-                      <p className="text-gray-500">{provider.city}, {provider.state}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm p-3 bg-blue-50 border border-blue-100 rounded-lg">
-                    <Phone className="w-4 h-4 text-blue-700 shrink-0" />
-                    <span className="font-semibold text-blue-800">({provider.city.slice(0,3).toUpperCase()}) •••-••••</span>
-                  </div>
-                  {provider.website && (
-                    <div className="flex items-center gap-3 text-sm p-3 bg-gray-50 border border-gray-200 rounded-lg">
-                      <Globe className="w-4 h-4 text-gray-500 shrink-0" />
-                      <span className="text-gray-700 font-medium">Visit Website</span>
-                    </div>
-                  )}
-                </div>
 
-                {/* Overlay CTA */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 backdrop-blur-[2px] rounded-b-2xl px-5 py-6 text-center">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-3">
-                    <Lock className="w-5 h-5 text-green-700" />
+              {provider.phone && (
+                <a
+                  href={`tel:${provider.phone.replace(/\D/g, '')}`}
+                  onClick={() => trackEvent(provider.id, 'click_phone')}
+                  className="flex items-center gap-3 text-sm p-3 bg-blue-50 border border-blue-100 rounded-lg hover:bg-blue-100 transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-blue-700 shrink-0" />
+                  <span className="font-semibold text-blue-800">{formatPhone(provider.phone)}</span>
+                </a>
+              )}
+
+              {provider.website && (
+                <a
+                  href={provider.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent(provider.id, 'click_website')}
+                  className="flex items-center gap-3 text-sm p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <Globe className="w-4 h-4 text-gray-500 shrink-0" />
+                  <span className="text-gray-700 font-medium truncate">Visit Website</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-400 ml-auto shrink-0" />
+                </a>
+              )}
+
+              {provider.rating !== null && (
+                <div className="border-t border-gray-100 pt-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <StarRating rating={provider.rating} size="sm" />
+                      <span className="font-bold text-gray-900">{provider.rating.toFixed(1)}</span>
+                    </div>
+                    <span className="text-xs text-gray-500">{provider.review_count.toLocaleString()} reviews</span>
                   </div>
-                  <p className="font-bold text-gray-900 text-sm mb-1">Unlock contact info</p>
-                  <p className="text-gray-500 text-xs mb-4 leading-relaxed">
-                    Create a free account to view phone numbers, addresses, and website links.
-                  </p>
-                  <button
-                    onClick={() => openModal('phone')}
-                    className="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl text-sm transition-colors"
-                  >
-                    Sign up free — it's instant
-                  </button>
-                  <button
-                    onClick={() => openModal('phone')}
-                    className="mt-2 text-xs text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    Already have an account? Sign in
-                  </button>
                 </div>
-              </div>
-            )}
+              )}
+
+              {categoryMeta && cityMeta && (
+                <Link
+                  to={`/${cityMeta.stateSlug}/${cityMeta.citySlug}/${provider.category as CategorySlug}`}
+                  className="flex items-center justify-center gap-1.5 w-full py-2.5 border border-blue-200 text-blue-700 rounded-lg text-sm font-semibold hover:bg-blue-50 transition-colors"
+                >
+                  More {categoryMeta.pluralLabel} in {provider.city}
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              )}
+
+              {isGoogleListed && provider.last_synced_at && (
+                <p className="text-xs text-gray-400 text-center">
+                  Data from Google Places · Updated {new Date(provider.last_synced_at).toLocaleDateString()}
+                </p>
+              )}
+            </div>
+
+            {/* Newsletter signup — dynamic based on city */}
+            <NewsletterSignup city={provider.city} state={provider.state} category={categoryMeta?.pluralLabel} />
 
             {/* PetOS Health upsell — always visible */}
             <div className="border-t border-gray-100 px-5 py-4">
