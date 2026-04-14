@@ -18,7 +18,7 @@ import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import type { CategorySlug } from '@/types'
 import {
   Star, Phone, Globe, MapPin, Shield, AlertCircle,
-  Clock, ChevronRight, ExternalLink, Share2, Heart, Navigation, Check, Copy,
+  Clock, ChevronRight, ExternalLink, Share2, Heart, Navigation, Check, Copy, Sparkles,
 } from 'lucide-react'
 
 function XLogo({ className }: { className?: string }) {
@@ -240,6 +240,17 @@ export default function ProviderPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left: main info */}
         <div className="lg:col-span-2 space-y-8">
+
+          {/* Special Offer banner (only if business has set one) */}
+          {provider.special_offer && (
+            <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+              <Sparkles className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs font-semibold text-amber-900 uppercase tracking-wide mb-0.5">Special Offer</p>
+                <p className="text-sm text-amber-900 font-medium">{provider.special_offer}</p>
+              </div>
+            </div>
+          )}
 
           {/* Name + rating */}
           <div className="pb-6 border-b border-gray-100">

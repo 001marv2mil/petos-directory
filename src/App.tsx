@@ -12,6 +12,8 @@ import StatePage from '@/pages/StatePage'
 import PrivacyPage from '@/pages/PrivacyPage'
 import AccountPage from '@/pages/AccountPage'
 import ClaimPage from '@/pages/ClaimPage'
+import BusinessDashboardPage from '@/pages/BusinessDashboardPage'
+import AdminClaimsPage from '@/pages/AdminClaimsPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import FaqPage from '@/pages/FaqPage'
 import CostCalculatorPage from '@/pages/CostCalculatorPage'
@@ -37,6 +39,8 @@ export default function App() {
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/claim/:slug" element={<ClaimPage />} />
             <Route path="/account" element={<AccountPage />} />
+            <Route path="/dashboard" element={<BusinessDashboardPage />} />
+            <Route path="/admin/claims" element={<AdminClaimsPage />} />
             <Route path="/not-found" element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

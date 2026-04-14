@@ -50,7 +50,11 @@ export interface Provider {
   gallery_images: string[]
   emergency: boolean
   verified: boolean
+  special_offer: string | null
+  claimed_by_email: string | null
+  claimed_at: string | null
   last_synced_at: string | null
+  source?: string | null
   created_at: string
   updated_at: string
 }
