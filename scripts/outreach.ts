@@ -31,7 +31,7 @@ const SITE = 'https://petosdirectory.com'
 const FROM = 'Malak from PetOS Directory <malak@petosdirectory.com>'
 const REPLY_TO = 'info@petoshealth.com'
 const DELAY_MS = 500 // 500ms between sends to respect rate limits
-const FEATURED_URL = 'YOUR_STRIPE_PAYMENT_LINK_HERE' // Replace with $99/mo Stripe payment link
+const FEATURED_URL = 'https://buy.stripe.com/fZu00jeJLblfecd4tg04802'
 
 const CATEGORY_LABELS: Record<string, string> = {
   veterinarians: 'veterinarian',
