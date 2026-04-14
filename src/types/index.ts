@@ -54,7 +54,6 @@ export interface Provider {
   claimed_by_email: string | null
   claimed_at: string | null
   last_synced_at: string | null
-  source?: string | null
   created_at: string
   updated_at: string
 }
