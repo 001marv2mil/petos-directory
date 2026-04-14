@@ -82,6 +82,7 @@ function getSubject(emailNum: number, p: Provider): string {
     case 1: return `${p.business_name} is now on petosdirectory.com`
     case 2: return `Your listing on petosdirectory.com`
     case 3: return `Want to be the top ${p.city} ${CATEGORY_LABELS[p.category] || 'pet service'}?`
+    case 4: return `${p.business_name} — ready to stand out?`
     default: return ''
   }
 }
@@ -205,34 +206,57 @@ function getHtml(emailNum: number, p: Provider): string {
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`
 
+    case 4:
+      return `${base}
+        <p style="font-size:15px;line-height:1.6;">Hi,</p>
+        <p style="font-size:15px;line-height:1.6;">
+          Thanks for claiming <strong>${p.business_name}</strong> on
+          <a href="${SITE}" style="color:#16a34a;">petosdirectory.com</a> — your listing
+          is now verified and showing updated info to pet owners in ${p.city}.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Want to take it a step further? <strong>Featured businesses get
+          top placement</strong> — meaning pet owners see you first when they search
+          for ${catLabel}s in ${p.city}.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Here's what Featured includes:
+        </p>
+        <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#374151;">
+          <li><strong>Top placement</strong> on the ${p.city} ${catLabel} page</li>
+          <li><strong>Highlighted card</strong> with your photo &amp; call button</li>
+          <li><strong>Priority</strong> in search results across the directory</li>
+        </ul>
+        <p style="text-align:center;margin:24px 0;">
+          <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">
+            Get Featured — $99/mo
+          </a>
+        </p>
+        <p style="font-size:13px;color:#6b7280;text-align:center;">
+          Cancel anytime. No contracts.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
+      ${footer}`
+
     default:
       return ''
   }
 }
 
 // ─── Exclusion lists ──────────────────────────────────────────────────────────
-// Businesses that have claimed their listing or paid for featured should not
-// receive follow-up emails pitching them things they've already done.
 
-async function getExcludedProviderIds(): Promise<Set<string>> {
-  const excluded = new Set<string>()
+async function getClaimedProviderIds(): Promise<Set<string>> {
+  const ids = new Set<string>()
+  const { data } = await supabase.from('claim_requests').select('provider_id')
+  if (data) data.forEach(c => ids.add(c.provider_id))
+  return ids
+}
 
-  // Exclude businesses that have submitted a claim request
-  const { data: claimed } = await supabase
-    .from('claim_requests')
-    .select('provider_id')
-
-  if (claimed) claimed.forEach(c => excluded.add(c.provider_id))
-
-  // Exclude businesses that have paid for featured listing
-  const { data: paid } = await supabase
-    .from('featured_payments')
-    .select('provider_id')
-    .eq('status', 'active')
-
-  if (paid) paid.forEach(p => excluded.add(p.provider_id))
-
-  return excluded
+async function getPaidProviderIds(): Promise<Set<string>> {
+  const ids = new Set<string>()
+  const { data } = await supabase.from('featured_payments').select('provider_id').eq('status', 'active')
+  if (data) data.forEach(p => ids.add(p.provider_id))
+  return ids
 }
 
 // ─── Fetch targets ─────────────────────────────────────────────────────────────
@@ -271,8 +295,9 @@ async function fetchFollowUpTargets(emailNum: number): Promise<Provider[]> {
   const prevEmailNum = emailNum - 1
   const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
 
-  // Get providers who already claimed or paid — skip them for follow-ups
-  const excludedIds = await getExcludedProviderIds()
+  // Claimed businesses get Email 4 instead; paid businesses get nothing
+  const claimedIds = await getClaimedProviderIds()
+  const paidIds = await getPaidProviderIds()
 
   const { data: eligible } = await supabase
     .from('outreach_log')
@@ -290,7 +315,52 @@ async function fetchFollowUpTargets(emailNum: number): Promise<Provider[]> {
   const alreadySentIds = new Set((alreadySent || []).map(s => s.provider_id))
   const targetIds = Array.from(new Set(eligible.map(e => e.provider_id)))
     .filter(id => !alreadySentIds.has(id))
-    .filter(id => !excludedIds.has(id)) // Skip claimed + paid businesses
+    .filter(id => !claimedIds.has(id))  // Claimed → routed to Email 4 instead
+    .filter(id => !paidIds.has(id))     // Paid → done, no more emails
+
+  if (targetIds.length === 0) return []
+
+  const all: Provider[] = []
+  for (let i = 0; i < targetIds.length; i += 100) {
+    const chunk = targetIds.slice(i, i + 100)
+    const { data } = await supabase
+      .from('providers')
+      .select('id, business_name, contact_email, city, state, category, slug, rating, review_count')
+      .in('id', chunk)
+
+    if (data) all.push(...(data as Provider[]))
+  }
+  return all.filter(p => p.contact_email && isValidOutreachEmail(p.contact_email))
+}
+
+// Email 4: post-claim upsell — businesses that claimed but haven't paid
+async function fetchEmail4Targets(): Promise<Provider[]> {
+  const oneDayAgo = new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+
+  // Get all claimed provider IDs (claimed at least 1 day ago to give breathing room)
+  const { data: claims } = await supabase
+    .from('claim_requests')
+    .select('provider_id')
+    .lt('created_at', oneDayAgo)
+
+  if (!claims || claims.length === 0) return []
+
+  const claimedIds = [...new Set(claims.map(c => c.provider_id))]
+
+  // Exclude those who already got Email 4
+  const { data: alreadySent } = await supabase
+    .from('outreach_log')
+    .select('provider_id')
+    .eq('email_num', 4)
+
+  const alreadySentIds = new Set((alreadySent || []).map(s => s.provider_id))
+
+  // Exclude those who already paid
+  const paidIds = await getPaidProviderIds()
+
+  const targetIds = claimedIds
+    .filter(id => !alreadySentIds.has(id))
+    .filter(id => !paidIds.has(id))
 
   if (targetIds.length === 0) return []
 
@@ -378,12 +448,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       : { sent: 0, failed: 0 }
     results.email2 = { ...r2, eligible: email2Targets.length }
 
-    // Email #3 — follow up on #2 sent 5+ days ago
+    // Email #3 — follow up on #2 sent 3+ days ago (unclaimed, unpaid only)
     const email3Targets = await fetchFollowUpTargets(3)
     const r3 = email3Targets.length > 0
       ? await sendBatch(email3Targets, 3)
       : { sent: 0, failed: 0 }
     results.email3 = { ...r3, eligible: email3Targets.length }
+
+    // Email #4 — post-claim upsell (claimed 1+ day ago, not paid)
+    const email4Targets = await fetchEmail4Targets()
+    const r4 = email4Targets.length > 0
+      ? await sendBatch(email4Targets, 4)
+      : { sent: 0, failed: 0 }
+    results.email4 = { ...r4, eligible: email4Targets.length }
 
     console.log('Outreach cron complete:', JSON.stringify(results))
     return res.status(200).json({ success: true, results })
