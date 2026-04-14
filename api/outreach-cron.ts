@@ -210,6 +210,31 @@ function getHtml(emailNum: number, p: Provider): string {
   }
 }
 
+// ─── Exclusion lists ──────────────────────────────────────────────────────────
+// Businesses that have claimed their listing or paid for featured should not
+// receive follow-up emails pitching them things they've already done.
+
+async function getExcludedProviderIds(): Promise<Set<string>> {
+  const excluded = new Set<string>()
+
+  // Exclude businesses that have submitted a claim request
+  const { data: claimed } = await supabase
+    .from('claim_requests')
+    .select('provider_id')
+
+  if (claimed) claimed.forEach(c => excluded.add(c.provider_id))
+
+  // Exclude businesses that have paid for featured listing
+  const { data: paid } = await supabase
+    .from('featured_payments')
+    .select('provider_id')
+    .eq('status', 'active')
+
+  if (paid) paid.forEach(p => excluded.add(p.provider_id))
+
+  return excluded
+}
+
 // ─── Fetch targets ─────────────────────────────────────────────────────────────
 
 async function fetchEmail1Targets(): Promise<Provider[]> {
@@ -246,6 +271,9 @@ async function fetchFollowUpTargets(emailNum: number): Promise<Provider[]> {
   const prevEmailNum = emailNum - 1
   const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
 
+  // Get providers who already claimed or paid — skip them for follow-ups
+  const excludedIds = await getExcludedProviderIds()
+
   const { data: eligible } = await supabase
     .from('outreach_log')
     .select('provider_id')
@@ -260,7 +288,9 @@ async function fetchFollowUpTargets(emailNum: number): Promise<Provider[]> {
     .eq('email_num', emailNum)
 
   const alreadySentIds = new Set((alreadySent || []).map(s => s.provider_id))
-  const targetIds = Array.from(new Set(eligible.map(e => e.provider_id))).filter(id => !alreadySentIds.has(id))
+  const targetIds = Array.from(new Set(eligible.map(e => e.provider_id)))
+    .filter(id => !alreadySentIds.has(id))
+    .filter(id => !excludedIds.has(id)) // Skip claimed + paid businesses
 
   if (targetIds.length === 0) return []
 
