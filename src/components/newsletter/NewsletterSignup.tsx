@@ -41,7 +41,7 @@ export function NewsletterSignup({ city, state, category, referrerSlug, source =
       <div className="border-t border-gray-100 px-5 py-4">
         <div className="flex items-center gap-3 p-3.5 rounded-xl bg-green-50 border border-green-200">
           <Check className="w-5 h-5 text-green-600 shrink-0" />
-          <p className="text-sm text-green-800 font-medium">You're in — we'll send you new listings and deals in {locationLabel}.</p>
+          <p className="text-sm text-green-800 font-medium">You're in — we'll send pet deals, perks & events in {locationLabel} straight to your inbox.</p>
         </div>
       </div>
     )
@@ -54,10 +54,10 @@ export function NewsletterSignup({ city, state, category, referrerSlug, source =
           <Mail className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
           <div>
             <p className="text-xs font-semibold text-amber-900">
-              Get new pet services in {locationLabel}
+              Pet deals, perks & events in {locationLabel}
             </p>
             <p className="text-xs text-amber-700 mt-0.5">
-              New listings, deals, and pet care tips — free. No spam.
+              Exclusive discounts from local vets, groomers &amp; pet stores — free.
             </p>
           </div>
         </div>
