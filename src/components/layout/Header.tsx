@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { PawPrint, AlertCircle, LogIn, LogOut, User, Briefcase } from 'lucide-react'
+import { PawPrint, AlertCircle, LogOut, User, Briefcase } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 
@@ -90,9 +90,8 @@ export function Header() {
             ) : (
               <button
                 onClick={() => openModal('default')}
-                className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-gray-700 border border-gray-200 rounded-lg hover:border-blue-300 hover:text-blue-700 transition-colors"
+                className="px-4 py-2 text-sm font-semibold text-gray-700 border border-gray-200 rounded-lg hover:border-blue-300 hover:text-blue-700 transition-colors"
               >
-                <LogIn className="w-4 h-4" />
                 Sign in
               </button>
             )}
