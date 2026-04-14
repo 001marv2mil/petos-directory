@@ -97,15 +97,16 @@ export function Header() {
               </button>
             )}
 
-            {/* PetOS Health official partner */}
+            {/* PetOS Health — subtle partner link */}
             <a
               href="https://petoshealth.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex flex-col items-center px-5 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg transition-colors leading-tight"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-gray-500 hover:text-blue-700 transition-colors group"
             >
-              <span className="text-[9px] font-semibold uppercase tracking-widest opacity-70">Official Partner</span>
-              <span className="text-sm font-bold">PetOS Health</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+              PetOS Health
+              <span className="text-gray-300 group-hover:translate-x-0.5 transition-transform">→</span>
             </a>
           </div>
         </div>
