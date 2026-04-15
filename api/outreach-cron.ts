@@ -83,6 +83,8 @@ function getSubject(emailNum: number, p: Provider): string {
     case 2: return `Your listing on petosdirectory.com`
     case 3: return `Want to be the top ${p.city} ${CATEGORY_LABELS[p.category] || 'pet service'}?`
     case 4: return `${p.business_name} — ready to stand out?`
+    case 5: return `${p.business_name} — your listing has been live for a month`
+    case 6: return `Last note about Featured Listing for ${p.business_name}`
     default: return ''
   }
 }
@@ -238,6 +240,71 @@ function getHtml(emailNum: number, p: Provider): string {
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`
 
+    case 5:
+      return `${base}
+        <p style="font-size:15px;line-height:1.6;">Hi,</p>
+        <p style="font-size:15px;line-height:1.6;">
+          Quick update — <strong>${p.business_name}</strong> has been live on
+          <a href="${SITE}" style="color:#16a34a;">petosdirectory.com</a> for about a month now.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Pet owners are searching for ${catLabel}s in ${p.city} every day. Right now your
+          listing shows up alongside everyone else in the area. <strong>Featured businesses
+          get the top spot</strong> — they're the first thing pet owners see, with a bigger
+          card, photo, and a special offer banner.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          For $99/mo, you get:
+        </p>
+        <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#374151;">
+          <li>Top placement on the ${p.city} ${catLabel} page</li>
+          <li>A promotional offer banner (e.g. "20% off first visit") that pet owners see right when they land on your listing</li>
+          <li>Priority across search results</li>
+        </ul>
+        <p style="text-align:center;margin:24px 0;">
+          <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">
+            Upgrade to Featured — $99/mo
+          </a>
+        </p>
+        <p style="font-size:13px;color:#6b7280;text-align:center;">
+          Cancel anytime. Your basic listing always stays free.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
+      ${footer}`
+
+    case 6:
+      return `${base}
+        <p style="font-size:15px;line-height:1.6;">Hi,</p>
+        <p style="font-size:15px;line-height:1.6;">
+          Last note from me about Featured — I won't keep emailing about this.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          <strong>${p.business_name}</strong> has been on petosdirectory.com for two months.
+          You've claimed it, your info is verified, but you're still listed alongside other
+          ${catLabel}s in ${p.city}.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Featured businesses are seeing the difference — top placement, highlighted listings,
+          and the ability to run promotional offers like "first visit free" right on their listing.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          If you want to give it a try, here's the link one more time:
+        </p>
+        <p style="text-align:center;margin:24px 0;">
+          <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">
+            Get Featured — $99/mo
+          </a>
+        </p>
+        <p style="font-size:13px;color:#6b7280;text-align:center;">
+          Cancel anytime. No contracts.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Either way, your basic listing stays up and continues sending you referrals at no cost.
+          Thanks for being part of ${p.city}'s pet community.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
+      ${footer}`
+
     default:
       return ''
   }
@@ -333,32 +400,34 @@ async function fetchFollowUpTargets(emailNum: number): Promise<Provider[]> {
   return all.filter(p => p.contact_email && isValidOutreachEmail(p.contact_email))
 }
 
-// Email 4: post-claim upsell — businesses that claimed but haven't paid
-async function fetchEmail4Targets(): Promise<Provider[]> {
-  const oneDayAgo = new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+// Shared helper: fetch providers whose claim was APPROVED at least N days ago,
+// haven't received the given email yet, and haven't paid for Featured.
+async function fetchPostApprovalTargets(emailNum: number, daysAgo: number): Promise<Provider[]> {
+  const cutoff = new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000).toISOString()
 
-  // Get all claimed provider IDs (claimed at least 1 day ago to give breathing room)
+  // Only APPROVED claims (admin has verified them) past the age cutoff
   const { data: claims } = await supabase
     .from('claim_requests')
     .select('provider_id')
-    .lt('created_at', oneDayAgo)
+    .eq('status', 'approved')
+    .lt('approved_at', cutoff)
 
   if (!claims || claims.length === 0) return []
 
-  const claimedIds = [...new Set(claims.map(c => c.provider_id))]
+  const approvedIds = [...new Set(claims.map(c => c.provider_id))]
 
-  // Exclude those who already got Email 4
+  // Exclude those who already got this email
   const { data: alreadySent } = await supabase
     .from('outreach_log')
     .select('provider_id')
-    .eq('email_num', 4)
+    .eq('email_num', emailNum)
 
   const alreadySentIds = new Set((alreadySent || []).map(s => s.provider_id))
 
-  // Exclude those who already paid
+  // Exclude those who already paid for Featured
   const paidIds = await getPaidProviderIds()
 
-  const targetIds = claimedIds
+  const targetIds = approvedIds
     .filter(id => !alreadySentIds.has(id))
     .filter(id => !paidIds.has(id))
 
@@ -375,6 +444,21 @@ async function fetchEmail4Targets(): Promise<Provider[]> {
     if (data) all.push(...(data as Provider[]))
   }
   return all.filter(p => p.contact_email && isValidOutreachEmail(p.contact_email))
+}
+
+// Email 4: post-approval upsell (1 day after admin approves)
+async function fetchEmail4Targets(): Promise<Provider[]> {
+  return fetchPostApprovalTargets(4, 1)
+}
+
+// Email 5: 30-day check-in (30 days after approval)
+async function fetchEmail5Targets(): Promise<Provider[]> {
+  return fetchPostApprovalTargets(5, 30)
+}
+
+// Email 6: 60-day final nudge (60 days after approval)
+async function fetchEmail6Targets(): Promise<Provider[]> {
+  return fetchPostApprovalTargets(6, 60)
 }
 
 // ─── Send batch ────────────────────────────────────────────────────────────────
@@ -455,12 +539,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       : { sent: 0, failed: 0 }
     results.email3 = { ...r3, eligible: email3Targets.length }
 
-    // Email #4 — post-claim upsell (claimed 1+ day ago, not paid)
+    // Email #4 — post-approval upsell (1 day after admin approves the claim, not paid)
     const email4Targets = await fetchEmail4Targets()
     const r4 = email4Targets.length > 0
       ? await sendBatch(email4Targets, 4)
       : { sent: 0, failed: 0 }
     results.email4 = { ...r4, eligible: email4Targets.length }
+
+    // Email #5 — 30-day check-in (30 days after approval, not paid)
+    const email5Targets = await fetchEmail5Targets()
+    const r5 = email5Targets.length > 0
+      ? await sendBatch(email5Targets, 5)
+      : { sent: 0, failed: 0 }
+    results.email5 = { ...r5, eligible: email5Targets.length }
+
+    // Email #6 — final nudge (60 days after approval, not paid)
+    const email6Targets = await fetchEmail6Targets()
+    const r6 = email6Targets.length > 0
+      ? await sendBatch(email6Targets, 6)
+      : { sent: 0, failed: 0 }
+    results.email6 = { ...r6, eligible: email6Targets.length }
 
     console.log('Outreach cron complete:', JSON.stringify(results))
     return res.status(200).json({ success: true, results })

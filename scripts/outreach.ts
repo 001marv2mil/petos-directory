@@ -73,6 +73,8 @@ function getSubject(emailNum: number, p: Provider): string {
     case 2: return `Your listing on petosdirectory.com`
     case 3: return `Want to be the top ${p.city} ${CATEGORY_LABELS[p.category] || 'pet service'}?`
     case 4: return `${p.business_name} — ready to stand out?`
+    case 5: return `${p.business_name} — your listing has been live for a month`
+    case 6: return `Last note about Featured Listing for ${p.business_name}`
     default: return ''
   }
 }
@@ -232,6 +234,71 @@ function getHtml(emailNum: number, p: Provider): string {
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`
 
+    case 5:
+      return `${base}
+        <p style="font-size:15px;line-height:1.6;">Hi,</p>
+        <p style="font-size:15px;line-height:1.6;">
+          Quick update — <strong>${p.business_name}</strong> has been live on
+          <a href="${SITE}" style="color:#16a34a;">petosdirectory.com</a> for about a month now.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Pet owners are searching for ${catLabel}s in ${p.city} every day. Right now your
+          listing shows up alongside everyone else in the area. <strong>Featured businesses
+          get the top spot</strong> — they're the first thing pet owners see, with a bigger
+          card, photo, and a special offer banner.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          For $99/mo, you get:
+        </p>
+        <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#374151;">
+          <li>Top placement on the ${p.city} ${catLabel} page</li>
+          <li>A promotional offer banner (e.g. "20% off first visit") that pet owners see right when they land on your listing</li>
+          <li>Priority across search results</li>
+        </ul>
+        <p style="text-align:center;margin:24px 0;">
+          <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">
+            Upgrade to Featured — $99/mo
+          </a>
+        </p>
+        <p style="font-size:13px;color:#6b7280;text-align:center;">
+          Cancel anytime. Your basic listing always stays free.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
+      ${footer}`
+
+    case 6:
+      return `${base}
+        <p style="font-size:15px;line-height:1.6;">Hi,</p>
+        <p style="font-size:15px;line-height:1.6;">
+          Last note from me about Featured — I won't keep emailing about this.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          <strong>${p.business_name}</strong> has been on petosdirectory.com for two months.
+          You've claimed it, your info is verified, but you're still listed alongside other
+          ${catLabel}s in ${p.city}.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Featured businesses are seeing the difference — top placement, highlighted listings,
+          and the ability to run promotional offers like "first visit free" right on their listing.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          If you want to give it a try, here's the link one more time:
+        </p>
+        <p style="text-align:center;margin:24px 0;">
+          <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">
+            Get Featured — $99/mo
+          </a>
+        </p>
+        <p style="font-size:13px;color:#6b7280;text-align:center;">
+          Cancel anytime. No contracts.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Either way, your basic listing stays up and continues sending you referrals at no cost.
+          Thanks for being part of ${p.city}'s pet community.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
+      ${footer}`
+
     default:
       return ''
   }
@@ -294,20 +361,24 @@ async function fetchTargets(): Promise<Provider[]> {
     const claimedIds = await getClaimedProviderIds()
     const paidIds = await getPaidProviderIds()
 
-    if (EMAIL_NUM === 4) {
-      // Email 4: post-claim upsell — businesses that claimed 1+ day ago, not paid
-      const oneDayAgo = new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+    if (EMAIL_NUM === 4 || EMAIL_NUM === 5 || EMAIL_NUM === 6) {
+      // Email 4/5/6 fire N days AFTER admin approval (not after claim submission)
+      const daysAgoByEmail: Record<number, number> = { 4: 1, 5: 30, 6: 60 }
+      const days = daysAgoByEmail[EMAIL_NUM]
+      const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString()
+
       const { data: claims } = await supabase
         .from('claim_requests')
         .select('provider_id')
-        .lt('created_at', oneDayAgo)
+        .eq('status', 'approved')
+        .lt('approved_at', cutoff)
 
       if (!claims || claims.length === 0) return []
 
       const { data: alreadySent } = await supabase
         .from('outreach_log')
         .select('provider_id')
-        .eq('email_num', 4)
+        .eq('email_num', EMAIL_NUM)
 
       const alreadySentIds = new Set((alreadySent || []).map(s => s.provider_id))
       const targetIds = [...new Set(claims.map(c => c.provider_id))]
