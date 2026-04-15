@@ -28,3 +28,31 @@ vercil skills/
 PLaywright cli w skills/
 .claude/
 .gstack/
+.vercel
+
+# Tampa Pulse — separate project, contains secrets (Vercel PATs etc), MUST stay out of this repo
+TampaPulse*
+Tampa_Outreach_Tracker*
+tampa_pulse*
+
+# Internal analysis/handoff docs — not for git
+ANALYSIS_INDEX.md
+COVERAGE_ANALYSIS_REPORT.md
+COVERAGE_SUMMARY.txt
+EXECUTIVE_BRIEF.md
+HANDOFF.md
+coverage-analysis.json
+analyze-coverage.js
+analyze-seed-coverage.js
+petos_growth_strategy.docx
+email-preview.html
+test-connection.js
+outreach_emails.md
+
+# Supabase CLI temp state
+supabase/.temp/
+
+# Any future secret-bearing handoff/session docs
+*Session_Handoff*
+*_secrets*
+*_credentials*
