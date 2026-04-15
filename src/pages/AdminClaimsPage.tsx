@@ -42,25 +42,27 @@ export default function AdminClaimsPage() {
 
   async function loadClaims() {
     setLoading(true)
-    let query = supabase
-      .from('claim_requests')
-      .select('*, providers(slug, city, state, category)')
-      .order('created_at', { ascending: false })
-
-    if (filter !== 'all') {
-      query = query.eq('status', filter)
+    try {
+      const token = (await supabase.auth.getSession()).data.session?.access_token
+      const res = await fetch(`/api/admin/list-claims?filter=${filter}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (!res.ok) {
+        setClaims([])
+        return
+      }
+      const json = await res.json()
+      const mapped: ClaimWithProvider[] = (json.claims || []).map((c: any) => ({
+        ...c,
+        provider_slug: c.providers?.slug ?? null,
+        provider_city: c.providers?.city ?? null,
+        provider_state: c.providers?.state ?? null,
+        provider_category: c.providers?.category ?? null,
+      }))
+      setClaims(mapped)
+    } finally {
+      setLoading(false)
     }
-
-    const { data } = await query
-    const mapped: ClaimWithProvider[] = (data || []).map((c: any) => ({
-      ...c,
-      provider_slug: c.providers?.slug ?? null,
-      provider_city: c.providers?.city ?? null,
-      provider_state: c.providers?.state ?? null,
-      provider_category: c.providers?.category ?? null,
-    }))
-    setClaims(mapped)
-    setLoading(false)
   }
 
   async function handleApprove(claim: ClaimWithProvider) {
