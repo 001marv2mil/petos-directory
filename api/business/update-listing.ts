@@ -34,13 +34,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(403).json({ error: 'You do not own this listing' })
   }
 
+  // Special Offer requires active Featured payment
+  let isFeatured = false
+  if (special_offer !== undefined) {
+    const { data: payment } = await supabase
+      .from('featured_payments')
+      .select('id')
+      .eq('provider_id', provider_id)
+      .eq('status', 'active')
+      .limit(1)
+      .single()
+    isFeatured = !!payment
+  }
+
   // Whitelist fields — business cannot change anything else (business_name, city, category, etc. locked)
   const updates: Record<string, any> = {}
   if (description !== undefined) updates.description = description?.slice(0, 2000) || null
   if (phone !== undefined) updates.phone = phone?.slice(0, 30) || null
   if (website !== undefined) updates.website = website?.slice(0, 500) || null
-  if (special_offer !== undefined) updates.special_offer = special_offer?.slice(0, 120) || null
   if (hero_image !== undefined) updates.hero_image = hero_image?.slice(0, 1000) || null
+  // Only allow special_offer if business has paid for Featured
+  if (special_offer !== undefined && isFeatured) {
+    updates.special_offer = special_offer?.slice(0, 120) || null
+  }
 
   if (Object.keys(updates).length === 0) {
     return res.status(400).json({ error: 'No fields to update' })

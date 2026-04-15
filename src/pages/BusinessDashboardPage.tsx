@@ -3,7 +3,7 @@ import { Navigate, Link } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import { PageMeta } from '@/components/common/PageMeta'
-import { Briefcase, ExternalLink, Image as ImageIcon, Upload, Save, Check, Sparkles } from 'lucide-react'
+import { Briefcase, ExternalLink, Image as ImageIcon, Upload, Save, Check, Sparkles, Lock } from 'lucide-react'
 
 interface Provider {
   id: string
@@ -24,9 +24,13 @@ interface Provider {
   verified: boolean
 }
 
+// Stripe payment link for upgrading to Featured
+const FEATURED_URL = 'https://buy.stripe.com/fZu00jeJLblfecd4tg04802'
+
 export default function BusinessDashboardPage() {
   const { user, loading: authLoading } = useAuth()
   const [providers, setProviders] = useState<Provider[]>([])
+  const [featuredIds, setFeaturedIds] = useState<Set<string>>(new Set())
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -55,6 +59,18 @@ export default function BusinessDashboardPage() {
 
     const list = (data || []) as Provider[]
     setProviders(list)
+
+    // Check which businesses have paid for Featured
+    if (list.length > 0) {
+      const ids = list.map(p => p.id)
+      const { data: payments } = await supabase
+        .from('featured_payments')
+        .select('provider_id')
+        .in('provider_id', ids)
+        .eq('status', 'active')
+      setFeaturedIds(new Set((payments || []).map(p => p.provider_id)))
+    }
+
     if (list.length > 0 && !selectedId) {
       selectProvider(list[0])
     }
@@ -272,25 +288,65 @@ export default function BusinessDashboardPage() {
             </div>
           </div>
 
-          {/* Special offer */}
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-            <label className="block text-sm font-semibold text-amber-900 mb-1 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-700" />
-              Special Offer (optional)
-            </label>
-            <p className="text-xs text-amber-800 mb-2">
-              Attract new clients with a short promotion. Example: "20% off your first grooming"
-            </p>
-            <input
-              type="text"
-              value={specialOffer}
-              onChange={e => setSpecialOffer(e.target.value)}
-              maxLength={120}
-              placeholder="e.g. First-time clients get $20 off"
-              className="w-full px-3 py-2 text-sm border border-amber-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 bg-white"
-            />
-            <p className="text-xs text-amber-700 mt-1">{specialOffer.length}/120</p>
-          </div>
+          {/* Special offer — Featured ($99/mo) ONLY */}
+          {featuredIds.has(selected.id) ? (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+              <label className="block text-sm font-semibold text-amber-900 mb-1 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-700" />
+                Special Offer
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-600 text-white px-2 py-0.5 rounded">Featured</span>
+              </label>
+              <p className="text-xs text-amber-800 mb-2">
+                This shows as a banner on your public listing. Example: "20% off your first grooming"
+              </p>
+              <input
+                type="text"
+                value={specialOffer}
+                onChange={e => setSpecialOffer(e.target.value)}
+                maxLength={120}
+                placeholder="e.g. First-time clients get $20 off"
+                className="w-full px-3 py-2 text-sm border border-amber-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 bg-white"
+              />
+              <p className="text-xs text-amber-700 mt-1">{specialOffer.length}/120</p>
+            </div>
+          ) : (
+            <div className="bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-300 rounded-xl p-5">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-9 h-9 bg-amber-200 rounded-lg flex items-center justify-center shrink-0">
+                  <Lock className="w-4 h-4 text-amber-800" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-amber-900 flex items-center gap-2">
+                    Add a Special Offer
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-600 text-white px-2 py-0.5 rounded">Featured Only</span>
+                  </h3>
+                  <p className="text-sm text-amber-800 mt-1 leading-snug">
+                    Featured businesses can display a promotion banner on their listing to attract new customers.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white border border-amber-200 rounded-lg p-3 mb-3">
+                <p className="text-xs font-semibold text-amber-900 uppercase tracking-wide mb-1">Featured Listing — $99/mo</p>
+                <ul className="text-xs text-amber-800 space-y-1">
+                  <li>• Top placement on city/category pages</li>
+                  <li>• Highlighted card with photo &amp; CTA</li>
+                  <li>• <strong>Special Offer banner on your listing</strong></li>
+                  <li>• Priority in search results</li>
+                </ul>
+              </div>
+
+              <a
+                href={FEATURED_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg text-sm transition-colors"
+              >
+                Upgrade to Featured — $99/mo
+              </a>
+              <p className="text-xs text-amber-700 text-center mt-2">Cancel anytime. No contracts.</p>
+            </div>
+          )}
 
           {/* Save button */}
           <div className="flex items-center gap-3">
