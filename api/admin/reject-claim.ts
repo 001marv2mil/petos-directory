@@ -7,7 +7,7 @@ const supabase = createClient(
   { auth: { persistSession: false } },
 )
 
-const ADMIN_EMAILS = ['001marv2mil@gmail.com', 'marv2mil@gmail.com', 'malak@petosdirectory.com', 'info@petoshealth.com']
+const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'marv2mil@gmail.com', 'malak@petosdirectory.com', 'info@petoshealth.com']
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })

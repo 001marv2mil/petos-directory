@@ -4,7 +4,7 @@ import { PawPrint, AlertCircle, LogOut, User, Briefcase } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 
-const ADMIN_EMAILS = ['001marv2mil@gmail.com', 'marv2mil@gmail.com', 'malak@petosdirectory.com', 'info@petoshealth.com']
+const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'marv2mil@gmail.com', 'malak@petosdirectory.com', 'info@petoshealth.com']
 
 export function Header() {
   const { user, signOut, openModal } = useAuth()
