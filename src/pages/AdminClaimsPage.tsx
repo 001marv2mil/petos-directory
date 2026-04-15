@@ -6,7 +6,7 @@ import { PageMeta } from '@/components/common/PageMeta'
 import { Check, X, Shield, Mail, Phone, Calendar } from 'lucide-react'
 
 // Admin emails — only these can access this page
-const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'marv2mil@gmail.com', 'malak@petosdirectory.com', 'info@petoshealth.com']
+const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'malak@petosdirectory.com']
 
 interface ClaimWithProvider {
   id: string
