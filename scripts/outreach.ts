@@ -528,6 +528,12 @@ async function main() {
         to: p.email,
         subject,
         html,
+        tags: [
+          { name: 'campaign', value: 'outreach' },
+          { name: 'email_num', value: String(EMAIL_NUM) },
+          { name: 'category', value: p.category },
+          { name: 'state', value: p.state.toLowerCase() },
+        ],
       })
 
       // Log to outreach_log
