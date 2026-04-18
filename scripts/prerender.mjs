@@ -30,6 +30,7 @@ const ssrBuildDir = path.join(root, 'ssr-build')
 const STATIC_ROUTES = [
   '/',
   '/privacy',
+  '/reports/emergency-vet-access-2026',
 ]
 
 // All states with city data
