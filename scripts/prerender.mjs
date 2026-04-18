@@ -31,6 +31,7 @@ const STATIC_ROUTES = [
   '/',
   '/privacy',
   '/reports/emergency-vet-access-2026',
+  '/reports/pet-service-availability-2026',
 ]
 
 // All states with city data

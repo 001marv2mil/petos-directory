@@ -90,6 +90,7 @@ async function generate() {
     urlEntry('/search', '0.8', 'daily'),
     urlEntry('/faq', '0.7', 'monthly'),
     urlEntry('/reports/emergency-vet-access-2026', '0.9', 'monthly'),
+    urlEntry('/reports/pet-service-availability-2026', '0.9', 'monthly'),
   ]
   writeUrlset('sitemap-static.xml', staticUrls)
 
