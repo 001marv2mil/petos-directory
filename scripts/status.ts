@@ -41,7 +41,7 @@ async function groupCount(table: string, col: string, since?: string) {
   // Providers
   console.log('--- Providers ---')
   console.log('Total providers:', await count('providers'))
-  console.log('Featured providers:', await count('providers', q => q.eq('featured', true)))
+  console.log('Featured providers (active payments):', await count('featured_payments', q => q.eq('status', 'active')))
   console.log('')
 
   // Traffic / analytics

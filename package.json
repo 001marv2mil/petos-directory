@@ -10,13 +10,16 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "seed": "tsx --env-file=.env.local scripts/seed-providers.ts",
-    "ingest": "tsx --env-file=.env.local scripts/ingest-providers.ts"
+    "ingest": "tsx --env-file=.env.local scripts/ingest-providers.ts",
+    "outreach": "tsx --env-file=.env.local scripts/outreach.ts",
+    "outreach:send": "tsx --env-file=.env.local scripts/outreach.ts --send"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.3",
     "@tanstack/react-query": "^5.91.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "googleapis": "^171.4.0",
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
