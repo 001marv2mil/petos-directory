@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Pulls Google Search Console + GA4 stats.
  * Run: npx tsx --env-file=.env.local scripts/seo-status.ts

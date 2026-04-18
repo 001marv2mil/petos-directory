@@ -98,7 +98,7 @@ export function FeaturedProviders() {
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-2 mb-1">
                       <h3 className="font-bold text-gray-900 text-base leading-tight">{provider.business_name}</h3>
-                      <Shield className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" title="Featured listing" />
+                      <Shield className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" aria-label="Featured listing" />
                     </div>
                     <p className="text-sm text-gray-500 mb-3">
                       {categoryMeta?.label ?? provider.category} · {provider.city}, {provider.state}
