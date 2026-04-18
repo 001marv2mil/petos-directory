@@ -391,26 +391,57 @@ export default function ProviderPage() {
             </div>
           </div>
 
-          {/* Claim listing */}
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
-                <Shield className="w-4 h-4 text-blue-700" />
-              </div>
-              <div>
-                <h2 className="font-semibold text-gray-900 mb-1">Own this business?</h2>
-                <p className="text-sm text-gray-500 mb-3">
-                  Claim your listing to add photos, update your hours, respond to reviews, and get a verified badge.
-                </p>
-                <Link
-                  to={`/claim/${provider.slug}?name=${encodeURIComponent(provider.business_name)}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-sm font-semibold transition-colors"
-                >
-                  Claim Your Listing
-                </Link>
+          {/* Owner CTA — three states:
+              1. Unclaimed: claim the listing
+              2. Claimed but not Featured: upgrade to Featured ($99/mo)
+              3. Featured: no CTA (already paying) */}
+          {!provider.claimed_at && (
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+                  <Shield className="w-4 h-4 text-blue-700" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-gray-900 mb-1">Own this business?</h2>
+                  <p className="text-sm text-gray-500 mb-3">
+                    Claim your listing to add photos, update your hours, respond to reviews, and get a verified badge.
+                  </p>
+                  <Link
+                    to={`/claim/${provider.slug}?name=${encodeURIComponent(provider.business_name)}`}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Claim Your Listing
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
+          {provider.claimed_at && !provider.featured && (
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-5">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
+                  <Sparkles className="w-4 h-4 text-amber-600" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="font-semibold text-gray-900 mb-1">Stand out in {provider.city}</h2>
+                  <p className="text-sm text-gray-600 mb-3">
+                    Featured businesses get <strong>top placement</strong> on every search, a highlighted card with a FEATURED badge, and priority in category results.
+                  </p>
+                  <a
+                    href="https://buy.stripe.com/fZu00jeJLblfecd4tg04802"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Get Featured — $99/mo
+                  </a>
+                  <p className="text-xs text-gray-500 mt-2">Cancel anytime. Your free listing stays live.</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right: contact card */}
