@@ -13,6 +13,7 @@ import CategoryPage from '@/pages/CategoryPage'
 import ProviderPage from '@/pages/ProviderPage'
 import StatePage from '@/pages/StatePage'
 import PrivacyPage from '@/pages/PrivacyPage'
+import EmergencyVetReportPage from '@/pages/EmergencyVetReportPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 type SSRHelmetContext = { helmet?: HelmetServerState }
@@ -37,6 +38,7 @@ export function render(url: string) {
                 <Route path="/:state/:city/:category" element={<CategoryPage />} />
                 <Route path="/provider/:slug" element={<ProviderPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/reports/emergency-vet-access-2026" element={<EmergencyVetReportPage />} />
                 <Route path="/not-found" element={<NotFoundPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
