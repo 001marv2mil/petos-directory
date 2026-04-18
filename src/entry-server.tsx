@@ -14,6 +14,7 @@ import ProviderPage from '@/pages/ProviderPage'
 import StatePage from '@/pages/StatePage'
 import PrivacyPage from '@/pages/PrivacyPage'
 import EmergencyVetReportPage from '@/pages/EmergencyVetReportPage'
+import AvailabilityReportPage from '@/pages/AvailabilityReportPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 type SSRHelmetContext = { helmet?: HelmetServerState }
@@ -39,6 +40,7 @@ export function render(url: string) {
                 <Route path="/provider/:slug" element={<ProviderPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/reports/emergency-vet-access-2026" element={<EmergencyVetReportPage />} />
+                <Route path="/reports/pet-service-availability-2026" element={<AvailabilityReportPage />} />
                 <Route path="/not-found" element={<NotFoundPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
