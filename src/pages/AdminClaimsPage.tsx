@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import { PageMeta } from '@/components/common/PageMeta'
-import { Check, X, Shield, Mail, Phone, Calendar } from 'lucide-react'
+import { Check, X, Shield, Mail, Phone, Calendar, ChevronDown } from 'lucide-react'
 
 // Admin emails — only these can access this page
 const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'malak@petosdirectory.com']
@@ -24,6 +24,28 @@ interface ClaimWithProvider {
   provider_city: string | null
   provider_state: string | null
   provider_category: string | null
+  provider_address: string | null
+  provider_phone: string | null
+  provider_website: string | null
+  provider_description: string | null
+}
+
+const CATEGORY_OPTIONS = [
+  { value: 'veterinarians', label: 'Veterinarians' },
+  { value: 'emergency_vets', label: 'Emergency Vets' },
+  { value: 'groomers', label: 'Groomers' },
+  { value: 'boarding', label: 'Boarding' },
+  { value: 'daycare', label: 'Daycare' },
+  { value: 'trainers', label: 'Trainers' },
+  { value: 'pet_pharmacies', label: 'Pet Pharmacies' },
+]
+
+interface ProviderEdits {
+  description: string
+  address: string
+  category: string
+  phone: string
+  website: string
 }
 
 export default function AdminClaimsPage() {
@@ -32,6 +54,8 @@ export default function AdminClaimsPage() {
   const [loading, setLoading] = useState(true)
   const [processing, setProcessing] = useState<string | null>(null)
   const [filter, setFilter] = useState<'pending' | 'approved' | 'rejected' | 'all'>('pending')
+  const [expandedClaim, setExpandedClaim] = useState<string | null>(null)
+  const [edits, setEdits] = useState<Record<string, ProviderEdits>>({})
 
   const isAdmin = user && ADMIN_EMAILS.includes(user.email?.toLowerCase() ?? '')
 
@@ -58,8 +82,24 @@ export default function AdminClaimsPage() {
         provider_city: c.providers?.city ?? null,
         provider_state: c.providers?.state ?? null,
         provider_category: c.providers?.category ?? null,
+        provider_address: c.providers?.address ?? null,
+        provider_phone: c.providers?.phone ?? null,
+        provider_website: c.providers?.website ?? null,
+        provider_description: c.providers?.description ?? null,
       }))
       setClaims(mapped)
+      // Seed edit state with current values so admin can see + change
+      const seed: Record<string, ProviderEdits> = {}
+      for (const c of mapped) {
+        seed[c.id] = {
+          description: c.provider_description ?? '',
+          address: c.provider_address ?? '',
+          category: c.provider_category ?? '',
+          phone: c.provider_phone ?? '',
+          website: c.provider_website ?? '',
+        }
+      }
+      setEdits(seed)
     } finally {
       setLoading(false)
     }
@@ -70,15 +110,39 @@ export default function AdminClaimsPage() {
     setProcessing(claim.id)
     try {
       const token = (await supabase.auth.getSession()).data.session?.access_token
+      // Only send fields that changed from the current DB values — avoids
+      // unnecessary writes and makes the payload explicit
+      const current = {
+        description: claim.provider_description ?? '',
+        address: claim.provider_address ?? '',
+        category: claim.provider_category ?? '',
+        phone: claim.provider_phone ?? '',
+        website: claim.provider_website ?? '',
+      }
+      const edited = edits[claim.id] ?? current
+      const provider_updates: Partial<ProviderEdits> = {}
+      for (const k of Object.keys(current) as (keyof ProviderEdits)[]) {
+        if (edited[k] !== current[k]) provider_updates[k] = edited[k]
+      }
       const res = await fetch('/api/admin/approve-claim', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ claim_id: claim.id }),
+        body: JSON.stringify({
+          claim_id: claim.id,
+          ...(Object.keys(provider_updates).length > 0 ? { provider_updates } : {}),
+        }),
       })
       if (res.ok) await loadClaims()
     } finally {
       setProcessing(null)
     }
+  }
+
+  function updateEdit(claimId: string, field: keyof ProviderEdits, value: string) {
+    setEdits(prev => ({
+      ...prev,
+      [claimId]: { ...(prev[claimId] ?? { description: '', address: '', category: '', phone: '', website: '' }), [field]: value },
+    }))
   }
 
   async function handleReject(claim: ClaimWithProvider) {
@@ -201,24 +265,78 @@ export default function AdminClaimsPage() {
               )}
 
               {claim.status === 'pending' && (
-                <div className="flex gap-2 pt-3 border-t border-gray-100">
+                <>
+                  {/* Expandable edit-before-approve panel */}
                   <button
-                    onClick={() => handleApprove(claim)}
-                    disabled={processing === claim.id}
-                    className="flex-1 flex items-center justify-center gap-2 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-semibold rounded-lg text-sm transition-colors"
+                    type="button"
+                    onClick={() => setExpandedClaim(expandedClaim === claim.id ? null : claim.id)}
+                    className="w-full flex items-center justify-between gap-2 py-2 px-3 mb-3 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg text-sm font-medium text-blue-900 transition-colors"
                   >
-                    <Check className="w-4 h-4" />
-                    {processing === claim.id ? '...' : 'Approve'}
+                    <span>Edit listing fields before approving</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${expandedClaim === claim.id ? 'rotate-180' : ''}`} />
                   </button>
-                  <button
-                    onClick={() => handleReject(claim)}
-                    disabled={processing === claim.id}
-                    className="flex-1 flex items-center justify-center gap-2 py-2 bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 text-gray-700 font-semibold rounded-lg text-sm transition-colors"
-                  >
-                    <X className="w-4 h-4" />
-                    Reject
-                  </button>
-                </div>
+
+                  {expandedClaim === claim.id && (
+                    <div className="mb-4 p-4 bg-blue-50/40 border border-blue-100 rounded-lg space-y-3">
+                      <p className="text-xs text-blue-900 mb-2">
+                        Edit the fields below, then click Approve. Only changed fields will be saved.
+                      </p>
+
+                      <EditField
+                        label="Description"
+                        type="textarea"
+                        value={edits[claim.id]?.description ?? ''}
+                        onChange={v => updateEdit(claim.id, 'description', v)}
+                      />
+                      <EditField
+                        label="Address"
+                        type="text"
+                        value={edits[claim.id]?.address ?? ''}
+                        onChange={v => updateEdit(claim.id, 'address', v)}
+                      />
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <EditField
+                          label="Category"
+                          type="select"
+                          options={CATEGORY_OPTIONS}
+                          value={edits[claim.id]?.category ?? ''}
+                          onChange={v => updateEdit(claim.id, 'category', v)}
+                        />
+                        <EditField
+                          label="Phone"
+                          type="text"
+                          value={edits[claim.id]?.phone ?? ''}
+                          onChange={v => updateEdit(claim.id, 'phone', v)}
+                        />
+                      </div>
+                      <EditField
+                        label="Website"
+                        type="text"
+                        value={edits[claim.id]?.website ?? ''}
+                        onChange={v => updateEdit(claim.id, 'website', v)}
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex gap-2 pt-3 border-t border-gray-100">
+                    <button
+                      onClick={() => handleApprove(claim)}
+                      disabled={processing === claim.id}
+                      className="flex-1 flex items-center justify-center gap-2 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-semibold rounded-lg text-sm transition-colors"
+                    >
+                      <Check className="w-4 h-4" />
+                      {processing === claim.id ? '...' : 'Approve'}
+                    </button>
+                    <button
+                      onClick={() => handleReject(claim)}
+                      disabled={processing === claim.id}
+                      className="flex-1 flex items-center justify-center gap-2 py-2 bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 text-gray-700 font-semibold rounded-lg text-sm transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                      Reject
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           ))}
@@ -227,3 +345,42 @@ export default function AdminClaimsPage() {
     </div>
   )
 }
+
+interface EditFieldProps {
+  label: string
+  type: 'text' | 'textarea' | 'select'
+  value: string
+  onChange: (v: string) => void
+  options?: { value: string; label: string }[]
+}
+
+function EditField({ label, type, value, onChange, options }: EditFieldProps) {
+  const common = 'w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
+  return (
+    <label className="block">
+      <span className="text-xs font-medium text-gray-700 mb-1 block">{label}</span>
+      {type === 'textarea' ? (
+        <textarea
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          rows={3}
+          className={common}
+        />
+      ) : type === 'select' ? (
+        <select value={value} onChange={e => onChange(e.target.value)} className={common}>
+          {options?.map(o => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+      ) : (
+        <input
+          type="text"
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          className={common}
+        />
+      )}
+    </label>
+  )
+}
+
