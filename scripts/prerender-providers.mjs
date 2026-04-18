@@ -119,6 +119,55 @@ function buildBreadcrumbJsonLd(p) {
   })
 }
 
+// ── Internal linking (SEO) ──────────────────────────────────────────────────
+// Hidden-but-crawlable HTML block injected inside #root. Googlebot sees
+// breadcrumb + nearby-provider + city + category links immediately. The visible
+// React UI still renders NearbyProviders client-side for users after hydration.
+
+function cityPath(p) {
+  return `${p.state.toLowerCase()}/${p.city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '')}`
+}
+
+function buildInternalLinksBlock(p, nearby) {
+  const catLabel = CATEGORY_LABELS[p.category] || p.category
+  const cityUrl = `/${cityPath(p)}`
+  const categoryUrl = `/${cityPath(p)}/${p.category}`
+
+  const nearbyList = nearby
+    .map(n => `<li><a href="/provider/${n.slug}">${escapeHtml(n.business_name)} — ${escapeHtml(n.city)}, ${escapeHtml(n.state)}</a></li>`)
+    .join('')
+
+  return `<aside class="seo-internal-links" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+  <nav aria-label="Breadcrumb"><a href="/">Home</a> › <a href="/${p.state.toLowerCase()}">${escapeHtml(p.state)}</a> › <a href="${cityUrl}">${escapeHtml(p.city)}</a> › <a href="${categoryUrl}">${escapeHtml(catLabel)}</a> › ${escapeHtml(p.business_name)}</nav>
+  <h2>${escapeHtml(p.business_name)}</h2>
+  ${p.description ? `<p>${escapeHtml(p.description)}</p>` : ''}
+  <h3>More ${escapeHtml(catLabel.toLowerCase())}s in ${escapeHtml(p.city)}</h3>
+  <ul>${nearbyList}</ul>
+  <p><a href="${cityUrl}">All pet services in ${escapeHtml(p.city)}</a></p>
+  <p><a href="${categoryUrl}">All ${escapeHtml(catLabel.toLowerCase())}s in ${escapeHtml(p.city)}</a></p>
+</aside>`
+}
+
+function buildNearbyIndex(providers) {
+  const map = new Map()
+  for (const p of providers) {
+    const k = `${p.state}|${p.city.toLowerCase()}|${p.category}`
+    const arr = map.get(k) || []
+    arr.push(p)
+    map.set(k, arr)
+  }
+  for (const arr of map.values()) {
+    arr.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0) || (b.review_count ?? 0) - (a.review_count ?? 0))
+  }
+  return map
+}
+
+function findNearby(p, index, limit = 5) {
+  const k = `${p.state}|${p.city.toLowerCase()}|${p.category}`
+  const bucket = index.get(k) || []
+  return bucket.filter(n => n.slug !== p.slug).slice(0, limit)
+}
+
 async function fetchAllProviders() {
   let all = []
   let offset = 0
@@ -169,6 +218,9 @@ async function main() {
     process.exit(1)
   }
 
+  console.log(`Building nearby-provider index...`)
+  const nearbyIndex = buildNearbyIndex(providers)
+
   console.log(`Generating ${providers.length} provider pages...\n`)
 
   let ok = 0
@@ -199,12 +251,16 @@ async function main() {
     <script type="application/ld+json">${buildJsonLd(p)}</script>
     <script type="application/ld+json">${buildBreadcrumbJsonLd(p)}</script>`
 
-      // We inject head tags but leave <!--ssr-outlet--> as the empty div
-      // so the client-side JS hydrates and loads the full page.
-      // The key thing is Google gets the right title/description/canonical/structured data.
+      // Head tags: rich metadata for crawlers.
+      // Body (#root): hidden-but-crawlable internal-link block so Google sees
+      // nearby provider links, breadcrumb, city, and category pages immediately.
+      // React hydrates on top of it after load — the visible UI is the normal
+      // React-rendered page with the NearbyProviders component etc.
+      const nearby = findNearby(p, nearbyIndex, 5)
+      const internalLinks = buildInternalLinksBlock(p, nearby)
       const page = template
         .replace('<!--ssr-head-->', headTags)
-        .replace('<!--ssr-outlet-->', '')
+        .replace('<!--ssr-outlet-->', internalLinks)
 
       const filePath = path.join(distDir, 'provider', p.slug, 'index.html')
       fs.mkdirSync(path.dirname(filePath), { recursive: true })
