@@ -30,7 +30,7 @@ export function RecentlyViewed() {
             <Link
               key={item.slug}
               to={`/provider/${item.slug}`}
-              className="shrink-0 flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-3 py-2.5 hover:border-green-300 hover:shadow-sm transition-all group"
+              className="shrink-0 flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-3 py-2.5 hover:border-blue-200 hover:shadow-sm transition-all group"
             >
               <img
                 src={img}
@@ -41,7 +41,7 @@ export function RecentlyViewed() {
                 }}
               />
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-800 group-hover:text-green-700 transition-colors truncate max-w-[140px]">
+                <p className="text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors truncate max-w-[140px]">
                   {item.name}
                 </p>
                 <p className="text-xs text-gray-400 truncate">

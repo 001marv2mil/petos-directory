@@ -26,10 +26,11 @@ export function CategoryGrid() {
   return (
     <section className="py-14 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Find What You Need</h2>
-          <p className="text-sm text-gray-500">Local vets, groomers, boarding, and more</p>
-          <div className="w-16 h-0.5 bg-gray-300 mx-auto mt-3" />
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Browse by Category</h2>
+            <p className="text-sm text-gray-500 mt-1">Search any service in your city</p>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">

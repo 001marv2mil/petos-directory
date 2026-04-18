@@ -324,7 +324,7 @@ export default function ProviderPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent(provider.id, 'click_directions')}
-                className="shrink-0 ml-3 flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded-lg transition-colors"
+                className="shrink-0 ml-3 flex items-center gap-1.5 px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold rounded-lg transition-colors"
               >
                 <Navigation className="w-3.5 h-3.5" />
                 Get Directions
@@ -451,7 +451,7 @@ export default function ProviderPage() {
                   href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${provider.address}, ${provider.city}, ${provider.state}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 flex items-center gap-1 text-xs font-semibold text-green-600 hover:text-green-700 transition-colors"
+                  className="shrink-0 flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors"
                   onClick={e => e.stopPropagation()}
                 >
                   <Navigation className="w-3.5 h-3.5" />

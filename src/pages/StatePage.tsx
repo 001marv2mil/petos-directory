@@ -55,7 +55,7 @@ export default function StatePage() {
             <Link
               key={city.citySlug}
               to={`/${city.stateSlug}/${city.citySlug}`}
-              className="flex flex-col gap-1 p-4 bg-white border border-gray-200 rounded-xl hover:border-green-300 hover:shadow-sm transition-all"
+              className="flex flex-col gap-1 p-4 bg-white border border-gray-200 rounded-xl hover:border-blue-200 hover:shadow-sm transition-all"
             >
               <span className="font-semibold text-gray-800 text-sm">{city.city}</span>
               <span className="text-xs text-gray-400">{stateAbbr}</span>

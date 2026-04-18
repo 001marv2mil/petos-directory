@@ -65,7 +65,7 @@ export default function ClaimPage() {
         </p>
         <Link
           to={`/provider/${slug}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl text-sm font-semibold transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-sm font-semibold transition-colors"
         >
           Back to listing
         </Link>

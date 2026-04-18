@@ -20,7 +20,7 @@ export function CategoryTabs({ stateSlug, citySlug, activeCategory }: CategoryTa
               'px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all',
               activeCategory === cat.slug
                 ? 'bg-green-600 text-white shadow-sm'
-                : 'bg-white text-gray-600 border border-gray-200 hover:border-green-300 hover:text-green-700 hover:bg-green-50'
+                : 'bg-white text-gray-600 border border-gray-200 hover:border-blue-200 hover:text-blue-700 hover:bg-blue-50'
             )}
           >
             {cat.pluralLabel}

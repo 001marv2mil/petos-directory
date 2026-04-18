@@ -74,7 +74,7 @@ export function Header() {
                 )}
                 <Link
                   to="/account"
-                  className="hidden sm:flex items-center gap-1.5 text-xs text-gray-500 hover:text-green-700 transition-colors font-medium"
+                  className="hidden sm:flex items-center gap-1.5 text-xs text-gray-500 hover:text-blue-700 transition-colors font-medium"
                 >
                   <User className="w-3.5 h-3.5" />
                   {user.email?.split('@')[0]}

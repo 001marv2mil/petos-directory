@@ -25,7 +25,7 @@ export default function AccountPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-            <User className="w-6 h-6 text-green-700" />
+            <User className="w-6 h-6 text-blue-700" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-900">Hey, {displayName} 👋</h1>
@@ -50,13 +50,13 @@ export default function AccountPage() {
       <div className="grid grid-cols-2 gap-4">
         <Link
           to="/search"
-          className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl p-4 hover:border-green-300 hover:shadow-sm transition-all group"
+          className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl p-4 hover:border-blue-200 hover:shadow-sm transition-all group"
         >
           <div className="w-9 h-9 bg-red-50 rounded-lg flex items-center justify-center">
             <Heart className="w-5 h-5 text-red-400" />
           </div>
           <div>
-            <p className="font-semibold text-gray-800 text-sm group-hover:text-green-700 transition-colors">Favorites</p>
+            <p className="font-semibold text-gray-800 text-sm group-hover:text-blue-700 transition-colors">Favorites</p>
             <p className="text-xs text-gray-400">Browse saved providers</p>
           </div>
         </Link>

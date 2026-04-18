@@ -17,11 +17,16 @@ export default function HomePage() {
       />
       <WebSiteJsonLd />
       <HeroSection />
-      <RecentlyViewed />
+      {/* Category discovery — core value prop, first thing after hero */}
       <CategoryGrid />
+      {/* Top-rated listings — give users something concrete to click */}
       <FeaturedProviders />
-      <PetOSHealthBanner />
+      {/* Emergency CTA — high urgency, high conversion */}
       <EmergencyCTA />
+      {/* Recently viewed — only renders if user has history */}
+      <RecentlyViewed />
+      {/* Cross-sell to PetOS Health — after core value delivered */}
+      <PetOSHealthBanner />
     </div>
   )
 }

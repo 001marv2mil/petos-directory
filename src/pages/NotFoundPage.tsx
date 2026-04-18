@@ -5,7 +5,7 @@ export default function NotFoundPage() {
   return (
     <div className="max-w-lg mx-auto px-4 py-24 text-center">
       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-        <PawPrint className="w-10 h-10 text-green-600" />
+        <PawPrint className="w-10 h-10 text-blue-700" />
       </div>
       <h1 className="text-3xl font-bold text-gray-900 mb-3">Page Not Found</h1>
       <p className="text-gray-500 mb-8">
@@ -14,7 +14,7 @@ export default function NotFoundPage() {
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           to="/"
-          className="px-5 py-2.5 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+          className="px-5 py-2.5 bg-blue-700 text-white rounded-lg font-medium hover:bg-blue-800 transition-colors"
         >
           Go Home
         </Link>

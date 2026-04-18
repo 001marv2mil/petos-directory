@@ -119,7 +119,7 @@ export function AuthModal() {
           {success ? (
             <div className="text-center py-6">
               <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <PawPrint className="w-7 h-7 text-green-600" />
+                <PawPrint className="w-7 h-7 text-blue-700" />
               </div>
               <h3 className="font-bold text-gray-900 text-lg mb-1">Check your email</h3>
               <p className="text-gray-500 text-sm">We sent a confirmation link to <strong>{email}</strong>. Click it to activate your account.</p>

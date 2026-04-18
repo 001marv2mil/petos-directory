@@ -48,13 +48,13 @@ export function MyPets() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <PawPrint className="w-5 h-5 text-green-600" />
+          <PawPrint className="w-5 h-5 text-blue-700" />
           <h2 className="text-lg font-bold text-gray-900">My Pets</h2>
         </div>
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             Add Pet
@@ -74,7 +74,7 @@ export function MyPets() {
           <p className="text-sm text-gray-400 mt-1">Add your pet to get personalized care recommendations</p>
           <button
             onClick={() => setShowForm(true)}
-            className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors"
+            className="mt-4 px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold rounded-lg transition-colors"
           >
             Add your first pet
           </button>
@@ -153,7 +153,7 @@ export function MyPets() {
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-60"
+              className="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-60"
             >
               {submitting ? 'Saving…' : 'Save Pet'}
             </button>

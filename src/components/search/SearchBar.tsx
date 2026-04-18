@@ -219,7 +219,7 @@ export function SearchBar({
             type="button"
             onClick={handleNearMe}
             title="Use my location"
-            className="p-3 border border-gray-200 rounded-xl text-gray-500 hover:text-green-600 hover:border-green-300 transition-colors shrink-0"
+            className="p-3 border border-gray-200 rounded-xl text-gray-500 hover:text-blue-600 hover:border-blue-300 transition-colors shrink-0"
           >
             <Navigation className={`w-4 h-4 ${locating ? 'animate-spin' : ''}`} />
           </button>

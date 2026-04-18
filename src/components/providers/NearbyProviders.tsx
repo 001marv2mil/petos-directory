@@ -19,7 +19,7 @@ export function NearbyProviders({ providers }: NearbyProvidersProps) {
           <Link
             key={p.id}
             to={`/provider/${p.slug}`}
-            className="group shrink-0 w-48 bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-green-200 transition-all"
+            className="group shrink-0 w-48 bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-blue-200 transition-all"
           >
             <div className="h-28 overflow-hidden bg-gray-100">
               <img
@@ -33,7 +33,7 @@ export function NearbyProviders({ providers }: NearbyProvidersProps) {
               />
             </div>
             <div className="p-2.5">
-              <p className="text-xs font-semibold text-gray-900 group-hover:text-green-700 transition-colors line-clamp-2 leading-tight mb-1">
+              <p className="text-xs font-semibold text-gray-900 group-hover:text-blue-700 transition-colors line-clamp-2 leading-tight mb-1">
                 {p.business_name}
               </p>
               {p.rating !== null && (

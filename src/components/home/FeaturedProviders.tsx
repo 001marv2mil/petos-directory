@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
-import { Star, CheckCircle } from 'lucide-react'
+import { Star, Shield } from 'lucide-react'
 import type { Provider } from '@/types'
 import { getProviderImage } from '@/lib/images'
 import { CATEGORIES } from '@/lib/constants'
@@ -51,10 +51,17 @@ export function FeaturedProviders() {
   return (
     <section className="py-14 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900">Featured Pet Services</h2>
-          <p className="text-sm text-gray-500 mt-2">Sponsored by local pet businesses</p>
-          <div className="w-16 h-0.5 bg-gray-300 mx-auto mt-3" />
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Featured Pet Services</h2>
+            <p className="text-sm text-gray-500 mt-1">Promoted by local pet businesses</p>
+          </div>
+          <Link
+            to="/search"
+            className="text-sm font-semibold text-blue-700 hover:text-blue-900 transition-colors hidden sm:block"
+          >
+            Browse all →
+          </Link>
         </div>
 
         {isLoading ? (
@@ -91,7 +98,7 @@ export function FeaturedProviders() {
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-2 mb-1">
                       <h3 className="font-bold text-gray-900 text-base leading-tight">{provider.business_name}</h3>
-                      <CheckCircle className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
+                      <Shield className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" title="Featured listing" />
                     </div>
                     <p className="text-sm text-gray-500 mb-3">
                       {categoryMeta?.label ?? provider.category} · {provider.city}, {provider.state}
@@ -99,12 +106,12 @@ export function FeaturedProviders() {
                     {provider.rating !== null && (
                       <div className="flex items-center gap-2 mb-4">
                         <StarRating rating={provider.rating} />
-                        <span className="text-sm text-gray-500">({provider.review_count.toLocaleString()} Reviews)</span>
+                        <span className="text-sm text-gray-500">({provider.review_count.toLocaleString()} reviews)</span>
                       </div>
                     )}
                     <Link
                       to={`/provider/${provider.slug}`}
-                      className="block w-full text-center py-2.5 bg-blue-800 text-white text-sm font-semibold rounded-lg hover:bg-blue-900 transition-colors"
+                      className="block w-full text-center py-2.5 bg-blue-700 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors"
                     >
                       View Profile
                     </Link>

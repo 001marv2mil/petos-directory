@@ -149,8 +149,8 @@ export default function PrivacyPage() {
           </p>
           <address className="not-italic mt-2 text-gray-600 space-y-1">
             <p><strong>PetOS Health</strong></p>
-            <p>Email: <a href="mailto:privacy@petoshealth.com" className="text-green-600 hover:text-green-700">privacy@petoshealth.com</a></p>
-            <p>Website: <a href="https://petoshealth.com" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700">petoshealth.com</a></p>
+            <p>Email: <a href="mailto:privacy@petoshealth.com" className="text-blue-600 hover:text-blue-800">privacy@petoshealth.com</a></p>
+            <p>Website: <a href="https://petoshealth.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">petoshealth.com</a></p>
           </address>
         </section>
 

@@ -109,12 +109,12 @@ export default function CityPage() {
               <Link
                 key={cat.slug}
                 to={`/${cityMeta.stateSlug}/${cityMeta.citySlug}/${cat.slug}`}
-                className="group flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-md transition-all text-center"
+                className="group flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all text-center"
               >
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${cat.color} group-hover:scale-110 transition-transform`}>
                   {ICON_MAP[cat.slug as CategorySlug]}
                 </div>
-                <span className="text-xs font-semibold text-gray-700 group-hover:text-green-700 transition-colors leading-tight">
+                <span className="text-xs font-semibold text-gray-700 group-hover:text-blue-700 transition-colors leading-tight">
                   {cat.pluralLabel}
                 </span>
               </Link>
@@ -131,7 +131,7 @@ export default function CityPage() {
             </div>
             <Link
               to={`/search?city=${encodeURIComponent(cityMeta.city)}&state=${cityMeta.stateAbbr}`}
-              className="flex items-center gap-1 text-sm text-green-600 font-medium hover:text-green-700 transition-colors"
+              className="flex items-center gap-1 text-sm text-green-600 font-medium hover:text-blue-700 transition-colors"
             >
               View all <ChevronRight className="w-4 h-4" />
             </Link>
@@ -161,7 +161,7 @@ export default function CityPage() {
           ) : (
             <div className="text-center py-12 bg-gray-50 rounded-xl">
               <p className="text-gray-500">No providers listed in {cityMeta.city} yet.</p>
-              <Link to="/search" className="text-green-600 text-sm font-medium hover:text-green-700 mt-2 inline-block">
+              <Link to="/search" className="text-blue-700 text-sm font-medium hover:text-blue-700 mt-2 inline-block">
                 Browse all cities →
               </Link>
             </div>

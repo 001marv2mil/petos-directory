@@ -26,7 +26,7 @@ export function ProviderCard({ provider, precomputedImage, distanceMiles }: Prov
       tabIndex={0}
       onClick={() => navigate(`/provider/${provider.slug}`)}
       onKeyDown={e => e.key === 'Enter' && navigate(`/provider/${provider.slug}`)}
-      className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-green-200 transition-all duration-200 flex flex-col cursor-pointer"
+      className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all duration-200 flex flex-col cursor-pointer"
     >
       {/* Image */}
       <div className="relative h-44 overflow-hidden bg-gray-100">
@@ -42,7 +42,7 @@ export function ProviderCard({ provider, precomputedImage, distanceMiles }: Prov
         {/* Heart / favorite button */}
         <button
           onClick={toggleFavorite}
-          className="absolute top-2 right-2 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-colors shadow-sm"
+          className="absolute top-2 right-2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-colors shadow-sm"
           aria-label={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
         >
           <Heart className={`w-4 h-4 transition-colors ${isFavorited ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-red-400'}`} />
@@ -56,7 +56,7 @@ export function ProviderCard({ provider, precomputedImage, distanceMiles }: Prov
             </span>
           )}
           {provider.verified && (
-            <span className="flex items-center gap-1 bg-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+            <span className="flex items-center gap-1 bg-blue-700 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
               <Shield className="w-3 h-3" />
               Verified
             </span>
@@ -79,7 +79,7 @@ export function ProviderCard({ provider, precomputedImage, distanceMiles }: Prov
 
       {/* Content */}
       <div className="p-4 flex-1 flex flex-col gap-2">
-        <h3 className="font-semibold text-gray-900 group-hover:text-green-700 transition-colors leading-tight line-clamp-2">
+        <h3 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors leading-tight line-clamp-2">
           {provider.business_name}
         </h3>
 
@@ -134,7 +134,7 @@ export function ProviderCard({ provider, precomputedImage, distanceMiles }: Prov
               target="_blank"
               rel="noopener noreferrer"
               onClick={e => e.stopPropagation()}
-              className="flex items-center gap-1 text-xs text-green-600 ml-auto hover:text-green-800 transition-colors"
+              className="flex items-center gap-1 text-xs text-blue-600 ml-auto hover:text-blue-800 transition-colors"
             >
               <Globe className="w-3 h-3" />
               Website
