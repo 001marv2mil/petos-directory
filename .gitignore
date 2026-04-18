@@ -57,3 +57,4 @@ supabase/.temp/
 *Session_Handoff*
 *_secrets*
 *_credentials*
+gcp-service-account.json
