@@ -25,7 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(403).json({ error: 'Not an admin' })
   }
 
-  const { claim_id } = req.body || {}
+  const { claim_id, provider_updates } = req.body || {}
   if (!claim_id) return res.status(400).json({ error: 'Missing claim_id' })
 
   // Get the claim
@@ -48,13 +48,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
     .eq('id', claim_id)
 
-  // Link provider to owner's email + mark as verified
+  // Apply any admin-edited provider fields (description, address, category, phone, website)
+  // Whitelist explicitly to prevent updating slug, id, ratings, etc.
+  const ALLOWED_FIELDS = ['description', 'address', 'category', 'phone', 'website'] as const
+  const cleanedUpdates: Record<string, string | null> = {}
+  if (provider_updates && typeof provider_updates === 'object') {
+    for (const key of ALLOWED_FIELDS) {
+      const val = (provider_updates as Record<string, unknown>)[key]
+      if (typeof val === 'string') {
+        const trimmed = val.trim()
+        cleanedUpdates[key] = trimmed === '' ? null : trimmed
+      }
+    }
+  }
+
+  // Link provider to owner's email + mark as verified + apply any field updates
   await supabase
     .from('providers')
     .update({
       claimed_by_email: claim.owner_email.toLowerCase().trim(),
       claimed_at: new Date().toISOString(),
       verified: true,
+      ...cleanedUpdates,
     })
     .eq('id', claim.provider_id)
 

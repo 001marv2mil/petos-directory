@@ -26,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   let query = supabase
     .from('claim_requests')
-    .select('*, providers(slug, city, state, category)')
+    .select('*, providers(slug, city, state, category, address, phone, website, description)')
     .order('created_at', { ascending: false })
 
   if (filter !== 'all') {
