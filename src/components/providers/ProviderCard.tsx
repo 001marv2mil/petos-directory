@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Star, MapPin, Phone, Shield, AlertCircle, Globe, Heart } from 'lucide-react'
+import { Star, MapPin, Phone, Shield, AlertCircle, Globe, Heart, Sparkles } from 'lucide-react'
 import type { Provider } from '@/types'
 import { getProviderImage } from '@/lib/images'
 import { formatPhone, formatRating, isOpenNow } from '@/lib/utils'
@@ -26,8 +26,18 @@ export function ProviderCard({ provider, precomputedImage, distanceMiles }: Prov
       tabIndex={0}
       onClick={() => navigate(`/provider/${provider.slug}`)}
       onKeyDown={e => e.key === 'Enter' && navigate(`/provider/${provider.slug}`)}
-      className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all duration-200 flex flex-col cursor-pointer"
+      className={
+        provider.featured
+          ? 'group bg-white rounded-xl overflow-hidden transition-all duration-200 flex flex-col cursor-pointer ring-2 ring-amber-400 shadow-md shadow-amber-100 hover:shadow-lg hover:ring-amber-500 relative'
+          : 'group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all duration-200 flex flex-col cursor-pointer'
+      }
     >
+      {provider.featured && (
+        <div className="absolute -top-2.5 left-4 z-20 flex items-center gap-1 bg-amber-500 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow">
+          <Sparkles className="w-3 h-3" />
+          Featured
+        </div>
+      )}
       {/* Image */}
       <div className="relative h-44 overflow-hidden bg-gray-100">
         <img

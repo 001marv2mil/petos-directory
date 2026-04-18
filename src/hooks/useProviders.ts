@@ -49,11 +49,12 @@ async function fetchProviders(params: SearchParams): Promise<SearchResult> {
   let providers = (data ?? []) as Provider[]
   const total = count ?? 0
 
-  // Paid featured listings go to the top (level playing field otherwise)
+  // Paid featured listings go to the top, and are tagged so cards render
+  // a Featured badge + highlighted border (what the $99/mo pitch promises)
   if (providers.length > 0 && page === 1) {
     const featuredIds = await fetchFeaturedProviderIds()
     if (featuredIds.size > 0) {
-      const featured = providers.filter(p => featuredIds.has(p.id))
+      const featured = providers.filter(p => featuredIds.has(p.id)).map(p => ({ ...p, featured: true }))
       const rest = providers.filter(p => !featuredIds.has(p.id))
       providers = [...featured, ...rest]
     }
