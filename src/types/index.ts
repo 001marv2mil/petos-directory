@@ -56,6 +56,9 @@ export interface Provider {
   last_synced_at: string | null
   created_at: string
   updated_at: string
+  /** True when an active row exists in featured_payments for this provider.
+   *  Attached client-side in useProviders; not a DB column. */
+  featured?: boolean
 }
 
 export type SortOption = 'rating' | 'review_count' | 'name'
