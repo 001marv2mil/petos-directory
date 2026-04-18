@@ -17,6 +17,7 @@ import AdminClaimsPage from '@/pages/AdminClaimsPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import FaqPage from '@/pages/FaqPage'
 import CostCalculatorPage from '@/pages/CostCalculatorPage'
+import EmergencyVetReportPage from '@/pages/EmergencyVetReportPage'
 import ScrollToTop from '@/components/common/ScrollToTop'
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
           <Route element={<PageShell />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/calculator" element={<CostCalculatorPage />} />
+            <Route path="/reports/emergency-vet-access-2026" element={<EmergencyVetReportPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/:state" element={<StatePage />} />
             <Route path="/:state/:city" element={<CityPage />} />
