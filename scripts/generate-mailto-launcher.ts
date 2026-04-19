@@ -217,7 +217,42 @@ ${cards.join('\n')}
   const outDir = resolve(process.cwd(), 'outreach')
   mkdirSync(outDir, { recursive: true })
   writeFileSync(resolve(outDir, 'send-pitches.html'), html, 'utf-8')
-  console.log(`✓ Wrote outreach/send-pitches.html`)
+
+  // Also write a plain-text copy/paste version (Option B for user).
+  // One block per pitch with clearly-labeled TO / SUBJECT / BODY fields.
+  const txtLines: string[] = []
+  txtLines.push(`PETOS DIRECTORY — PITCH EMAILS (copy/paste into Outlook)`)
+  txtLines.push(`Generated ${new Date().toISOString().slice(0, 10)} · ${PITCHES.length} pitches`)
+  txtLines.push(`\nFor each pitch below:`)
+  txtLines.push(`  1. Copy the TO address into Outlook's "To:" field`)
+  txtLines.push(`  2. Copy the SUBJECT line into Outlook's "Subject:" field`)
+  txtLines.push(`  3. Copy everything under BODY into the email body`)
+  txtLines.push(`  4. Verify From: is support@petoshealth.com, then click Send\n`)
+  txtLines.push(`${'='.repeat(70)}\n\n`)
+
+  for (const p of PITCHES) {
+    txtLines.push(`╔══════════════════════════════════════════════════════════════════╗`)
+    txtLines.push(`║  PITCH #${String(p.id).padStart(2, ' ')} of ${PITCHES.length}    ·    ${p.quality === 'A' ? 'TIER A — TOP PICK' : 'TIER B — BACKUP'}`)
+    txtLines.push(`║  ${p.outletName}`)
+    txtLines.push(`║  (${p.reason})`)
+    txtLines.push(`╚══════════════════════════════════════════════════════════════════╝`)
+    txtLines.push(``)
+    txtLines.push(`TO:`)
+    txtLines.push(p.contact)
+    txtLines.push(``)
+    txtLines.push(`SUBJECT:`)
+    txtLines.push(p.subject)
+    txtLines.push(``)
+    txtLines.push(`BODY:`)
+    txtLines.push(p.body)
+    txtLines.push(``)
+    txtLines.push(`${'─'.repeat(70)}\n\n`)
+  }
+
+  writeFileSync(resolve(outDir, 'pitches-to-copy.txt'), txtLines.join('\n'), 'utf-8')
+
+  console.log(`✓ Wrote outreach/send-pitches.html (clickable launcher)`)
+  console.log(`✓ Wrote outreach/pitches-to-copy.txt (copy/paste version)`)
   console.log(`  ${tierA.length} Tier A (top picks) + ${tierB.length} Tier B (backups) = ${PITCHES.length} total`)
 }
 
