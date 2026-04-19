@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>PetOS Pitch Launcher — 8 targeted pitches</title>
+<title>PetOS Pitch Launcher — 22 curated targets</title>
 <style>
   * { box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 780px; margin: 0 auto; padding: 32px 16px; background: #fafafa; color: #111; line-height: 1.5; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 820px; margin: 0 auto; padding: 32px 16px; background: #fafafa; color: #111; line-height: 1.5; }
   h1 { font-size: 28px; margin-bottom: 8px; }
   h2 { font-size: 20px; margin-top: 32px; }
   .lead { color: #6b7280; font-size: 14px; margin-bottom: 16px; }
@@ -14,11 +14,16 @@
   .schedule ol { margin: 0; padding-left: 20px; font-size: 14px; color: #1e3a8a; }
   .section-note { font-size: 13px; color: #6b7280; background: #f3f4f6; border-radius: 8px; padding: 12px; margin: 12px 0; }
   .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-  .header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .card-A { border-left: 4px solid #10b981; }
+  .card-B { border-left: 4px solid #6b7280; opacity: 0.85; }
+  .header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
   .num { font-size: 12px; font-weight: 700; color: #6b7280; background: #f3f4f6; padding: 2px 8px; border-radius: 999px; }
   .tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 999px; }
   .tag-pet-press { background: #dbeafe; color: #1e40af; }
   .tag-desert-city { background: #fee2e2; color: #991b1b; }
+  .quality { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 999px; }
+  .quality-A { background: #d1fae5; color: #065f46; }
+  .quality-B { background: #e5e7eb; color: #374151; }
   .outlet { font-weight: 600; color: #111; font-size: 15px; margin-bottom: 4px; }
   .reason { font-size: 13px; color: #6b7280; font-style: italic; margin-bottom: 10px; }
   .contact { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 13px; color: #111; background: #f9fafb; padding: 4px 8px; border-radius: 6px; display: inline-block; margin-bottom: 10px; }
@@ -31,37 +36,37 @@
 <body>
 <h1>📫 PetOS Pitch Launcher</h1>
 <p class="lead">
-  8 high-quality recipients. Each with a job description that maps to your emergency-vet shortage story.
-  One click per button opens Outlook (or whichever app you have set as default mail client) with the subject and body pre-filled.
-  Review, then click Send in the email.
+  22 curated recipients — 12 Tier A (top picks) + 10 Tier B (backups).
+  One click opens Outlook with subject + body pre-filled. Review, click Send.
 </p>
 
 <div class="schedule">
-  <h3>📅 Your 4-day schedule (2/day)</h3>
+  <h3>📅 Recommended 6-day cadence (2/day, Tier A first)</h3>
   <ol>
-    <li><strong>Day 1 (today):</strong> #1 Pet Age (Glenn) + #2 Today's Vet Business (Sarah)</li>
-    <li><strong>Day 2:</strong> #3 Kinship + #4 DVM360</li>
-    <li><strong>Day 3:</strong> #5 MinnPost (Andy) + #6 KC Star (Greg)</li>
-    <li><strong>Day 4:</strong> #7 Signal Cleveland (Frank) + #8 Missoula Current (Martin)</li>
+    <li><strong>Day 1:</strong> #1 Pet Age (Glenn) + #2 Today's Vet (Sarah)</li>
+    <li><strong>Day 2:</strong> #3 Today's Vet (Ken) + #4 Kinship editorial</li>
+    <li><strong>Day 3:</strong> #5 DVM360 + #6 AKC Brandi Munden</li>
+    <li><strong>Day 4:</strong> #7 AKC Jessica D'Amato + #8 AKC Sarah Bank</li>
+    <li><strong>Day 5:</strong> #9 MinnPost Andy + #10 KC Star Greg</li>
+    <li><strong>Day 6:</strong> #11 Signal Cleveland Frank + #12 Missoula Martin</li>
+    <li><em>Week 2:</em> Check replies. Send Tier B to outlets that went silent.</li>
   </ol>
 </div>
 
 <div class="tracker-note">
-  <strong>Before you click the first button:</strong> Install <a href="https://mailtrack.io" target="_blank">Mailtrack.io</a>
-  (free Gmail extension) or enable Outlook's read receipts so you see when each email is opened.
-  After each send, log it in <code>outreach/backlink-tracker.csv</code>.
+  <strong>Before your first click:</strong> install <a href="https://mailtrack.io" target="_blank">Mailtrack.io</a>
+  (free Gmail extension) or enable Outlook read receipts so you see which pitches got opened.
+  Log each send in <code>outreach/backlink-tracker.csv</code>.
 </div>
 
-<h2>🎯 The 8 high-quality pitches</h2>
-<p class="section-note">
-    Each of these 8 people has a job description that maps directly to your story.
-    Expected response rate: ~15–25% (1–2 replies).
-  </p>
+<h2>🎯 Tier A — Top picks (12) — send these first</h2>
+<p class="section-note">These are the highest-relevance contacts: editors, reporters, and named team members whose job description maps directly to your story. Expected response rate: ~15–25%.</p>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
       <span class="num">#1</span>
       <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
     <div class="outlet">Pet Age — Glenn Polyn (Editor-in-Chief)</div>
     <div class="reason">Editor of a pet industry trade. Lives for this data.</div>
@@ -70,92 +75,283 @@
     <a href="mailto:gpolyn%40petage.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Glenn%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
       <span class="num">#2</span>
       <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
-    <div class="outlet">Today's Veterinary Business — Sarah Rumple Mahan (Editor)</div>
-    <div class="reason">Vet industry trade editor. Vet workforce shortage is her beat.</div>
+    <div class="outlet">Today's Veterinary Business — Sarah Mahan (Editor)</div>
+    <div class="reason">Vet trade editor. Vet workforce shortage is her beat.</div>
     <div class="contact">smahan@navc.com</div>
     <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
     <a href="mailto:smahan%40navc.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Sarah%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
       <span class="num">#3</span>
       <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
-    <div class="outlet">Kinship (editorial)</div>
-    <div class="reason">Condé Nast pet brand, huge audience, actively publishes data stories.</div>
+    <div class="outlet">Today's Veterinary Business — Ken Niedziela (Editor)</div>
+    <div class="reason">Outgoing Editor at TVB. Still covers this beat.</div>
+    <div class="contact">kniedziela@navc.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:kniedziela%40navc.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Ken%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-A">
+    <div class="header">
+      <span class="num">#4</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
+    </div>
+    <div class="outlet">Kinship — editorial</div>
+    <div class="reason">Condé Nast pet brand. Huge audience. Publishes data stories.</div>
     <div class="contact">editorial@kinship.com</div>
     <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
     <a href="mailto:editorial%40kinship.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Kinship%20team%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
-      <span class="num">#4</span>
+      <span class="num">#5</span>
       <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
-    <div class="outlet">DVM360 (news tips)</div>
-    <div class="reason">Vet industry news tip line — they cover exactly this kind of shortage story.</div>
+    <div class="outlet">DVM360 — news tips</div>
+    <div class="reason">Vet industry news tip line. Covers workforce/access stories.</div>
     <div class="contact">news@dvm360.com</div>
     <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
     <a href="mailto:news%40dvm360.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20DVM360%20team%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
-      <span class="num">#5</span>
-      <span class="tag tag-desert-city">Desert City</span>
+      <span class="num">#6</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
-    <div class="outlet">MinnPost — Andy Steiner (lifestyle/health reporter)</div>
-    <div class="reason">Lifestyle/health beat in Minnesota. St. Paul vet desert is her lane.</div>
+    <div class="outlet">AKC News — Brandi Munden (Communications VP)</div>
+    <div class="reason">Top press contact at the AKC. Routes industry data stories.</div>
+    <div class="contact">brandi.munden@akc.org</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:brandi.munden%40akc.org?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Brandi%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-A">
+    <div class="header">
+      <span class="num">#7</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
+    </div>
+    <div class="outlet">AKC News — Jessica D'Amato</div>
+    <div class="reason">AKC communications team member.</div>
+    <div class="contact">jessica.damato@akc.org</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:jessica.damato%40akc.org?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Jessica%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-A">
+    <div class="header">
+      <span class="num">#8</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-A">Top pick</span>
+    </div>
+    <div class="outlet">AKC News — Sarah Bank</div>
+    <div class="reason">AKC communications team member.</div>
+    <div class="contact">sarah.bank@akc.org</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:sarah.bank%40akc.org?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Sarah%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-A">
+    <div class="header">
+      <span class="num">#9</span>
+      <span class="tag tag-desert-city">Desert City</span>
+      <span class="quality quality-A">Top pick</span>
+    </div>
+    <div class="outlet">MinnPost — Andy Steiner (Health/lifestyle)</div>
+    <div class="reason">Her Minnesota beat includes St. Paul vet desert.</div>
     <div class="contact">asteiner@minnpost.com</div>
     <div class="subject"><strong>Subject:</strong> St. Paul data: only 1 emergency vet for the entire city (PetOS research)</div>
     <a href="mailto:asteiner%40minnpost.com?subject=St.%20Paul%20data%3A%20only%201%20emergency%20vet%20for%20the%20entire%20city%20%28PetOS%20research%29&body=Hi%20Andy%2C%0A%0AI%20run%20PetOS%20Directory%2C%20a%20nationwide%20directory%20of%20pet%20services.%20We%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros%20%E2%80%94%20and%20St.%20Paul%20stood%20out.%0A%0AHeadline%20for%20St.%20Paul%3A%20your%20city%20has%20only%20ONE%20emergency%20veterinary%20clinic%20inside%20city%20limits.%20That%20means%20if%20a%20family%27s%20pet%20has%20a%20crisis%20when%20their%20primary%20vet%20is%20closed%2C%20they%20have%20zero%20backup%20options%20if%20that%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency.%0A%0ANationally%2C%208%20US%20cities%20share%20this%20problem%2C%20and%2015%20have%202%20or%20fewer%20options%20%2818.3%25%20of%20those%20analyzed%29.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0ASt.%20Paul-specific%20angles%20your%20audience%20would%20care%20about%3A%0A1.%20What%20local%20pet%20owners%20actually%20do%20in%20a%20crisis%20%28drive%20times%2C%20nearest%20backup%29%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20Practical%20takeaway%3A%20how%20families%20should%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20connect%20you%20with%20local%20vet%20sources%2C%20or%20answer%20questions%20on%20background.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
-      <span class="num">#6</span>
+      <span class="num">#10</span>
       <span class="tag tag-desert-city">Desert City</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
-    <div class="outlet">Kansas City Star — Greg Farmer (Executive Editor)</div>
-    <div class="reason">Will route to the right reporter if he doesn't cover it himself. Overland Park is in KC metro.</div>
+    <div class="outlet">Kansas City Star — Greg Farmer (Exec Editor)</div>
+    <div class="reason">Routes KC-area editorial. Overland Park is his metro.</div>
     <div class="contact">gfarmer@kcstar.com</div>
     <div class="subject"><strong>Subject:</strong> Overland Park data: only 1 emergency vet for the entire city (PetOS research)</div>
     <a href="mailto:gfarmer%40kcstar.com?subject=Overland%20Park%20data%3A%20only%201%20emergency%20vet%20for%20the%20entire%20city%20%28PetOS%20research%29&body=Hi%20Greg%2C%0A%0AI%20run%20PetOS%20Directory%2C%20a%20nationwide%20directory%20of%20pet%20services.%20We%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros%20%E2%80%94%20and%20Overland%20Park%20stood%20out.%0A%0AHeadline%20for%20Overland%20Park%3A%20your%20city%20has%20only%20ONE%20emergency%20veterinary%20clinic%20inside%20city%20limits.%20That%20means%20if%20a%20family%27s%20pet%20has%20a%20crisis%20when%20their%20primary%20vet%20is%20closed%2C%20they%20have%20zero%20backup%20options%20if%20that%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency.%0A%0ANationally%2C%208%20US%20cities%20share%20this%20problem%2C%20and%2015%20have%202%20or%20fewer%20options%20%2818.3%25%20of%20those%20analyzed%29.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AOverland%20Park-specific%20angles%20your%20audience%20would%20care%20about%3A%0A1.%20What%20local%20pet%20owners%20actually%20do%20in%20a%20crisis%20%28drive%20times%2C%20nearest%20backup%29%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20Practical%20takeaway%3A%20how%20families%20should%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20connect%20you%20with%20local%20vet%20sources%2C%20or%20answer%20questions%20on%20background.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
-      <span class="num">#7</span>
+      <span class="num">#11</span>
       <span class="tag tag-desert-city">Desert City</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
     <div class="outlet">Signal Cleveland — Frank W. Lewis (Editors Bureau)</div>
-    <div class="reason">Local Cleveland editor. Cares about Cleveland-specific stories.</div>
+    <div class="reason">Local Cleveland editor.</div>
     <div class="contact">frank@signalcleveland.org</div>
     <div class="subject"><strong>Subject:</strong> Cleveland data: only 1 emergency vet for the entire city (PetOS research)</div>
     <a href="mailto:frank%40signalcleveland.org?subject=Cleveland%20data%3A%20only%201%20emergency%20vet%20for%20the%20entire%20city%20%28PetOS%20research%29&body=Hi%20Frank%2C%0A%0AI%20run%20PetOS%20Directory%2C%20a%20nationwide%20directory%20of%20pet%20services.%20We%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros%20%E2%80%94%20and%20Cleveland%20stood%20out.%0A%0AHeadline%20for%20Cleveland%3A%20your%20city%20has%20only%20ONE%20emergency%20veterinary%20clinic%20inside%20city%20limits.%20That%20means%20if%20a%20family%27s%20pet%20has%20a%20crisis%20when%20their%20primary%20vet%20is%20closed%2C%20they%20have%20zero%20backup%20options%20if%20that%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency.%0A%0ANationally%2C%208%20US%20cities%20share%20this%20problem%2C%20and%2015%20have%202%20or%20fewer%20options%20%2818.3%25%20of%20those%20analyzed%29.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0ACleveland-specific%20angles%20your%20audience%20would%20care%20about%3A%0A1.%20What%20local%20pet%20owners%20actually%20do%20in%20a%20crisis%20%28drive%20times%2C%20nearest%20backup%29%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20Practical%20takeaway%3A%20how%20families%20should%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20connect%20you%20with%20local%20vet%20sources%2C%20or%20answer%20questions%20on%20background.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
 
-  <div class="card">
+  <div class="card card-A">
     <div class="header">
-      <span class="num">#8</span>
+      <span class="num">#12</span>
       <span class="tag tag-desert-city">Desert City</span>
+      <span class="quality quality-A">Top pick</span>
     </div>
     <div class="outlet">Missoula Current — Martin Kidston (Editor)</div>
-    <div class="reason">Independent local editor. Will take a Missoula-specific data angle.</div>
+    <div class="reason">Independent local editor in Missoula.</div>
     <div class="contact">editor@missoulacurrent.com</div>
     <div class="subject"><strong>Subject:</strong> Missoula data: only 1 emergency vet for the entire city (PetOS research)</div>
     <a href="mailto:editor%40missoulacurrent.com?subject=Missoula%20data%3A%20only%201%20emergency%20vet%20for%20the%20entire%20city%20%28PetOS%20research%29&body=Hi%20Martin%2C%0A%0AI%20run%20PetOS%20Directory%2C%20a%20nationwide%20directory%20of%20pet%20services.%20We%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros%20%E2%80%94%20and%20Missoula%20stood%20out.%0A%0AHeadline%20for%20Missoula%3A%20your%20city%20has%20only%20ONE%20emergency%20veterinary%20clinic%20inside%20city%20limits.%20That%20means%20if%20a%20family%27s%20pet%20has%20a%20crisis%20when%20their%20primary%20vet%20is%20closed%2C%20they%20have%20zero%20backup%20options%20if%20that%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency.%0A%0ANationally%2C%208%20US%20cities%20share%20this%20problem%2C%20and%2015%20have%202%20or%20fewer%20options%20%2818.3%25%20of%20those%20analyzed%29.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AMissoula-specific%20angles%20your%20audience%20would%20care%20about%3A%0A1.%20What%20local%20pet%20owners%20actually%20do%20in%20a%20crisis%20%28drive%20times%2C%20nearest%20backup%29%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20Practical%20takeaway%3A%20how%20families%20should%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20connect%20you%20with%20local%20vet%20sources%2C%20or%20answer%20questions%20on%20background.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
   </div>
+<h2 style="margin-top:48px">📋 Tier B — Solid backups (10) — send if Tier A goes quiet after 7 days</h2>
+<p class="section-note">Catchall inboxes, backup editors, and generic press addresses. Lower reply rate (~5-10%) but still worth trying if Tier A doesn't land anything.</p>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#13</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Kinship — press (backup)</div>
+    <div class="reason">Press/partnerships backup for Kinship.</div>
+    <div class="contact">press@kinship.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:press%40kinship.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Kinship%20press%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#14</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">DVM360 — articles (backup)</div>
+    <div class="reason">Article submissions backup for DVM360.</div>
+    <div class="contact">articles@dvm360.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:articles%40dvm360.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20DVM360%20team%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#15</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">AKC News — Communications catchall</div>
+    <div class="reason">General AKC press inbox.</div>
+    <div class="contact">communications@akc.org</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:communications%40akc.org?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20AKC%20Communications%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#16</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Scientific American — Editors</div>
+    <div class="reason">Editors catchall. SciAm covers pet science occasionally.</div>
+    <div class="contact">editors@sciam.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:editors%40sciam.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Scientific%20American%20editors%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#17</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Best Friends Animal Society — Editor</div>
+    <div class="reason">Editorial catchall at the largest pet welfare org.</div>
+    <div class="contact">editor@bestfriends.org</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:editor%40bestfriends.org?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Best%20Friends%20editorial%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#18</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Pet Age — Juliana Hefford (backup)</div>
+    <div class="reason">Backup editor at Pet Age.</div>
+    <div class="contact">jhefford@petage.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:jhefford%40petage.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Juliana%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#19</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Today's Veterinary Business — editor@ catchall</div>
+    <div class="reason">Backup catchall at TVB.</div>
+    <div class="contact">editor@navc.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:editor%40navc.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20editor%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#20</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Modern Dog — general</div>
+    <div class="reason">Only published address. Reaches editorial team.</div>
+    <div class="contact">info@moderndogmagazine.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:info%40moderndogmagazine.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Modern%20Dog%20team%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#21</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Modern Cat — general</div>
+    <div class="reason">Only published address. Reaches editorial team.</div>
+    <div class="contact">info@moderncat.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:info%40moderncat.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Modern%20Cat%20team%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
+
+  <div class="card card-B">
+    <div class="header">
+      <span class="num">#22</span>
+      <span class="tag tag-pet-press">Pet Press</span>
+      <span class="quality quality-B">Backup</span>
+    </div>
+    <div class="outlet">Pet Life Radio</div>
+    <div class="reason">Podcast/interview angle.</div>
+    <div class="contact">info@petliferadio.com</div>
+    <div class="subject"><strong>Subject:</strong> New data: 8 major US cities have only 1 emergency vet — America's vet shortage mapped</div>
+    <a href="mailto:info%40petliferadio.com?subject=New%20data%3A%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20%E2%80%94%20America%27s%20vet%20shortage%20mapped&body=Hi%20Pet%20Life%20Radio%20team%2C%0A%0AI%20run%20PetOS%20Directory%20and%20just%20finished%20an%20analysis%20of%20emergency%20vet%20access%20across%2082%20major%20US%20metros.%20The%20findings%20aren%27t%20getting%20much%20coverage%20and%20I%20think%20your%20audience%20would%20care.%0A%0AHeadlines%3A%0A-%208%20major%20US%20cities%20have%20only%201%20emergency%20vet%20clinic%20inside%20city%20limits%20%E2%80%94%20including%20Cleveland%2C%20St.%20Paul%2C%20Savannah%2C%20and%20Clearwater%0A-%2015%20cities%20%2818.3%25%20of%20those%20analyzed%29%20have%202%20or%20fewer%20options%0A-%20Analyzed%20863%20emergency%20vet%20clinics%20total%0A%0AWhy%20this%20matters%3A%20when%20a%20pet%20has%20a%20crisis%20and%20the%20primary%20vet%20is%20closed%2C%20pet%20owners%20in%20these%20cities%20have%20no%20backup.%20If%20the%20one%20clinic%20is%20at%20capacity%20or%20not%20equipped%20for%20the%20specific%20emergency%2C%20the%20nearest%20alternative%20is%20often%2030%E2%80%9390%20minutes%20away.%0A%0AFull%20report%20with%20city-by-city%20data%2C%20methodology%2C%20and%20state-level%20breakdown%3A%0Ahttps%3A%2F%2Fpetosdirectory.com%2Freports%2Femergency-vet-access-2026%0A%0AA%20few%20angles%20your%20readers%20would%20engage%20with%3A%0A1.%20The%20shortage%20mapped%20%E2%80%94%20which%20metros%20are%20best%2Fworst%20for%20after-hours%20care%0A2.%20Why%20the%20shortage%20exists%20%E2%80%94%20vet%20workforce%20trends%2C%20specialty%20accreditation%20costs%0A3.%20What%20pet%20owners%20should%20do%20%E2%80%94%20how%20to%20prepare%20BEFORE%20a%20pet%20emergency%0A%0AHappy%20to%20share%20raw%20data%2C%20additional%20breakdowns%2C%20or%20connect%20you%20with%20vet%20sources.%20Free%20to%20cite%20with%20attribution%20to%20PetOS%20Directory.%0A%0AThanks%2C%0AMalak%20Ghonimy%0AFounder%2C%20PetOS%20Directory%0Apetosdirectory%40gmail.com%0Ahttps%3A%2F%2Fpetosdirectory.com" class="send-btn">📧 Open in Outlook / email client</a>
+  </div>
 
 <p class="lead" style="margin-top: 40px; text-align: center; color: #9ca3af;">
-  Generated 2026-04-19 by scripts/generate-mailto-launcher.ts
+  Generated 2026-04-19 by scripts/generate-mailto-launcher.ts · 22 pitches
 </p>
 </body>
 </html>
