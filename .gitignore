@@ -58,3 +58,4 @@ supabase/.temp/
 *_secrets*
 *_credentials*
 gcp-service-account.json
+.firecrawl
