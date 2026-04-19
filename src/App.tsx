@@ -14,6 +14,7 @@ import AccountPage from '@/pages/AccountPage'
 import ClaimPage from '@/pages/ClaimPage'
 import BusinessDashboardPage from '@/pages/BusinessDashboardPage'
 import AdminClaimsPage from '@/pages/AdminClaimsPage'
+import AdminDashboardPage from '@/pages/AdminDashboardPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import FaqPage from '@/pages/FaqPage'
 import CostCalculatorPage from '@/pages/CostCalculatorPage'
@@ -45,6 +46,7 @@ export default function App() {
             <Route path="/account" element={<AccountPage />} />
             <Route path="/dashboard" element={<BusinessDashboardPage />} />
             <Route path="/admin/claims" element={<AdminClaimsPage />} />
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
             <Route path="/not-found" element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
