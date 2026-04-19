@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import { PageMeta } from '@/components/common/PageMeta'
@@ -170,14 +170,19 @@ export default function AdminClaimsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
       <PageMeta title="Admin — Claims" description="Review pending business claims" path="/admin/claims" />
 
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
-          <Shield className="w-5 h-5 text-amber-700" />
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+            <Shield className="w-5 h-5 text-amber-700" />
+          </div>
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">Business Claims</h1>
+            <p className="text-sm text-gray-500">Review and approve business ownership requests</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-xl font-bold text-gray-900">Business Claims</h1>
-          <p className="text-sm text-gray-500">Review and approve business ownership requests</p>
-        </div>
+        <Link to="/admin/dashboard" className="text-sm text-blue-700 hover:text-blue-900 font-medium">
+          ← Dashboard
+        </Link>
       </div>
 
       {/* Filter tabs */}
