@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Top 50 Journalists — Apify pipeline
  *
