@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { AlertTriangle, MapPin, Stethoscope, TrendingDown, Share2 } from 'lucide-react'
 import { PageMeta } from '@/components/common/PageMeta'
 import { emergencyVetReport as R } from '@/data/emergency-vet-report'
+import { EmergencyCardCTA } from '@/components/reports/EmergencyCardCTA'
 
 const STATE_NAMES: Record<string, string> = {
   FL: 'Florida', GA: 'Georgia', OH: 'Ohio', MN: 'Minnesota', KS: 'Kansas',
@@ -61,6 +62,9 @@ export default function EmergencyVetReportPage() {
           emergency vet options if their pet has a medical crisis.
         </p>
       </div>
+
+      {/* Lead magnet CTA — emergency card */}
+      <EmergencyCardCTA />
 
       {/* Key stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
