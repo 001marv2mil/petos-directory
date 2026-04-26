@@ -106,7 +106,7 @@ export default function ProviderPage() {
   )
   const isGoogleListed = provider.source === 'google_places'
 
-  const pageUrl = `https://petоs.directory/provider/${provider.slug}`
+  const pageUrl = `https://petosdirectory.com/provider/${provider.slug}`
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',

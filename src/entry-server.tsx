@@ -13,6 +13,7 @@ import CategoryPage from '@/pages/CategoryPage'
 import ProviderPage from '@/pages/ProviderPage'
 import StatePage from '@/pages/StatePage'
 import PrivacyPage from '@/pages/PrivacyPage'
+import FaqPage from '@/pages/FaqPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 type SSRHelmetContext = { helmet?: HelmetServerState }
@@ -32,11 +33,13 @@ export function render(url: string) {
               <Route element={<PageShell />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/search" element={<SearchPage />} />
+                <Route path="/faq" element={<FaqPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/provider/:slug" element={<ProviderPage />} />
                 <Route path="/:state" element={<StatePage />} />
+                <Route path="/:state/:city/faq" element={<FaqPage />} />
                 <Route path="/:state/:city" element={<CityPage />} />
                 <Route path="/:state/:city/:category" element={<CategoryPage />} />
-                <Route path="/provider/:slug" element={<ProviderPage />} />
-                <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/not-found" element={<NotFoundPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
