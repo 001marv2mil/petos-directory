@@ -265,18 +265,6 @@
     <lastmod>2026-04-26</lastmod>
   </url>
   <url>
-    <loc>https://petosdirectory.com/ny/manhattan</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
-    <loc>https://petosdirectory.com/ny/manhattan/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
     <loc>https://petosdirectory.com/fl/miami</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -889,18 +877,6 @@
     <lastmod>2026-04-26</lastmod>
   </url>
   <url>
-    <loc>https://petosdirectory.com/ny/bronx</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
-    <loc>https://petosdirectory.com/ny/bronx/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
     <loc>https://petosdirectory.com/al/huntsville</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -980,18 +956,6 @@
   </url>
   <url>
     <loc>https://petosdirectory.com/ar/fayetteville/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
-    <loc>https://petosdirectory.com/il/naperville</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
-    <loc>https://petosdirectory.com/il/naperville/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-26</lastmod>
@@ -1081,6 +1045,18 @@
     <lastmod>2026-04-26</lastmod>
   </url>
   <url>
+    <loc>https://petosdirectory.com/il/naperville</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/il/naperville/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
     <loc>https://petosdirectory.com/in/fort-wayne</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1088,18 +1064,6 @@
   </url>
   <url>
     <loc>https://petosdirectory.com/in/fort-wayne/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
-    <loc>https://petosdirectory.com/ny/staten-island</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
-    <loc>https://petosdirectory.com/ny/staten-island/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-26</lastmod>
@@ -1153,6 +1117,18 @@
     <lastmod>2026-04-26</lastmod>
   </url>
   <url>
+    <loc>https://petosdirectory.com/ny/manhattan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ny/manhattan/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
     <loc>https://petosdirectory.com/ny/queens</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1160,6 +1136,30 @@
   </url>
   <url>
     <loc>https://petosdirectory.com/ny/queens/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ny/bronx</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ny/bronx/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ny/staten-island</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ny/staten-island/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-26</lastmod>
@@ -1184,6 +1184,210 @@
   </url>
   <url>
     <loc>https://petosdirectory.com/ca/long-beach/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ny/buffalo</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ny/buffalo/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/oh/cincinnati</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/oh/cincinnati/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ok/tulsa</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ok/tulsa/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/or/eugene</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/or/eugene/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ri/providence</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ri/providence/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/sc/charleston</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/sc/charleston/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/sc/columbia</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/sc/columbia/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/sd/sioux-falls</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/sd/sioux-falls/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/tn/knoxville</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/tn/knoxville/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ut/provo</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ut/provo/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/vt/burlington</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/vt/burlington/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/va/arlington</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/va/arlington/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wa/spokane</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wa/spokane/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wv/charleston</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wv/charleston/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wi/madison</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wi/madison/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wy/cheyenne</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/wy/cheyenne/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ca/san-jose</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+  <url>
+    <loc>https://petosdirectory.com/ca/san-jose/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-26</lastmod>

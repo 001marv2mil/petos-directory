@@ -36,6 +36,7 @@ export function render(url: string) {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/:state" element={<StatePage />} />
+                <Route path="/:state/:city/faq" element={<FaqPage />} />
                 <Route path="/:state/:city" element={<CityPage />} />
                 <Route path="/:state/:city/:category" element={<CategoryPage />} />
                 <Route path="/provider/:slug" element={<ProviderPage />} />
@@ -43,7 +44,6 @@ export function render(url: string) {
                 <Route path="/reports/emergency-vet-access-2026" element={<EmergencyVetReportPage />} />
                 <Route path="/reports/pet-service-availability-2026" element={<AvailabilityReportPage />} />
                 <Route path="/faq" element={<FaqPage />} />
-                <Route path="/:state/:city/faq" element={<FaqPage />} />
                 <Route path="/not-found" element={<NotFoundPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>

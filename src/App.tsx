@@ -39,11 +39,11 @@ export default function App() {
               <Route path="/reports/pet-service-availability-2026" element={<AvailabilityReportPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/:state" element={<StatePage />} />
+              <Route path="/:state/:city/faq" element={<FaqPage />} />
               <Route path="/:state/:city" element={<CityPage />} />
               <Route path="/:state/:city/:category" element={<CategoryPage />} />
               <Route path="/provider/:slug" element={<ProviderPage />} />
               <Route path="/faq" element={<FaqPage />} />
-              <Route path="/:state/:city/faq" element={<FaqPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/claim/:slug" element={<ClaimPage />} />
               <Route path="/account" element={<AccountPage />} />
