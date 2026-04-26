@@ -20,15 +20,21 @@ async function count(table: string, filters: (q: any) => any = q => q) {
   return count ?? 0
 }
 
-async function groupCount(table: string, col: string, since?: string) {
-  let q = sb.from(table).select(col)
-  if (since) q = q.gte('created_at', since)
-  const { data, error } = await q
-  if (error) return { error: error.message }
+async function groupCount(table: string, col: string, since?: string, sinceCol = 'created_at') {
+  const PAGE = 1000
+  let offset = 0
   const out: Record<string, number> = {}
-  for (const row of data || []) {
-    const k = (row as any)[col] ?? 'null'
-    out[k] = (out[k] || 0) + 1
+  while (true) {
+    let q = sb.from(table).select(col).range(offset, offset + PAGE - 1)
+    if (since) q = q.gte(sinceCol, since)
+    const { data, error } = await q
+    if (error) return { error: error.message }
+    for (const row of data || []) {
+      const k = String((row as any)[col] ?? 'null')
+      out[k] = (out[k] || 0) + 1
+    }
+    if (!data || data.length < PAGE) break
+    offset += PAGE
   }
   return out
 }
@@ -61,7 +67,7 @@ async function groupCount(table: string, col: string, since?: string) {
   console.log('Outreach last 24h:', await count('outreach_log', q => q.gte('sent_at', iso24h)))
   console.log('Outreach last 7d:', await count('outreach_log', q => q.gte('sent_at', iso7d)))
   console.log('Outreach last 30d:', await count('outreach_log', q => q.gte('sent_at', iso30d)))
-  console.log('Breakdown by email_num (all-time):', await groupCount('outreach_log', 'email_num'))
+  console.log('Breakdown by email_num (all-time):', await groupCount('outreach_log', 'email_num', undefined, 'sent_at'))
   console.log('')
 
   // Claims
