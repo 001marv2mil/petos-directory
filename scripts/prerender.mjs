@@ -65,7 +65,7 @@ const CITIES = [
   // Florida
   ['fl', 'tampa'],          ['fl', 'st-petersburg'],  ['fl', 'clearwater'],
   ['fl', 'orlando'],        ['fl', 'miami'],           ['fl', 'jacksonville'],
-  ['fl', 'fort-lauderdale'], ['fl', 'sarasota'],
+  ['fl', 'fort-lauderdale'], ['fl', 'sarasota'],       ['fl', 'brandon'],
   // Georgia
   ['ga', 'atlanta'],        ['ga', 'savannah'],        ['ga', 'augusta'],
   // Hawaii

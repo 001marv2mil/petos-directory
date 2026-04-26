@@ -103,7 +103,7 @@ export function SearchBar({
         let nearest = CITIES[0]
         let minDist = Infinity
         for (const c of CITIES) {
-          const coords = CITY_COORDS[c.citySlug]
+          const coords = CITY_COORDS[`${c.stateSlug}-${c.citySlug}`] ?? CITY_COORDS[c.citySlug]
           if (!coords) continue
           const d = haversineDistance(latitude, longitude, coords.lat, coords.lng)
           if (d < minDist) { minDist = d; nearest = c }

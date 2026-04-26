@@ -39,6 +39,7 @@ export const CITIES: CityMeta[] = [
   { city: 'Jacksonville',   state: 'Florida',        stateAbbr: 'FL', stateSlug: 'fl', citySlug: 'jacksonville',   heroImage: img('1575517111839-3a3843ee7f5d') },
   { city: 'Fort Lauderdale', state: 'Florida',       stateAbbr: 'FL', stateSlug: 'fl', citySlug: 'fort-lauderdale', heroImage: img('1507525428034-b723cf961d3e') },
   { city: 'Sarasota',       state: 'Florida',        stateAbbr: 'FL', stateSlug: 'fl', citySlug: 'sarasota',       heroImage: img('1507525428034-b723cf961d3e') },
+  { city: 'Brandon',        state: 'Florida',        stateAbbr: 'FL', stateSlug: 'fl', citySlug: 'brandon',        heroImage: img('1575517111839-3a3843ee7f5d') },
   // Georgia
   { city: 'Atlanta',        state: 'Georgia',        stateAbbr: 'GA', stateSlug: 'ga', citySlug: 'atlanta',        heroImage: img('1575383502153-5f9d5d07e5f3') },
   { city: 'Savannah',       state: 'Georgia',        stateAbbr: 'GA', stateSlug: 'ga', citySlug: 'savannah',       heroImage: img('1575383502153-5f9d5d07e5f3') },

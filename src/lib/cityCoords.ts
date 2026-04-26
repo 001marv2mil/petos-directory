@@ -88,6 +88,8 @@ export const CITY_COORDS: Record<string, { lat: number; lng: number }> = {
   pittsburgh:      { lat: 40.4406, lng: -79.9959 },
   providence:      { lat: 41.8240, lng: -71.4128 },
   charleston:      { lat: 32.7765, lng: -79.9311 },
+  'wv-charleston': { lat: 38.3498, lng: -81.6326 },
+  brandon:         { lat: 27.9378, lng: -82.2859 },
   columbia:        { lat: 34.0007, lng: -81.0348 },
   'sioux-falls':   { lat: 43.5473, lng: -96.7283 },
   nashville:       { lat: 36.1627, lng: -86.7816 },

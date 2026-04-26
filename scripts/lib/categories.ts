@@ -99,6 +99,12 @@ export const CITY_CENTERS: CityCenter[] = [
     streetNames: ['Colfax', 'Broadway', 'Colorado', 'University', 'Monaco', 'Havana', 'Leetsdale', 'Evans'],
   },
   {
+    city: 'Boulder', state: 'Colorado', stateAbbr: 'CO', stateSlug: 'co', citySlug: 'boulder',
+    lat: 40.0150, lng: -105.2705, zipBase: '803',
+    streetTypes: ['Blvd', 'Ave', 'St', 'Dr', 'Rd'],
+    streetNames: ['Pearl', 'Broadway', 'Arapahoe', 'Canyon', 'Baseline', 'Folsom', 'Diagonal Hwy'],
+  },
+  {
     city: 'Los Angeles', state: 'California', stateAbbr: 'CA', stateSlug: 'ca', citySlug: 'los-angeles',
     lat: 34.0522, lng: -118.2437, zipBase: '900',
     streetTypes: ['Blvd', 'Ave', 'St', 'Dr', 'Rd', 'Way'],
