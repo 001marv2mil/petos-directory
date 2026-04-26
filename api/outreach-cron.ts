@@ -561,19 +561,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       : { sent: 0, failed: 0 }
     results.email1 = { ...r1, eligible: email1Targets.length }
 
-    // Email #2 — follow up on #1 sent 5+ days ago
-    const email2Targets = await fetchFollowUpTargets(2)
-    const r2 = email2Targets.length > 0
-      ? await sendBatch(email2Targets, 2)
-      : { sent: 0, failed: 0 }
-    results.email2 = { ...r2, eligible: email2Targets.length }
+    // Email #2 — paused until site has enough traffic to show meaningful stats
+    results.email2 = { sent: 0, failed: 0, eligible: 0 }
 
-    // Email #3 — follow up on #2 sent 3+ days ago (unclaimed, unpaid only)
-    const email3Targets = await fetchFollowUpTargets(3)
-    const r3 = email3Targets.length > 0
-      ? await sendBatch(email3Targets, 3)
-      : { sent: 0, failed: 0 }
-    results.email3 = { ...r3, eligible: email3Targets.length }
+    // Email #3 — paused until site has enough traffic to show meaningful stats
+    results.email3 = { sent: 0, failed: 0, eligible: 0 }
 
     // Email #4 — post-approval upsell (1 day after admin approves the claim, not paid)
     const email4Targets = await fetchEmail4Targets()
