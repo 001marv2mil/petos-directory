@@ -102,7 +102,7 @@ function getSubject(emailNum: number, p: Provider): string {
   }
 }
 
-function getHtml(emailNum: number, p: Provider): string {
+function getHtml(emailNum: number, p: Provider, stats?: ProviderStats): string {
   const listingUrl = `${SITE}/provider/${p.slug}`
   const claimUrl = `${SITE}/claim/${p.slug}?name=${encodeURIComponent(p.business_name)}`
   const catLabel = CATEGORY_LABELS[p.category] || 'pet service'
@@ -163,82 +163,49 @@ function getHtml(emailNum: number, p: Provider): string {
         <p style="font-size:15px;line-height:1.6;">Best,<br/>Malak<br/>PetOS Directory</p>
       ${footer}`
 
-    case 2:
+    case 2: {
+      const views2 = stats?.views ?? 0
+      const viewLine = views2 > 0
+        ? `<p style="font-size:15px;line-height:1.6;">In the past 30 days, your listing has been viewed <strong>${views2} time${views2 !== 1 ? 's' : ''}</strong> by pet owners searching for ${catLabel}s in ${p.city}.</p>`
+        : `<p style="font-size:15px;line-height:1.6;">Your listing is live and showing up in searches for ${catLabel}s in ${p.city}.</p>`
       return `${base}
         <p style="font-size:15px;line-height:1.6;">Hi,</p>
+        <p style="font-size:15px;line-height:1.6;">Quick update on <strong>${p.business_name}</strong>'s listing on PetOS Directory.</p>
+        ${viewLine}
         <p style="font-size:15px;line-height:1.6;">
-          Just checking in — your listing for <strong>${p.business_name}</strong> has been
-          live for a few days and is showing up in searches for ${catLabel}s in ${p.city}.
-        </p>
-        <p style="font-size:15px;line-height:1.6;">
-          Claimed listings rank higher and show more info to pet owners. Takes less than 2 minutes:
+          If you want to update your hours, add photos, or include a special offer, you can claim your listing here — it takes less than 2 minutes and it's free:
         </p>
         <p style="text-align:center;margin:24px 0;">
           <a href="${claimUrl}" style="display:inline-block;background:#2563eb;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
             Claim Your Listing (Free)
           </a>
         </p>
-
-        <div style="border-top:1px solid #e5e7eb;margin:28px 0;padding-top:24px;">
-          <p style="font-size:15px;line-height:1.6;font-weight:600;color:#111827;">
-            Want to stand out from other ${catLabel}s in ${p.city}?
-          </p>
-          <p style="font-size:14px;line-height:1.6;color:#374151;">
-            Some businesses are upgrading to <strong>Featured</strong> — here's what you get:
-          </p>
-          <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#374151;">
-            <li>Top placement on the ${p.city} ${catLabel} page</li>
-            <li>Highlighted card with your photo &amp; call-to-action</li>
-            <li>Priority in search results</li>
-          </ul>
-          <p style="text-align:center;margin:20px 0;">
-            <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
-              Get Featured — $99/mo
-            </a>
-          </p>
-          <p style="font-size:13px;color:#6b7280;text-align:center;">
-            Cancel anytime. Your basic listing stays free, always.
-          </p>
-        </div>
-
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`
+    }
 
-    case 3:
+    case 3: {
+      const views3 = stats?.views ?? 0
+      const clicks3 = stats?.clicks ?? 0
+      const statsSummary = views3 > 0
+        ? `<p style="font-size:15px;line-height:1.6;">Your listing has received <strong>${views3} view${views3 !== 1 ? 's' : ''}${clicks3 > 0 ? ` and ${clicks3} website click${clicks3 !== 1 ? 's' : ''}` : ''}</strong> from pet owners in ${p.city} over the past 30 days.</p>`
+        : `<p style="font-size:15px;line-height:1.6;">Pet owners in ${p.city} are actively searching for ${catLabel}s — your listing is showing up in those results.</p>`
       return `${base}
         <p style="font-size:15px;line-height:1.6;">Hi,</p>
+        <p style="font-size:15px;line-height:1.6;">One more note about <strong>${p.business_name}</strong>'s free listing on PetOS Directory.</p>
+        ${statsSummary}
         <p style="font-size:15px;line-height:1.6;">
-          Quick question — do you want <strong>${p.business_name}</strong> to be the first
-          ${catLabel} pet owners see when they search in ${p.city}?
+          Claiming your listing lets you update your hours, add photos, and make sure pet owners see accurate info. It's completely free:
         </p>
-        <p style="font-size:15px;line-height:1.6;">
-          Right now your listing is live on
-          <a href="${SITE}" style="color:#16a34a;">petosdirectory.com</a> alongside other
-          ${catLabel}s in the area. <strong>Featured businesses appear first</strong> — with a
-          highlighted card, photo, and a direct call-to-action button.
-        </p>
-        <p style="font-size:15px;line-height:1.6;">
-          We're featuring <strong>5 ${catLabel}s per city</strong>. Here's what's included:
-        </p>
-        <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#374151;">
-          <li><strong>Top placement</strong> on the ${p.city} ${catLabel} page</li>
-          <li><strong>Highlighted card</strong> with your photo &amp; call button</li>
-          <li><strong>Priority</strong> in search results across the directory</li>
-        </ul>
         <p style="text-align:center;margin:24px 0;">
-          <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">
-            Get Featured — $99/mo
+          <a href="${claimUrl}" style="display:inline-block;background:#2563eb;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
+            Claim Your Listing (Free)
           </a>
         </p>
-        <p style="font-size:13px;color:#6b7280;text-align:center;margin-bottom:24px;">
-          Cancel anytime. No contracts.
-        </p>
-        <p style="font-size:13px;color:#9ca3af;">
-          Not interested in Featured? Your free listing stays up —
-          <a href="${claimUrl}" style="color:#16a34a;">claim it here</a> to update your info anytime.
-        </p>
+        <p style="font-size:13px;color:#9ca3af;">Won't be claiming it? No worries — your free listing stays up regardless.</p>
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`
+    }
 
     case 4:
       return `${base}
@@ -356,6 +323,37 @@ async function getPaidProviderIds(): Promise<Set<string>> {
   const { data } = await supabase.from('featured_payments').select('provider_id').eq('status', 'active')
   if (data) data.forEach(p => ids.add(p.provider_id))
   return ids
+}
+
+// ─── Provider stats ───────────────────────────────────────────────────────────
+
+interface ProviderStats {
+  views: number
+  clicks: number
+}
+
+async function fetchStatsForProviders(ids: string[]): Promise<Map<string, ProviderStats>> {
+  const map = new Map<string, ProviderStats>()
+  if (ids.length === 0) return map
+
+  const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+
+  for (let i = 0; i < ids.length; i += 100) {
+    const chunk = ids.slice(i, i + 100)
+    const { data } = await supabase
+      .from('provider_analytics')
+      .select('provider_id, event_type')
+      .in('provider_id', chunk)
+      .gte('created_at', since)
+
+    for (const row of data || []) {
+      const s = map.get(row.provider_id) ?? { views: 0, clicks: 0 }
+      if (row.event_type === 'view') s.views++
+      else if (row.event_type === 'click_website') s.clicks++
+      map.set(row.provider_id, s)
+    }
+  }
+  return map
 }
 
 // ─── Fetch targets ─────────────────────────────────────────────────────────────
@@ -506,6 +504,12 @@ async function sendBatch(providers: Provider[], emailNum: number): Promise<{ sen
   })
 
   const batch = unique.slice(0, BATCH_PER_EMAIL)
+
+  // Pre-fetch stats for emails that use them
+  const statsMap = (emailNum === 2 || emailNum === 3)
+    ? await fetchStatsForProviders(batch.map(p => p.id))
+    : new Map<string, ProviderStats>()
+
   let sent = 0
   let failed = 0
 
@@ -516,7 +520,7 @@ async function sendBatch(providers: Provider[], emailNum: number): Promise<{ sen
         replyTo: REPLY_TO,
         to: p.contact_email,
         subject: getSubject(emailNum, p),
-        html: getHtml(emailNum, p),
+        html: getHtml(emailNum, p, statsMap.get(p.id)),
       })
 
       await supabase.from('outreach_log').insert({
