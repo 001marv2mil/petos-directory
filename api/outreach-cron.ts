@@ -93,11 +93,7 @@ interface Provider {
 function getSubject(emailNum: number, p: Provider): string {
   switch (emailNum) {
     case 1: return `${p.business_name} is now on petosdirectory.com`
-    case 2: return `Your listing on petosdirectory.com`
-    case 3: return `Want to be the top ${p.city} ${CATEGORY_LABELS[p.category] || 'pet service'}?`
-    case 4: return `${p.business_name} — ready to stand out?`
-    case 5: return `${p.business_name} — your listing has been live for a month`
-    case 6: return `Last note about Featured Listing for ${p.business_name}`
+    case 2: return `Still unclaimed: ${p.business_name} on petosdirectory.com`
     default: return ''
   }
 }
@@ -163,26 +159,27 @@ function getHtml(emailNum: number, p: Provider, stats?: ProviderStats): string {
         <p style="font-size:15px;line-height:1.6;">Best,<br/>Malak<br/>PetOS Directory</p>
       ${footer}`
 
-    case 2: {
-      const views2 = stats?.views ?? 0
-      const viewLine = views2 > 0
-        ? `<p style="font-size:15px;line-height:1.6;">In the past 30 days, your listing has been viewed <strong>${views2} time${views2 !== 1 ? 's' : ''}</strong> by pet owners searching for ${catLabel}s in ${p.city}.</p>`
-        : `<p style="font-size:15px;line-height:1.6;">Your listing is live and showing up in searches for ${catLabel}s in ${p.city}.</p>`
+    case 2:
       return `${base}
         <p style="font-size:15px;line-height:1.6;">Hi,</p>
-        <p style="font-size:15px;line-height:1.6;">Quick update on <strong>${p.business_name}</strong>'s listing on PetOS Directory.</p>
-        ${viewLine}
         <p style="font-size:15px;line-height:1.6;">
-          If you want to update your hours, add photos, or include a special offer, you can claim your listing here — it takes less than 2 minutes and it's free:
+          Just following up — <strong>${p.business_name}</strong>'s listing on
+          <a href="${SITE}" style="color:#16a34a;">petosdirectory.com</a> is still unclaimed.
+        </p>
+        <p style="font-size:15px;line-height:1.6;">
+          Claiming it is free and takes less than 2 minutes. Once you do, you can update your hours,
+          add photos, and make sure pet owners in ${p.city} are seeing accurate info.
         </p>
         <p style="text-align:center;margin:24px 0;">
           <a href="${claimUrl}" style="display:inline-block;background:#2563eb;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
             Claim Your Listing (Free)
           </a>
         </p>
+        <p style="font-size:13px;color:#9ca3af;">
+          Not interested? No worries — your free listing stays up regardless.
+        </p>
         <p style="font-size:15px;line-height:1.6;">— Malak<br/>PetOS Directory</p>
       ${footer}`
-    }
 
     case 3: {
       const views3 = stats?.views ?? 0
@@ -390,7 +387,7 @@ async function fetchEmail1Targets(): Promise<Provider[]> {
 
 async function fetchFollowUpTargets(emailNum: number): Promise<Provider[]> {
   const prevEmailNum = emailNum - 1
-  const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+  const threeDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
 
   // Claimed businesses get Email 4 instead; paid businesses get nothing
   const claimedIds = await getClaimedProviderIds()
@@ -561,32 +558,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       : { sent: 0, failed: 0 }
     results.email1 = { ...r1, eligible: email1Targets.length }
 
-    // Email #2 — paused until site has enough traffic to show meaningful stats
-    results.email2 = { sent: 0, failed: 0, eligible: 0 }
-
-    // Email #3 — paused until site has enough traffic to show meaningful stats
-    results.email3 = { sent: 0, failed: 0, eligible: 0 }
-
-    // Email #4 — post-approval upsell (1 day after admin approves the claim, not paid)
-    const email4Targets = await fetchEmail4Targets()
-    const r4 = email4Targets.length > 0
-      ? await sendBatch(email4Targets, 4)
+    // Email #2 — follow-up to unclaimed providers (7 days after Email 1)
+    const email2Targets = await fetchFollowUpTargets(2)
+    const r2 = email2Targets.length > 0
+      ? await sendBatch(email2Targets, 2)
       : { sent: 0, failed: 0 }
-    results.email4 = { ...r4, eligible: email4Targets.length }
-
-    // Email #5 — 30-day check-in (30 days after approval, not paid)
-    const email5Targets = await fetchEmail5Targets()
-    const r5 = email5Targets.length > 0
-      ? await sendBatch(email5Targets, 5)
-      : { sent: 0, failed: 0 }
-    results.email5 = { ...r5, eligible: email5Targets.length }
-
-    // Email #6 — final nudge (60 days after approval, not paid)
-    const email6Targets = await fetchEmail6Targets()
-    const r6 = email6Targets.length > 0
-      ? await sendBatch(email6Targets, 6)
-      : { sent: 0, failed: 0 }
-    results.email6 = { ...r6, eligible: email6Targets.length }
+    results.email2 = { ...r2, eligible: email2Targets.length }
 
     console.log('Outreach cron complete:', JSON.stringify(results))
     return res.status(200).json({ success: true, results })
