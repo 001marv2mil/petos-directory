@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { AuthModal } from '@/components/auth/AuthModal'
@@ -27,8 +28,14 @@ function BrowseTrigger() {
 }
 
 export function PageShell() {
+  const { pathname } = useLocation()
+  const canonical = `https://petosdirectory.com${pathname}`
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
+      <Helmet>
+        <link rel="canonical" href={canonical} />
+      </Helmet>
       <Header />
       <BrowseTrigger />
       <main className="flex-1">
