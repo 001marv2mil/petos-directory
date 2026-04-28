@@ -6,6 +6,7 @@ import { EmergencyCTA } from '@/components/home/EmergencyCTA'
 import { PageMeta } from '@/components/common/PageMeta'
 import { WebSiteJsonLd } from '@/components/common/JsonLd'
 import { RecentlyViewed } from '@/components/common/RecentlyViewed'
+import { PetPersonalityQuiz } from '@/components/quiz/PetPersonalityQuiz'
 
 export default function HomePage() {
   return (
@@ -21,6 +22,10 @@ export default function HomePage() {
       <CategoryGrid />
       {/* Top-rated listings — give users something concrete to click */}
       <FeaturedProviders />
+      {/* Quiz lead magnet — wraps in container for spacing */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <PetPersonalityQuiz />
+      </div>
       {/* Emergency CTA — high urgency, high conversion */}
       <EmergencyCTA />
       {/* Recently viewed — only renders if user has history */}
