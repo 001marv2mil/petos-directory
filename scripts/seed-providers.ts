@@ -1,9 +1,20 @@
 /**
- * Seed script — generates realistic placeholder provider data
- * for all 17 cities × 7 categories × 25 providers = 2,975 rows.
+ * 🚨🚨🚨 DANGER — THIS SCRIPT INSERTS FAKE LISTINGS 🚨🚨🚨
  *
- * Run: npx tsx --env-file=.env.local scripts/seed-providers.ts
- * Requires: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
+ * This generates synthetic placeholder providers (templated names like
+ * "Pet Meds Pet Pharmacy"). They violate the project's authority standard
+ * (no fake listings) and will tank SEO trust if they reach production.
+ *
+ * On 2026-04-26 ~01:03 UTC this script was run accidentally and added
+ * 17,542 fake rows that then had to be purged + redeployed. To prevent
+ * a repeat, this script now requires an explicit --i-really-want-fake-data
+ * flag before it will run.
+ *
+ * If you actually need to seed local-dev test data, run with:
+ *   npx tsx --env-file=.env.local scripts/seed-providers.ts --i-really-want-fake-data
+ *
+ * For real provider ingestion, use scripts/import-apify.ts or
+ * scripts/ingest-providers.ts (those use real Google Places data).
  */
 
 import { supabaseAdmin } from './lib/supabase-admin.js'
@@ -149,7 +160,29 @@ function generateProvider(
   }
 }
 
+// ─── Hard safety guard — added 2026-04-26 after fake-listings incident ─────
+const ACK_FLAG = '--i-really-want-fake-data'
+
+async function safetyGuard() {
+  if (!process.argv.includes(ACK_FLAG)) {
+    console.error('🚨 BLOCKED: this script inserts FAKE providers and was disabled after a prod incident.')
+    console.error('   See the header comment in scripts/seed-providers.ts for context.')
+    console.error('')
+    console.error(`   To override (you almost certainly should not), pass: ${ACK_FLAG}`)
+    console.error('   For real data, run scripts/import-apify.ts or scripts/ingest-providers.ts.')
+    process.exit(1)
+  }
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1') {
+    console.error('🚨 BLOCKED: seed-providers.ts cannot run in production environments.')
+    process.exit(1)
+  }
+  console.warn('⚠️  Running seed-providers with --i-really-want-fake-data ack flag.')
+  console.warn('   This will insert FAKE rows. Only proceed in local dev. Sleeping 5s for cancel...')
+  await new Promise(r => setTimeout(r, 5000))
+}
+
 async function seed() {
+  await safetyGuard()
   console.log('🌱 Starting PetOS seed...')
   console.log(`📍 ${CITY_CENTERS.length} cities × ${CATEGORIES.length} categories × ${PROVIDERS_PER_BATCH} providers`)
 
