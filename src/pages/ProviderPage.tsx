@@ -1,4 +1,5 @@
-import { useParams, Navigate, Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
+import NotFoundPage from '@/pages/NotFoundPage'
 import { useState, useEffect } from 'react'
 import { useProvider } from '@/hooks/useProvider'
 import { useNearbyProviders } from '@/hooks/useNearbyProviders'
@@ -97,7 +98,7 @@ export default function ProviderPage() {
     )
   }
 
-  if (isError || !provider) return <Navigate to="/not-found" replace />
+  if (isError || !provider) return <NotFoundPage />
 
   const img = getProviderImage(provider.hero_image, provider.category, provider.slug)
   const categoryMeta = CATEGORIES.find(c => c.slug === provider.category)
