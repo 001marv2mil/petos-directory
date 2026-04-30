@@ -59,3 +59,4 @@ supabase/.temp/
 *_credentials*
 gcp-service-account.json
 .firecrawl
+public/lead-magnet-previews/

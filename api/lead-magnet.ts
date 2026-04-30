@@ -131,7 +131,7 @@ function renderEmail(magnet: Magnet, ctx: EmailContext): string {
 
   <div style="margin-top:32px;padding:20px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;">
     <div style="font-size:11px;color:#1d4ed8;font-weight:700;letter-spacing:1.5px;">WANT THIS AUTOMATED?</div>
-    <h3 style="font-size:18px;color:#111;margin:6px 0 8px 0;font-weight:700;">PetOS Health does this — for every visit, every pet.</h3>
+    <h3 style="font-size:18px;color:#111;margin:6px 0 8px 0;font-weight:700;">PetOS Health does this for every visit, every pet.</h3>
     <p style="font-size:14px;line-height:1.6;color:#1e3a8a;margin:0 0 12px 0;">
       Track vaccines, store records, schedule vet visits, get AI symptom checks, and never lose a piece of your pet's health history again. All in one app.
     </p>
@@ -140,7 +140,7 @@ function renderEmail(magnet: Magnet, ctx: EmailContext): string {
 
   <p style="font-size:13px;color:#9ca3af;margin-top:28px;border-top:1px solid #e5e7eb;padding-top:16px;line-height:1.6;">
     Browse the full directory: <a href="${SITE}" style="color:#2563eb;">petosdirectory.com</a><br/>
-    Reply to this email if you have questions — a real person reads every reply.<br/><br/>
+    Reply to this email if you have questions. A real person reads every reply.<br/><br/>
     <a href="${SITE}/unsubscribe?email=${encodeURIComponent(ctx.email)}" style="color:#9ca3af;font-size:12px;">Unsubscribe</a>
   </p>
 </div>

@@ -5,7 +5,7 @@ import { getMagnetForCategory } from '@/data/lead-magnets'
 interface Props {
   /** Provider category slug (e.g. 'veterinarians', 'emergency_vets') */
   category: string
-  /** Slug of the provider page this magnet appeared on — for attribution */
+  /** Slug of the provider page this magnet appeared on, for attribution */
   providerSlug: string
   providerName: string
   city: string
