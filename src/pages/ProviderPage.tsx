@@ -16,6 +16,7 @@ import { useFavorite } from '@/hooks/useFavorite'
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed'
 import { trackEvent } from '@/lib/track'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
+import { CategoryLeadMagnet } from '@/components/leadmagnets/CategoryLeadMagnet'
 import type { CategorySlug } from '@/types'
 import {
   Star, Phone, Globe, MapPin, Shield, AlertCircle,
@@ -272,6 +273,15 @@ export default function ProviderPage() {
               </span>
             </div>
           </div>
+
+          {/* Category-specific lead magnet (Vet Visit Prep, Emergency Card, Grooming Calendar, etc.) */}
+          <CategoryLeadMagnet
+            category={provider.category}
+            providerSlug={provider.slug}
+            providerName={provider.business_name}
+            city={provider.city}
+            state={provider.state}
+          />
 
           {/* About */}
           {provider.description && (
