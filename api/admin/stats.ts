@@ -6,14 +6,13 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { createClient } from '@supabase/supabase-js'
+import { isAdminEmail } from '../../src/lib/admin'
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
   { auth: { persistSession: false } },
 )
-
-const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'malak@petosdirectory.com']
 
 async function count(table: string, filter?: (q: any) => any) {
   const base = supabase.from(table).select('*', { count: 'exact', head: true })
@@ -32,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const token = authHeader.slice(7)
   const { data: userData, error: authError } = await supabase.auth.getUser(token)
   if (authError || !userData.user) return res.status(401).json({ error: 'Invalid token' })
-  if (!ADMIN_EMAILS.includes(userData.user.email?.toLowerCase() ?? '')) {
+  if (!isAdminEmail(userData.user.email)) {
     return res.status(403).json({ error: 'Not an admin' })
   }
 

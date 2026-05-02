@@ -3,9 +3,8 @@ import { Link, Navigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import { PageMeta } from '@/components/common/PageMeta'
+import { isAdminEmail } from '@/lib/admin'
 import { LayoutDashboard, Users, Mail, DollarSign, Eye, FileCheck, RefreshCw, ExternalLink, TrendingUp } from 'lucide-react'
-
-const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'malak@petosdirectory.com']
 
 interface Stats {
   generatedAt: string
@@ -27,7 +26,7 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const isAdmin = user && ADMIN_EMAILS.includes(user.email?.toLowerCase() ?? '')
+  const isAdmin = isAdminEmail(user?.email)
 
   async function load() {
     setLoading(true)
