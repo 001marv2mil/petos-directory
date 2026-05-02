@@ -1,58 +1,54 @@
 import { Link } from 'react-router-dom'
+import { Stethoscope, AlertCircle, Scissors, Home, Sun, Award, Pill } from 'lucide-react'
 import { CATEGORIES } from '@/lib/constants'
 import type { CategorySlug } from '@/types'
 
-const CATEGORY_IMAGES: Record<CategorySlug, string> = {
-  veterinarians: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80&fit=crop',
-  emergency_vets: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80&fit=crop',
-  groomers: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=400&q=80&fit=crop',
-  boarding: 'https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=400&q=80&fit=crop',
-  daycare: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=80&fit=crop',
-  trainers: 'https://images.unsplash.com/photo-1546421845-6471bdcf3edf?w=400&q=80&fit=crop',
-  pet_pharmacies: 'https://images.unsplash.com/photo-1583947581924-860bda6a26df?w=400&q=80&fit=crop',
+const CATEGORY_ICONS: Record<CategorySlug, React.ReactNode> = {
+  veterinarians: <Stethoscope className="w-6 h-6" />,
+  emergency_vets: <AlertCircle className="w-6 h-6" />,
+  groomers: <Scissors className="w-6 h-6" />,
+  boarding: <Home className="w-6 h-6" />,
+  daycare: <Sun className="w-6 h-6" />,
+  trainers: <Award className="w-6 h-6" />,
+  pet_pharmacies: <Pill className="w-6 h-6" />,
 }
 
-const CATEGORY_LABELS: Record<CategorySlug, string> = {
-  veterinarians: 'Veterinarians',
-  emergency_vets: 'Emergency Vets',
-  groomers: 'Groomers',
-  boarding: 'Pet Boarding',
-  daycare: 'Pet Daycare',
-  trainers: 'Pet Trainers',
-  pet_pharmacies: 'Pet Pharmacies',
+const CATEGORY_COLORS: Record<CategorySlug, string> = {
+  veterinarians: 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100',
+  emergency_vets: 'bg-red-50 text-red-600 group-hover:bg-red-100',
+  groomers: 'bg-pink-50 text-pink-600 group-hover:bg-pink-100',
+  boarding: 'bg-amber-50 text-amber-700 group-hover:bg-amber-100',
+  daycare: 'bg-sky-50 text-sky-600 group-hover:bg-sky-100',
+  trainers: 'bg-violet-50 text-violet-600 group-hover:bg-violet-100',
+  pet_pharmacies: 'bg-teal-50 text-teal-600 group-hover:bg-teal-100',
 }
 
 export function CategoryGrid() {
   return (
-    <section className="py-14 bg-white">
+    <section className="py-20 sm:py-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">Browse by Category</h2>
-            <p className="text-sm text-gray-500 mt-1">Search any service in your city</p>
-          </div>
+        <div className="text-center mb-12">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900">
+            Every service your pet needs
+          </h2>
+          <p className="mt-3 text-gray-500 text-lg">
+            Browse by category to find the right provider
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
           {CATEGORIES.map(cat => (
             <Link
               key={cat.slug}
               to={`/search?category=${cat.slug}`}
-              className="group flex flex-col items-center bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all duration-200 text-center"
+              className="group flex flex-col items-center gap-3 p-5 rounded-2xl hover:shadow-md transition-all duration-200"
             >
-              <div className="w-full h-36 overflow-hidden bg-gray-100">
-                <img
-                  src={CATEGORY_IMAGES[cat.slug]}
-                  alt={CATEGORY_LABELS[cat.slug]}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${CATEGORY_COLORS[cat.slug]}`}>
+                {CATEGORY_ICONS[cat.slug]}
               </div>
-              <div className="py-4 px-2">
-                <span className="text-sm font-bold text-gray-800 group-hover:text-blue-700 transition-colors">
-                  {CATEGORY_LABELS[cat.slug]}
-                </span>
-              </div>
+              <span className="text-sm font-semibold text-gray-700 text-center leading-tight">
+                {cat.pluralLabel}
+              </span>
             </Link>
           ))}
         </div>

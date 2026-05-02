@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
-import { Star, Shield } from 'lucide-react'
+import { Star, BadgeCheck } from 'lucide-react'
 import type { Provider } from '@/types'
 import { getProviderImage } from '@/lib/images'
 import { CATEGORIES } from '@/lib/constants'
 
 async function fetchFeatured(): Promise<Provider[]> {
-  // Only show businesses that have paid for featured listing — level playing field for everyone else
   const { data: payments } = await supabase
     .from('featured_payments')
     .select('provider_id')
@@ -25,19 +24,6 @@ async function fetchFeatured(): Promise<Provider[]> {
   return (data || []) as Provider[]
 }
 
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[1, 2, 3, 4, 5].map(i => (
-        <Star
-          key={i}
-          className={`w-4 h-4 ${i <= Math.round(rating) ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200'}`}
-        />
-      ))}
-    </div>
-  )
-}
-
 export function FeaturedProviders() {
   const { data: providers = [], isLoading } = useQuery({
     queryKey: ['featured-providers'],
@@ -45,34 +31,26 @@ export function FeaturedProviders() {
     staleTime: 1000 * 60 * 10,
   })
 
-  // Hide section entirely when there are no paid featured listings — level playing field
   if (!isLoading && providers.length === 0) return null
 
   return (
-    <section className="py-14 bg-gray-50">
+    <section className="py-20 sm:py-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">Featured Pet Services</h2>
-            <p className="text-sm text-gray-500 mt-1">Promoted by local pet businesses</p>
-          </div>
-          <Link
-            to="/search"
-            className="text-sm font-semibold text-blue-700 hover:text-blue-900 transition-colors hidden sm:block"
-          >
-            Browse all →
-          </Link>
+        <div className="mb-12">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900">
+            Featured providers
+          </h2>
+          <p className="mt-3 text-gray-500 text-lg">Promoted by local pet businesses</p>
         </div>
 
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden animate-pulse shadow-sm">
-                <div className="h-52 bg-gray-200" />
+              <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden animate-pulse">
+                <div className="h-52 bg-gray-100" />
                 <div className="p-5 space-y-3">
-                  <div className="h-4 bg-gray-200 rounded w-3/4" />
-                  <div className="h-3 bg-gray-200 rounded w-1/2" />
-                  <div className="h-8 bg-gray-200 rounded w-full mt-4" />
+                  <div className="h-4 bg-gray-100 rounded w-3/4" />
+                  <div className="h-3 bg-gray-100 rounded w-1/2" />
                 </div>
               </div>
             ))}
@@ -83,12 +61,16 @@ export function FeaturedProviders() {
               const img = getProviderImage(provider.hero_image, provider.category, provider.slug)
               const categoryMeta = CATEGORIES.find(c => c.slug === provider.category)
               return (
-                <div key={provider.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <Link
+                  key={provider.id}
+                  to={`/provider/${provider.slug}`}
+                  className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-200"
+                >
                   <div className="h-52 overflow-hidden bg-gray-100">
                     <img
                       src={img}
                       alt={provider.business_name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                       loading="lazy"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80&fit=crop'
@@ -96,27 +78,33 @@ export function FeaturedProviders() {
                     />
                   </div>
                   <div className="p-5">
-                    <div className="flex items-start justify-between gap-2 mb-1">
-                      <h3 className="font-bold text-gray-900 text-base leading-tight">{provider.business_name}</h3>
-                      <Shield className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" aria-label="Featured listing" />
+                    <div className="flex items-center gap-2 mb-2">
+                      <BadgeCheck className="w-4 h-4 text-emerald-600" />
+                      <span className="text-xs font-medium text-emerald-700 uppercase tracking-wide">Featured</span>
                     </div>
-                    <p className="text-sm text-gray-500 mb-3">
-                      {categoryMeta?.label ?? provider.category} · {provider.city}, {provider.state}
+                    <h3 className="font-semibold text-gray-900 text-base leading-snug group-hover:text-emerald-700 transition-colors">
+                      {provider.business_name}
+                    </h3>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {categoryMeta?.label ?? provider.category} in {provider.city}, {provider.state}
                     </p>
                     {provider.rating !== null && (
-                      <div className="flex items-center gap-2 mb-4">
-                        <StarRating rating={provider.rating} />
-                        <span className="text-sm text-gray-500">({provider.review_count.toLocaleString()} reviews)</span>
+                      <div className="flex items-center gap-2 mt-3">
+                        <div className="flex items-center gap-0.5">
+                          {[1, 2, 3, 4, 5].map(i => (
+                            <Star
+                              key={i}
+                              className={`w-3.5 h-3.5 ${i <= Math.round(provider.rating!) ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200'}`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-500">
+                          ({provider.review_count.toLocaleString()})
+                        </span>
                       </div>
                     )}
-                    <Link
-                      to={`/provider/${provider.slug}`}
-                      className="block w-full text-center py-2.5 bg-blue-700 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors"
-                    >
-                      View Profile
-                    </Link>
                   </div>
-                </div>
+                </Link>
               )
             })}
           </div>
