@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
-import { Star, MapPin, CheckCircle } from 'lucide-react'
+import { Star, MapPin, CheckCircle, ArrowRight } from 'lucide-react'
 import type { Provider } from '@/types'
 import { getProviderImage } from '@/lib/images'
 import { CATEGORIES } from '@/lib/constants'
@@ -42,29 +42,32 @@ export function TopRatedProviders() {
   if (!isLoading && providers.length === 0) return null
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-20 sm:py-24 bg-stone-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex items-end justify-between mb-12">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Top Rated Near You</h2>
-            <p className="text-sm text-gray-500 mt-1">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900">
+              Top rated providers
+            </h2>
+            <p className="mt-3 text-gray-500 text-lg">
               Highest-reviewed pet services across our directory
             </p>
           </div>
           <Link
             to="/search"
-            className="text-sm font-semibold text-blue-700 hover:text-blue-900 transition-colors hidden sm:block"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
           >
-            View all listings →
+            View all
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="bg-white rounded-xl border border-gray-200 overflow-hidden animate-pulse">
-                <div className="h-44 bg-gray-100" />
-                <div className="p-4 space-y-2">
+              <div key={i} className="bg-white rounded-2xl overflow-hidden animate-pulse">
+                <div className="h-48 bg-gray-100" />
+                <div className="p-5 space-y-3">
                   <div className="h-4 bg-gray-100 rounded w-3/4" />
                   <div className="h-3 bg-gray-100 rounded w-1/2" />
                 </div>
@@ -72,7 +75,7 @@ export function TopRatedProviders() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {providers.map(provider => {
               const img = getProviderImage(provider.hero_image, provider.category, provider.slug)
               const categoryMeta = CATEGORIES.find(c => c.slug === provider.category)
@@ -80,30 +83,35 @@ export function TopRatedProviders() {
                 <Link
                   key={provider.id}
                   to={`/provider/${provider.slug}`}
-                  className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all"
+                  className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200"
                 >
-                  <div className="h-44 overflow-hidden bg-gray-100 relative">
+                  <div className="h-48 overflow-hidden bg-gray-100 relative">
                     <img
                       src={img}
                       alt={provider.business_name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                       loading="lazy"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80&fit=crop'
                       }}
                     />
                     {provider.verified && (
-                      <div className="absolute top-3 left-3 flex items-center gap-1 bg-white/90 backdrop-blur-sm text-green-700 text-xs font-semibold px-2 py-1 rounded-full">
-                        <CheckCircle className="w-3 h-3" />
+                      <div className="absolute top-3 left-3 flex items-center gap-1 bg-white/95 backdrop-blur-sm text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
+                        <CheckCircle className="w-3.5 h-3.5" />
                         Verified
                       </div>
                     )}
                   </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-gray-900 text-sm leading-tight group-hover:text-blue-700 transition-colors">
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                        {categoryMeta?.label ?? provider.category}
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-gray-900 text-base leading-snug group-hover:text-emerald-700 transition-colors">
                       {provider.business_name}
                     </h3>
-                    <div className="flex items-center gap-1.5 mt-1.5">
+                    <div className="flex items-center gap-2 mt-2">
                       <div className="flex items-center gap-0.5">
                         {[1, 2, 3, 4, 5].map(i => (
                           <Star
@@ -112,17 +120,13 @@ export function TopRatedProviders() {
                           />
                         ))}
                       </div>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-sm text-gray-500">
                         {provider.rating} ({provider.review_count.toLocaleString()})
                       </span>
                     </div>
-                    <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />
-                        {provider.city}, {provider.state}
-                      </span>
-                      <span className="text-gray-300">|</span>
-                      <span>{categoryMeta?.label ?? provider.category}</span>
+                    <div className="flex items-center gap-1 mt-3 text-sm text-gray-500">
+                      <MapPin className="w-3.5 h-3.5 text-gray-400" />
+                      {provider.city}, {provider.state}
                     </div>
                   </div>
                 </Link>
@@ -131,12 +135,13 @@ export function TopRatedProviders() {
           </div>
         )}
 
-        <div className="mt-6 text-center sm:hidden">
+        <div className="mt-8 text-center sm:hidden">
           <Link
             to="/search"
-            className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-700"
           >
-            View all listings →
+            View all listings
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
