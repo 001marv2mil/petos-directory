@@ -1,13 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { createClient } from '@supabase/supabase-js'
+import { isAdminEmail } from '../../src/lib/admin'
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
   { auth: { persistSession: false } },
 )
-
-const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'malak@petosdirectory.com']
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' })
@@ -18,7 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const token = authHeader.slice(7)
   const { data: userData, error: authError } = await supabase.auth.getUser(token)
   if (authError || !userData.user) return res.status(401).json({ error: 'Invalid token' })
-  if (!ADMIN_EMAILS.includes(userData.user.email?.toLowerCase() ?? '')) {
+  if (!isAdminEmail(userData.user.email)) {
     return res.status(403).json({ error: 'Not an admin' })
   }
 

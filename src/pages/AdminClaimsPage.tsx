@@ -3,10 +3,8 @@ import { Link, Navigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import { PageMeta } from '@/components/common/PageMeta'
+import { isAdminEmail } from '@/lib/admin'
 import { Check, X, Shield, Mail, Phone, Calendar, ChevronDown } from 'lucide-react'
-
-// Admin emails — only these can access this page
-const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'malak@petosdirectory.com']
 
 interface ClaimWithProvider {
   id: string
@@ -57,7 +55,7 @@ export default function AdminClaimsPage() {
   const [expandedClaim, setExpandedClaim] = useState<string | null>(null)
   const [edits, setEdits] = useState<Record<string, ProviderEdits>>({})
 
-  const isAdmin = user && ADMIN_EMAILS.includes(user.email?.toLowerCase() ?? '')
+  const isAdmin = isAdminEmail(user?.email)
 
   useEffect(() => {
     if (!isAdmin) return

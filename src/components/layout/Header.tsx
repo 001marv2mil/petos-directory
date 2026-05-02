@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { PawPrint, AlertCircle, LogOut, User, Briefcase } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { PawPrint, AlertCircle, LogOut, User, Briefcase, ChevronDown, Shield } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
-
-const ADMIN_EMAILS = ['petosdirectory@gmail.com', '001marv2mil@gmail.com', 'malak@petosdirectory.com']
+import { isAdminEmail } from '@/lib/admin'
 
 export function Header() {
   const { user, signOut, openModal } = useAuth()
   const [ownsBusinesses, setOwnsBusinesses] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!user?.email) { setOwnsBusinesses(false); return }
@@ -23,7 +24,32 @@ export function Header() {
     return () => { cancelled = true }
   }, [user?.email])
 
-  const isAdmin = user && ADMIN_EMAILS.includes(user.email?.toLowerCase() ?? '')
+  // Close menu on outside click
+  useEffect(() => {
+    if (!menuOpen) return
+    function handleClick(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [menuOpen])
+
+  // Close menu on Escape
+  useEffect(() => {
+    if (!menuOpen) return
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [menuOpen])
+
+  const isAdmin = isAdminEmail(user?.email)
+  const initials = user?.email
+    ? user.email.split('@')[0].slice(0, 2).toUpperCase()
+    : ''
 
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
@@ -54,38 +80,82 @@ export function Header() {
           <div className="flex items-center gap-2">
             {/* Auth */}
             {user ? (
-              <div className="flex items-center gap-2">
-                {ownsBusinesses && (
-                  <Link
-                    to="/dashboard"
-                    className="hidden sm:flex items-center gap-1.5 text-xs text-blue-700 hover:text-blue-900 font-semibold px-3 py-2 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors"
-                  >
-                    <Briefcase className="w-3.5 h-3.5" />
-                    Business Dashboard
-                  </Link>
-                )}
-                {isAdmin && (
-                  <Link
-                    to="/admin/claims"
-                    className="hidden sm:flex items-center gap-1.5 text-xs text-amber-700 hover:text-amber-900 font-semibold px-3 py-2 border border-amber-200 rounded-lg hover:bg-amber-50 transition-colors"
-                  >
-                    Admin
-                  </Link>
-                )}
-                <Link
-                  to="/account"
-                  className="hidden sm:flex items-center gap-1.5 text-xs text-gray-500 hover:text-blue-700 transition-colors font-medium"
-                >
-                  <User className="w-3.5 h-3.5" />
-                  {user.email?.split('@')[0]}
-                </Link>
+              <div className="relative" ref={menuRef}>
+                {/* Avatar trigger button */}
                 <button
-                  onClick={() => signOut()}
-                  className="flex items-center gap-1.5 px-3 py-2 text-xs text-gray-500 hover:text-gray-800 border border-gray-200 rounded-lg transition-colors"
+                  onClick={() => setMenuOpen(o => !o)}
+                  aria-haspopup="menu"
+                  aria-expanded={menuOpen}
+                  className="flex items-center gap-2 p-1 pr-2 rounded-full hover:bg-gray-100 transition-colors"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Sign out</span>
+                  <div className="w-8 h-8 rounded-full bg-blue-700 text-white text-xs font-bold flex items-center justify-center shrink-0">
+                    {initials}
+                  </div>
+                  <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${menuOpen ? 'rotate-180' : ''}`} />
                 </button>
+
+                {/* Dropdown menu */}
+                {menuOpen && (
+                  <div
+                    role="menu"
+                    className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
+                  >
+                    {/* Identity header */}
+                    <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
+                      <p className="text-xs text-gray-500">Signed in as</p>
+                      <p className="text-sm font-semibold text-gray-900 truncate">{user.email}</p>
+                    </div>
+
+                    {/* Menu items */}
+                    <div className="py-1">
+                      <Link
+                        to="/account"
+                        onClick={() => setMenuOpen(false)}
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        role="menuitem"
+                      >
+                        <User className="w-4 h-4 text-gray-400" />
+                        Your account
+                      </Link>
+
+                      {ownsBusinesses && (
+                        <Link
+                          to="/dashboard"
+                          onClick={() => setMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                          role="menuitem"
+                        >
+                          <Briefcase className="w-4 h-4 text-gray-400" />
+                          Business dashboard
+                        </Link>
+                      )}
+
+                      {isAdmin && (
+                        <Link
+                          to="/admin/dashboard"
+                          onClick={() => setMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-amber-700 hover:bg-amber-50 transition-colors"
+                          role="menuitem"
+                        >
+                          <Shield className="w-4 h-4 text-amber-500" />
+                          Admin
+                        </Link>
+                      )}
+                    </div>
+
+                    {/* Sign out — separated by border */}
+                    <div className="border-t border-gray-100 py-1">
+                      <button
+                        onClick={() => { setMenuOpen(false); signOut() }}
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors w-full text-left"
+                        role="menuitem"
+                      >
+                        <LogOut className="w-4 h-4 text-gray-400" />
+                        Sign out
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <button
