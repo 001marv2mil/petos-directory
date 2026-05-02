@@ -1,8 +1,7 @@
 /**
  * Lead-magnet content map.
  * One magnet per provider category. Each is a useful, branded
- * checklist that gets delivered to the user's email after signup
- * and bridges to PetOS Health at the bottom.
+ * checklist that gets delivered to the user's email after signup.
  *
  * Used by:
  *   - <CategoryLeadMagnet /> (renders the on-page card)

@@ -9,7 +9,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
 )
 
-const ADMIN_EMAIL = 'info@petoshealth.com'
+const ADMIN_EMAIL = 'info@petosdirectory.com'
 const FROM_EMAIL = 'PetOS Directory <noreply@petosdirectory.com>'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

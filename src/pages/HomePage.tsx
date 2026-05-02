@@ -1,7 +1,8 @@
 import { HeroSection } from '@/components/home/HeroSection'
 import { CategoryGrid } from '@/components/home/CategoryGrid'
+import { TopRatedProviders } from '@/components/home/TopRatedProviders'
 import { FeaturedProviders } from '@/components/home/FeaturedProviders'
-import { PetOSHealthBanner } from '@/components/home/PetOSHealthBanner'
+
 import { EmergencyCTA } from '@/components/home/EmergencyCTA'
 import { PageMeta } from '@/components/common/PageMeta'
 import { WebSiteJsonLd } from '@/components/common/JsonLd'
@@ -17,16 +18,11 @@ export default function HomePage() {
       />
       <WebSiteJsonLd />
       <HeroSection />
-      {/* Category discovery — core value prop, first thing after hero */}
       <CategoryGrid />
-      {/* Top-rated listings — give users something concrete to click */}
+      <TopRatedProviders />
       <FeaturedProviders />
-      {/* Emergency CTA — high urgency, high conversion */}
       <EmergencyCTA />
-      {/* Recently viewed — only renders if user has history */}
       <RecentlyViewed />
-      {/* Cross-sell to PetOS Health — after core value delivered */}
-      <PetOSHealthBanner />
     </div>
   )
 }

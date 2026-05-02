@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PawPrint, Plus, Trash2, ExternalLink } from 'lucide-react'
+import { PawPrint, Plus, Trash2 } from 'lucide-react'
 import { usePets } from '@/hooks/usePets'
 import { useAuth } from '@/context/AuthContext'
 
@@ -36,12 +36,6 @@ export function MyPets() {
     }
   }
 
-  const petNames = pets.map(p => p.name)
-  const petosHealthUrl = pets.length > 0
-    ? `https://petoshealth.com/onboard?` + pets.map((p, i) =>
-        `pet${i}_name=${encodeURIComponent(p.name)}&pet${i}_type=${encodeURIComponent(p.type)}${p.breed ? `&pet${i}_breed=${encodeURIComponent(p.breed)}` : ''}${p.birthday ? `&pet${i}_birthday=${encodeURIComponent(p.birthday)}` : ''}`
-      ).join('&') + `&source=petos_directory&email=${encodeURIComponent(user?.email ?? '')}`
-    : 'https://petoshealth.com'
 
   return (
     <div className="space-y-5">
@@ -168,30 +162,6 @@ export function MyPets() {
         </form>
       )}
 
-      {/* PetOS Health upsell — only shows when they have at least one pet */}
-      {pets.length > 0 && (
-        <a
-          href={petosHealthUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-4 p-4 bg-blue-50 border border-blue-100 rounded-xl hover:border-blue-300 hover:bg-blue-100 transition-colors group"
-        >
-          <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shrink-0">
-            <PawPrint className="w-5 h-5 text-white" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-bold text-blue-900 text-sm">
-              {pets.length === 1
-                ? `${pets[0].name} is ready on PetOS Health`
-                : `${petNames.slice(0, -1).join(', ')} & ${petNames[petNames.length - 1]} are ready on PetOS Health`}
-            </p>
-            <p className="text-xs text-blue-600 mt-0.5">
-              Track vet visits, vaccines & health records — no re-adding needed
-            </p>
-          </div>
-          <ExternalLink className="w-4 h-4 text-blue-400 group-hover:text-blue-600 shrink-0 transition-colors" />
-        </a>
-      )}
     </div>
   )
 }

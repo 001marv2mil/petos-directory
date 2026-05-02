@@ -13,7 +13,7 @@ const resend = new Resend(process.env.RESEND_API_KEY!)
 
 const SITE = 'https://petosdirectory.com'
 const FROM = 'Malak from PetOS Directory <malak@petosdirectory.com>'
-const REPLY_TO = 'info@petoshealth.com'
+const REPLY_TO = 'info@petosdirectory.com'
 const BATCH_PER_EMAIL = 100 // per email number per run (was 50 — doubled Apr 23 to shorten pool runway)
 const DELAY_MS = 500
 const FEATURED_URL = 'https://buy.stripe.com/fZu00jeJLblfecd4tg04802'

@@ -8,7 +8,7 @@
  *   emergency card, grooming calendar, etc.)
  * - Saves email to newsletter_signups (source='lead_magnet:<category>')
  * - Sends the magnet content to the user via Resend
- * - Bridges to PetOS Health at the bottom of every email
+ * - Sends helpful content directly via email
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { createClient } from '@supabase/supabase-js'
@@ -23,9 +23,8 @@ const supabase = createClient(
 const resend = new Resend(process.env.RESEND_API_KEY!)
 
 const SITE = 'https://petosdirectory.com'
-const HEALTH = 'https://petoshealth.com'
 const FROM = 'PetOS Directory <malak@petosdirectory.com>'
-const REPLY_TO = 'support@petoshealth.com'
+const REPLY_TO = 'info@petosdirectory.com'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -128,15 +127,6 @@ function renderEmail(magnet: Magnet, ctx: EmailContext): string {
   <p style="font-size:15px;line-height:1.65;color:#374151;margin:0 0 8px 0;">${escape(magnet.emailIntro)}</p>
 
   ${sectionsHtml}
-
-  <div style="margin-top:32px;padding:20px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;">
-    <div style="font-size:11px;color:#1d4ed8;font-weight:700;letter-spacing:1.5px;">WANT THIS AUTOMATED?</div>
-    <h3 style="font-size:18px;color:#111;margin:6px 0 8px 0;font-weight:700;">PetOS Health does this for every visit, every pet.</h3>
-    <p style="font-size:14px;line-height:1.6;color:#1e3a8a;margin:0 0 12px 0;">
-      Track vaccines, store records, schedule vet visits, get AI symptom checks, and never lose a piece of your pet's health history again. All in one app.
-    </p>
-    <a href="${HEALTH}" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:10px 18px;border-radius:8px;">Try PetOS Health free →</a>
-  </div>
 
   <p style="font-size:13px;color:#9ca3af;margin-top:28px;border-top:1px solid #e5e7eb;padding-top:16px;line-height:1.6;">
     Browse the full directory: <a href="${SITE}" style="color:#2563eb;">petosdirectory.com</a><br/>

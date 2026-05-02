@@ -193,7 +193,7 @@ export function AuthModal() {
                 <a href="/privacy" className="underline hover:text-gray-600">Privacy Policy</a>
                 {' '}and{' '}
                 <a href="/terms" className="underline hover:text-gray-600">Terms of Service</a>.
-                We may send you updates about pet care and PetOS Health.
+                We may send you updates about pet care.
               </p>
             </form>
           )}
