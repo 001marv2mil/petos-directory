@@ -3,13 +3,13 @@ import { CATEGORIES } from '@/lib/constants'
 import type { CategorySlug } from '@/types'
 
 const CATEGORY_IMAGES: Record<CategorySlug, string> = {
-  veterinarians: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80&fit=crop',
-  emergency_vets: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&q=80&fit=crop',
-  groomers: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=80&fit=crop',
-  boarding: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=80&fit=crop',
-  daycare: 'https://images.unsplash.com/photo-1560743641-3914f2c45636?w=400&q=80&fit=crop',
-  trainers: 'https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=400&q=80&fit=crop',
-  pet_pharmacies: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80&fit=crop',
+  veterinarians: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80&fit=crop',
+  emergency_vets: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80&fit=crop',
+  groomers: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=400&q=80&fit=crop',
+  boarding: 'https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=400&q=80&fit=crop',
+  daycare: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=80&fit=crop',
+  trainers: 'https://images.unsplash.com/photo-1546421845-6471bdcf3edf?w=400&q=80&fit=crop',
+  pet_pharmacies: 'https://images.unsplash.com/photo-1583947581924-860bda6a26df?w=400&q=80&fit=crop',
 }
 
 const CATEGORY_LABELS: Record<CategorySlug, string> = {
