@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { PawPrint, Plus, Trash2 } from 'lucide-react'
 import { usePets } from '@/hooks/usePets'
-import { useAuth } from '@/context/AuthContext'
 
 const PET_TYPES = ['Dog', 'Cat', 'Bird', 'Rabbit', 'Reptile', 'Other']
 
@@ -11,7 +10,6 @@ const PET_EMOJI: Record<string, string> = {
 
 export function MyPets() {
   const { pets, loading, addPet, deletePet } = usePets()
-  const { user } = useAuth()
   const [showForm, setShowForm] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({ name: '', type: 'Dog', breed: '', birthday: '' })
