@@ -21,7 +21,7 @@ const resend = new Resend(process.env.RESEND_API_KEY!)
 
 const SITE = 'https://petosdirectory.com'
 const FROM = 'PetOS Directory <malak@petosdirectory.com>'
-const REPLY_TO = 'support@petoshealth.com'
+const REPLY_TO = 'info@petosdirectory.com'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*')

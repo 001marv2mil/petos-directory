@@ -17,10 +17,9 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Who We Are</h2>
           <p className="text-gray-600 leading-relaxed">
-            PetOS Directory (<strong>petosdirectory.com</strong>) is a pet care discovery platform
-            operated by PetOS Health. We help pet owners find local veterinarians, groomers,
-            boarding facilities, and other pet care providers. Our parent company and data
-            controller is PetOS Health (<strong>petoshealth.com</strong>).
+            PetOS Directory (<strong>petosdirectory.com</strong>) is a pet care discovery platform.
+            We help pet owners find local veterinarians, groomers, boarding facilities,
+            and other pet care providers.
           </p>
         </section>
 
@@ -60,7 +59,7 @@ export default function PrivacyPage() {
             <li>To create and manage your account</li>
             <li>To send you city and category alerts you subscribe to</li>
             <li>To improve our directory listings and search results</li>
-            <li>To send you updates about PetOS Directory and PetOS Health products and services</li>
+            <li>To send you updates about PetOS Directory products and services</li>
             <li>To analyze usage patterns and improve site performance</li>
             <li>To comply with legal obligations</li>
           </ul>
@@ -70,7 +69,7 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-semibold text-gray-900 mb-3">4. Email Communications</h2>
           <p className="text-gray-600 leading-relaxed">
             By creating an account or signing up for alerts, you agree to receive emails from
-            PetOS Directory and PetOS Health. These may include new listing notifications, product
+            PetOS Directory. These may include new listing notifications, product
             updates, and occasional promotional offers. You can unsubscribe at any time by clicking
             the unsubscribe link in any email or contacting us directly.
           </p>
@@ -83,7 +82,6 @@ export default function PrivacyPage() {
           </p>
           <ul className="list-disc list-inside text-gray-600 space-y-2">
             <li><strong>Supabase</strong> — our database and authentication provider (data stored in the US)</li>
-            <li><strong>PetOS Health</strong> — our parent company, for product development and marketing purposes</li>
             <li><strong>Analytics providers</strong> — in aggregated, anonymized form only</li>
             <li><strong>Law enforcement</strong> — when required by applicable law</li>
           </ul>
@@ -111,7 +109,7 @@ export default function PrivacyPage() {
             <li>Data portability (receive your data in a structured format)</li>
           </ul>
           <p className="text-gray-600 mt-3">
-            To exercise these rights, email us at <strong>privacy@petoshealth.com</strong>.
+            To exercise these rights, email us at <strong>privacy@petosdirectory.com</strong>.
           </p>
         </section>
 
@@ -148,9 +146,9 @@ export default function PrivacyPage() {
             Questions about this privacy policy or how we handle your data?
           </p>
           <address className="not-italic mt-2 text-gray-600 space-y-1">
-            <p><strong>PetOS Health</strong></p>
-            <p>Email: <a href="mailto:privacy@petoshealth.com" className="text-blue-600 hover:text-blue-800">privacy@petoshealth.com</a></p>
-            <p>Website: <a href="https://petoshealth.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">petoshealth.com</a></p>
+            <p><strong>PetOS Directory</strong></p>
+            <p>Email: <a href="mailto:privacy@petosdirectory.com" className="text-blue-600 hover:text-blue-800">privacy@petosdirectory.com</a></p>
+            <p>Website: <a href="https://petosdirectory.com" className="text-blue-600 hover:text-blue-800">petosdirectory.com</a></p>
           </address>
         </section>
 

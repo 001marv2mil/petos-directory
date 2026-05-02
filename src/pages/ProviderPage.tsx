@@ -573,25 +573,6 @@ export default function ProviderPage() {
             {/* Newsletter signup — dynamic based on city */}
             <NewsletterSignup city={provider.city} state={provider.state} category={categoryMeta?.pluralLabel} />
 
-            {/* PetOS Health upsell — always visible */}
-            <div className="border-t border-gray-100 px-5 py-4">
-              <a
-                href="https://petoshealth.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col gap-1.5 p-3.5 rounded-xl bg-blue-50 border border-blue-100 hover:border-blue-300 hover:bg-blue-100 transition-colors group"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-blue-700 uppercase tracking-wide">PetOS Health</span>
-                  <svg className="w-3.5 h-3.5 text-blue-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-                <p className="text-xs text-blue-600 leading-snug">
-                  Found your vet? Track visits &amp; health records →
-                </p>
-              </a>
-            </div>
           </div>
         </div>
       </div>

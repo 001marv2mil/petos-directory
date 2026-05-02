@@ -2,7 +2,7 @@ import { HeroSection } from '@/components/home/HeroSection'
 import { CategoryGrid } from '@/components/home/CategoryGrid'
 import { TopRatedProviders } from '@/components/home/TopRatedProviders'
 import { FeaturedProviders } from '@/components/home/FeaturedProviders'
-import { PetOSHealthBanner } from '@/components/home/PetOSHealthBanner'
+
 import { EmergencyCTA } from '@/components/home/EmergencyCTA'
 import { PageMeta } from '@/components/common/PageMeta'
 import { WebSiteJsonLd } from '@/components/common/JsonLd'
@@ -23,7 +23,6 @@ export default function HomePage() {
       <FeaturedProviders />
       <EmergencyCTA />
       <RecentlyViewed />
-      <PetOSHealthBanner />
     </div>
   )
 }

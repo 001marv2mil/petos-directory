@@ -84,7 +84,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     await resend.emails.send({
       from: 'Malak from PetOS Directory <malak@petosdirectory.com>',
-      replyTo: 'info@petoshealth.com',
+      replyTo: 'info@petosdirectory.com',
       to: claim.owner_email,
       subject: `${claim.business_name} — your listing is approved`,
       html: `
