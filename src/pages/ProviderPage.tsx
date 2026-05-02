@@ -16,6 +16,8 @@ import { useFavorite } from '@/hooks/useFavorite'
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed'
 import { trackEvent } from '@/lib/track'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
+import { CategoryLeadMagnet } from '@/components/leadmagnets/CategoryLeadMagnet'
+import { CategoryGuide } from '@/components/providers/CategoryGuide'
 import type { CategorySlug } from '@/types'
 import {
   Star, Phone, Globe, MapPin, Shield, AlertCircle,
@@ -273,6 +275,15 @@ export default function ProviderPage() {
             </div>
           </div>
 
+          {/* Category-specific lead magnet (Vet Visit Prep, Emergency Card, Grooming Calendar, etc.) */}
+          <CategoryLeadMagnet
+            category={provider.category}
+            providerSlug={provider.slug}
+            providerName={provider.business_name}
+            city={provider.city}
+            state={provider.state}
+          />
+
           {/* About */}
           {provider.description && (
             <div>
@@ -334,6 +345,20 @@ export default function ProviderPage() {
           </div>
 
           <NearbyProviders providers={nearby} />
+
+          {/* Category guide + FAQs + related searches — adds ~500 words of unique
+              content per page so Google has more to index. Includes FAQ schema.org
+              JSON-LD for FAQ rich snippets in search results. */}
+          {categoryMeta && (
+            <CategoryGuide
+              category={provider.category}
+              city={provider.city}
+              state={provider.state}
+              stateSlug={cityMeta?.stateSlug}
+              citySlug={cityMeta?.citySlug}
+              categoryLabel={categoryMeta.pluralLabel}
+            />
+          )}
 
           {/* Share this business */}
           <div className="border-t border-gray-100 pt-6">
