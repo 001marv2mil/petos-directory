@@ -6,7 +6,6 @@ import { FeaturedProviders } from '@/components/home/FeaturedProviders'
 import { EmergencyCTA } from '@/components/home/EmergencyCTA'
 import { PageMeta } from '@/components/common/PageMeta'
 import { WebSiteJsonLd } from '@/components/common/JsonLd'
-import { RecentlyViewed } from '@/components/common/RecentlyViewed'
 
 export default function HomePage() {
   return (
@@ -23,7 +22,6 @@ export default function HomePage() {
       <TopRatedProviders />
       <FeaturedProviders />
       <EmergencyCTA />
-      <RecentlyViewed />
     </div>
   )
 }
