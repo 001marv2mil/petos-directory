@@ -1,6 +1,16 @@
+import { useMemo } from 'react'
 import { SearchBar } from '@/components/search/SearchBar'
 
+const HERO_VIDEOS = [
+  'https://videos.pexels.com/video-files/6235737/6235737-uhd_2560_1440_25fps.mp4',
+  'https://videos.pexels.com/video-files/11247812/11247812-uhd_2560_1440_24fps.mp4',
+  'https://videos.pexels.com/video-files/6816877/6816877-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/6235190/6235190-uhd_2560_1440_25fps.mp4',
+]
+
 export function HeroSection() {
+  const videoSrc = useMemo(() => HERO_VIDEOS[Math.floor(Math.random() * HERO_VIDEOS.length)], [])
+
   return (
     <section className="relative overflow-hidden min-h-[600px] flex items-center">
       <div className="absolute inset-0">
@@ -11,10 +21,8 @@ export function HeroSection() {
           playsInline
           className="w-full h-full object-cover"
           poster="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=1600&q=80&fit=crop"
-        >
-          <source src="https://videos.pexels.com/video-files/6235737/6235737-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-          <source src="https://videos.pexels.com/video-files/11247812/11247812-uhd_2560_1440_24fps.mp4" type="video/mp4" />
-        </video>
+          src={videoSrc}
+        />
         <div className="absolute inset-0 bg-gray-900/65" />
       </div>
 

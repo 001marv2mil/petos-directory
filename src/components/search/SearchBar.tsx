@@ -190,7 +190,7 @@ export function SearchBar({
 
   // Hero variant
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-4 w-full max-w-3xl mx-auto">
+    <form onSubmit={handleSubmit} className="bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl p-4 w-full max-w-3xl mx-auto">
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <select
