@@ -12,8 +12,8 @@ export function HeroSection() {
           className="w-full h-full object-cover"
           poster="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=1600&q=80&fit=crop"
         >
-          <source src="https://videos.pexels.com/video-files/32521679/13868705_2560_1440_24fps.mp4" type="video/mp4" />
-          <source src="https://videos.pexels.com/video-files/37180939/15750626_2560_1440_24fps.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/6235737/6235737-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/11247812/11247812-uhd_2560_1440_24fps.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gray-900/65" />
       </div>
