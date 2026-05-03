@@ -2,10 +2,10 @@ import { useCallback, useRef, useState } from 'react'
 import { SearchBar } from '@/components/search/SearchBar'
 
 const HERO_VIDEOS = [
-  'https://videos.pexels.com/video-files/6235737/6235737-uhd_2560_1440_25fps.mp4',
-  'https://videos.pexels.com/video-files/11247812/11247812-uhd_2560_1440_24fps.mp4',
-  'https://videos.pexels.com/video-files/6816877/6816877-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/6235190/6235190-uhd_2560_1440_25fps.mp4',
+  'https://videos.pexels.com/video-files/6235178/6235178-uhd_2560_1440_25fps.mp4',
+  'https://videos.pexels.com/video-files/6235740/6235740-uhd_2560_1440_25fps.mp4',
+  'https://videos.pexels.com/video-files/6235750/6235750-uhd_2560_1440_25fps.mp4',
+  'https://videos.pexels.com/video-files/6235739/6235739-uhd_2560_1440_25fps.mp4',
 ]
 
 export function HeroSection() {
