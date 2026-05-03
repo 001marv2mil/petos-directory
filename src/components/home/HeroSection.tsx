@@ -12,6 +12,7 @@ export function HeroSection() {
           className="w-full h-full object-cover"
           poster="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=1600&q=80&fit=crop"
         >
+          <source src="https://cdn.pixabay.com/video/2023/06/22/168345-838892846_large.mp4" type="video/mp4" />
           <source src="https://videos.pexels.com/video-files/6235806/6235806-uhd_2560_1440_25fps.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gray-900/65" />
