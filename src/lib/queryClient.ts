@@ -1,4 +1,4 @@
-import { QueryClient } from '@tanstack/react-query'
+import { QueryClient, hydrate } from '@tanstack/react-query'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -9,3 +9,9 @@ export const queryClient = new QueryClient({
     },
   },
 })
+
+// Hydrate from SSR-dehydrated state if available
+if (typeof window !== 'undefined' && (window as any).__REACT_QUERY_STATE__) {
+  hydrate(queryClient, (window as any).__REACT_QUERY_STATE__)
+  delete (window as any).__REACT_QUERY_STATE__
+}

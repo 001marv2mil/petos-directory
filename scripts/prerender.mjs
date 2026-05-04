@@ -2,8 +2,8 @@
  * Static pre-render script for PetOS Directory.
  *
  * Run after both Vite builds:
- *   1. vite build               → dist/
- *   2. vite build --config vite.ssr.config.ts  → ssr-build/
+ *   1. vite build               -> dist/
+ *   2. vite build --config vite.ssr.config.ts  -> ssr-build/
  *   3. node scripts/prerender.mjs
  *
  * For every route listed below the script renders the React tree to HTML
@@ -11,6 +11,10 @@
  * Helmet <head> tags and the body HTML into the dist/index.html template,
  * then writes dist/[route]/index.html so Google sees real content
  * immediately without waiting for JS.
+ *
+ * Category pages (/:state/:city/:category) now pre-fetch provider data
+ * from Supabase so the HTML includes real listings instead of loading
+ * skeletons. This is critical for SEO -- Google needs to see content.
  */
 
 import fs from 'node:fs'
@@ -22,10 +26,12 @@ const root = path.resolve(__dirname, '..')
 const distDir = path.join(root, 'dist')
 const ssrBuildDir = path.join(root, 'ssr-build')
 
+// ── Supabase config ──────────────────────────────────────────────────────────
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL
+const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY
+const HAS_SUPABASE = !!(SUPABASE_URL && SUPABASE_ANON_KEY)
+
 // ── Routes to pre-render ─────────────────────────────────────────────────────
-// Keep this list focused on high-value SEO pages.
-// Provider pages (/provider/:slug) are intentionally excluded — there can be
-// thousands and they are indexed fine via Google's JS rendering + sitemap.
 
 const STATIC_ROUTES = [
   '/',
@@ -43,117 +49,66 @@ const STATES = [
   'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy',
 ]
 
-// All cities per state: [stateSlug, citySlug] — mirrors src/lib/constants.ts CITIES
+// All cities per state: [stateSlug, citySlug]
 const CITIES = [
-  // Alabama
   ['al', 'birmingham'],     ['al', 'huntsville'],
-  // Alaska
   ['ak', 'anchorage'],
-  // Arizona
   ['az', 'phoenix'],        ['az', 'scottsdale'],     ['az', 'tucson'],
-  // Arkansas
   ['ar', 'little-rock'],    ['ar', 'fayetteville'],
-  // California
   ['ca', 'los-angeles'],    ['ca', 'san-diego'],      ['ca', 'san-francisco'],
   ['ca', 'sacramento'],     ['ca', 'san-jose'],
-  // Colorado
   ['co', 'denver'],         ['co', 'colorado-springs'], ['co', 'boulder'],
-  // Connecticut
   ['ct', 'hartford'],       ['ct', 'stamford'],
-  // Delaware
   ['de', 'wilmington'],
-  // Florida
   ['fl', 'tampa'],          ['fl', 'st-petersburg'],  ['fl', 'clearwater'],
   ['fl', 'orlando'],        ['fl', 'miami'],           ['fl', 'jacksonville'],
   ['fl', 'fort-lauderdale'], ['fl', 'sarasota'],       ['fl', 'brandon'],
-  // Georgia
   ['ga', 'atlanta'],        ['ga', 'savannah'],        ['ga', 'augusta'],
-  // Hawaii
   ['hi', 'honolulu'],
-  // Idaho
   ['id', 'boise'],
-  // Illinois
   ['il', 'chicago'],        ['il', 'naperville'],
-  // Indiana
   ['in', 'indianapolis'],   ['in', 'fort-wayne'],
-  // Iowa
   ['ia', 'des-moines'],     ['ia', 'cedar-rapids'],
-  // Kansas
   ['ks', 'wichita'],        ['ks', 'overland-park'],
-  // Kentucky
   ['ky', 'louisville'],     ['ky', 'lexington'],
-  // Louisiana
   ['la', 'new-orleans'],    ['la', 'baton-rouge'],
-  // Maine
   ['me', 'portland'],
-  // Maryland
   ['md', 'baltimore'],      ['md', 'rockville'],
-  // Massachusetts
   ['ma', 'boston'],         ['ma', 'worcester'],
-  // Michigan
   ['mi', 'detroit'],        ['mi', 'grand-rapids'],
-  // Minnesota
   ['mn', 'minneapolis'],    ['mn', 'st-paul'],
-  // Mississippi
   ['ms', 'jackson'],
-  // Missouri
   ['mo', 'kansas-city'],    ['mo', 'st-louis'],
-  // Montana
   ['mt', 'billings'],       ['mt', 'missoula'],
-  // Nebraska
   ['ne', 'omaha'],          ['ne', 'lincoln'],
-  // Nevada
   ['nv', 'las-vegas'],      ['nv', 'reno'],
-  // New Hampshire
   ['nh', 'manchester'],
-  // New Jersey
   ['nj', 'newark'],         ['nj', 'jersey-city'],
-  // New Mexico
   ['nm', 'albuquerque'],    ['nm', 'santa-fe'],
-  // New York
   ['ny', 'new-york'],       ['ny', 'brooklyn'],       ['ny', 'buffalo'],
   ['ny', 'manhattan'],      ['ny', 'queens'],          ['ny', 'bronx'],
   ['ny', 'staten-island'],
-  // North Carolina
   ['nc', 'charlotte'],      ['nc', 'raleigh'],         ['nc', 'durham'],
-  // North Dakota
   ['nd', 'fargo'],
-  // Ohio
   ['oh', 'columbus'],       ['oh', 'cleveland'],       ['oh', 'cincinnati'],
-  // Oklahoma
   ['ok', 'oklahoma-city'],  ['ok', 'tulsa'],
-  // Oregon
   ['or', 'portland'],       ['or', 'eugene'],
-  // Pennsylvania
   ['pa', 'philadelphia'],   ['pa', 'pittsburgh'],
-  // Rhode Island
   ['ri', 'providence'],
-  // South Carolina
   ['sc', 'charleston'],     ['sc', 'columbia'],
-  // South Dakota
   ['sd', 'sioux-falls'],
-  // Tennessee
   ['tn', 'nashville'],      ['tn', 'memphis'],         ['tn', 'knoxville'],
-  // Texas
   ['tx', 'houston'],        ['tx', 'dallas'],           ['tx', 'austin'],
   ['tx', 'san-antonio'],    ['tx', 'fort-worth'],       ['tx', 'el-paso'],
-  // Utah
   ['ut', 'salt-lake-city'], ['ut', 'provo'],
-  // Vermont
   ['vt', 'burlington'],
-  // Virginia
   ['va', 'virginia-beach'], ['va', 'richmond'],         ['va', 'arlington'],
-  // Washington
   ['wa', 'seattle'],        ['wa', 'spokane'],
-  // West Virginia
   ['wv', 'charleston'],
-  // Wisconsin
   ['wi', 'milwaukee'],      ['wi', 'madison'],
-  // Wyoming
   ['wy', 'cheyenne'],
 ]
 
-// Categories to generate per city
 const CATEGORIES = [
   'veterinarians',
   'emergency_vets',
@@ -166,22 +121,17 @@ const CATEGORIES = [
 
 function buildRouteList() {
   const routes = [...STATIC_ROUTES]
-
-  // Global FAQ page
   routes.push('/faq')
 
-  // State pages
   for (const state of STATES) {
     routes.push(`/${state}`)
   }
 
-  // City pages + city FAQ pages
   for (const [state, city] of CITIES) {
     routes.push(`/${state}/${city}`)
     routes.push(`/${state}/${city}/faq`)
   }
 
-  // Category pages (city × category)
   for (const [state, city] of CITIES) {
     for (const cat of CATEGORIES) {
       routes.push(`/${state}/${city}/${cat}`)
@@ -191,18 +141,66 @@ function buildRouteList() {
   return routes
 }
 
+// ── Supabase data fetching for category pages ────────────────────────────────
+
+const PAGE_SIZE = 24
+
+async function fetchProvidersForCategory(cityName, stateAbbr, category) {
+  if (!HAS_SUPABASE) return null
+
+  const params = new URLSearchParams({
+    'select': '*',
+    'state': `ilike.${stateAbbr}`,
+    'city': `ilike.${cityName}`,
+    'category': `eq.${category}`,
+    'order': 'rating.desc.nullslast,review_count.desc',
+    'limit': String(PAGE_SIZE),
+    'offset': '0',
+  })
+
+  // Also get total count
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/providers?${params}`, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'count=exact',
+      },
+    })
+
+    if (!res.ok) return null
+
+    const providers = await res.json()
+    const total = parseInt(res.headers.get('content-range')?.split('/')[1] ?? '0', 10)
+
+    return {
+      providers,
+      total: total || providers.length,
+      page: 1,
+      hasMore: total > PAGE_SIZE,
+      fallbackMode: 'exact',
+    }
+  } catch {
+    return null
+  }
+}
+
+function parseCategoryRoute(route) {
+  // Match /:state/:city/:category
+  const match = route.match(/^\/([a-z]{2})\/([a-z0-9-]+)\/([a-z_]+)$/)
+  if (!match) return null
+  const [, stateSlug, citySlug, category] = match
+  if (!CATEGORIES.includes(category)) return null
+  return { stateSlug, citySlug, category }
+}
+
 // ── Head-tag extraction ───────────────────────────────────────────────────────
-// react-helmet-async v3 on React 19 renders <title>/<meta>/<link> as React
-// elements directly in the HTML string (body). We extract them here and hoist
-// them into <head> so crawlers see a properly structured document.
 
 function extractHeadTags(html) {
   const tags = []
 
-  // <title>
   html = html.replace(/<title[^>]*>[\s\S]*?<\/title>/gi, (m) => { tags.push(m); return '' })
 
-  // SEO <meta> tags — skip charset / viewport / http-equiv (already in template)
   html = html.replace(/<meta\s[^>]*\/?>/gi, (m) => {
     if (
       /name=["'](description|robots|twitter:[^"']*)/i.test(m) ||
@@ -214,10 +212,8 @@ function extractHeadTags(html) {
     return m
   })
 
-  // <link rel="canonical">
   html = html.replace(/<link\s[^>]*rel=["']canonical["'][^>]*\/?>/gi, (m) => { tags.push(m); return '' })
 
-  // JSON-LD <script> blocks (structured data — fine anywhere, but cleaner in head)
   html = html.replace(/<script\s+type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, (m) => { tags.push(m); return '' })
 
   return { headTags: tags.join('\n    '), cleanedHtml: html }
@@ -226,7 +222,6 @@ function extractHeadTags(html) {
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  // Load the SSR bundle built by vite.ssr.config.ts
   const ssrEntryPath = path.join(ssrBuildDir, 'entry-server.js')
   if (!fs.existsSync(ssrEntryPath)) {
     console.error(`SSR bundle not found at ${ssrEntryPath}`)
@@ -234,12 +229,8 @@ async function main() {
     process.exit(1)
   }
 
-  const { render } = await import(pathToFileURL(ssrEntryPath).href)
+  const { render, getCityMeta, getCategoryMeta } = await import(pathToFileURL(ssrEntryPath).href)
 
-  // Load the client-built index.html as the template.
-  // We prefer a previously-saved clean copy (_template.html) so that running
-  // this script standalone (after a full build) still has the SSR markers even
-  // though dist/index.html was overwritten when the '/' route was last rendered.
   const templatePath = path.join(distDir, 'index.html')
   const backupTemplatePath = path.join(distDir, '_template.html')
 
@@ -250,42 +241,80 @@ async function main() {
 
   let template = fs.readFileSync(templatePath, 'utf-8')
 
-  // If the main template has already been replaced (missing markers), use backup
   if (!template.includes('<!--ssr-head-->') || !template.includes('<!--ssr-outlet-->')) {
     if (fs.existsSync(backupTemplatePath)) {
       template = fs.readFileSync(backupTemplatePath, 'utf-8')
       console.log('Using backup template (_template.html)')
     } else {
       console.error('dist/index.html is missing SSR markers and no backup exists.')
-      console.error('Run: vite build  (to regenerate the template with SSR markers)')
       process.exit(1)
     }
   }
 
-  // Save a clean backup before the loop overwrites dist/index.html for '/'
   fs.writeFileSync(backupTemplatePath, template, 'utf-8')
 
+  if (HAS_SUPABASE) {
+    console.log('Supabase credentials found - will pre-fetch category page data')
+  } else {
+    console.log('No Supabase credentials - category pages will render with skeletons')
+  }
+
   const routes = buildRouteList()
-  console.log(`\nPre-rendering ${routes.length} routes…\n`)
+  console.log(`\nPre-rendering ${routes.length} routes...\n`)
 
   let ok = 0
   let failed = 0
+  let dataFetched = 0
 
   for (const route of routes) {
     try {
-      const { html } = render(route)
+      // Check if this is a category page that needs data
+      let prefetchedData = undefined
+      const catRoute = parseCategoryRoute(route)
 
-      // react-helmet-async v3 / React 19 renders <title>/<meta> as inline
-      // React elements — extract them from the body HTML and hoist to <head>.
+      if (catRoute && HAS_SUPABASE) {
+        const cityMeta = getCityMeta(catRoute.stateSlug, catRoute.citySlug)
+        const categoryMeta = getCategoryMeta(catRoute.category)
+
+        if (cityMeta && categoryMeta) {
+          const result = await fetchProvidersForCategory(
+            cityMeta.city,
+            cityMeta.stateAbbr,
+            catRoute.category
+          )
+
+          if (result && result.providers.length > 0) {
+            // Build the exact query key that useProviders uses
+            const queryKey = ['providers', {
+              city: cityMeta.city,
+              state: cityMeta.stateAbbr,
+              category: catRoute.category,
+              sort: 'rating',
+              page: 1,
+            }]
+
+            prefetchedData = [{ queryKey, data: result }]
+            dataFetched++
+          }
+        }
+      }
+
+      const { html, dehydratedState } = render(route, prefetchedData)
+
       const { headTags, cleanedHtml } = extractHeadTags(html)
-
-      const fallbackHead = '<title>PetOS Directory — Find Vets, Groomers, Boarding &amp; More</title>'
+      const fallbackHead = '<title>PetOS Directory -- Find Vets, Groomers, Boarding &amp; More</title>'
 
       let page = template
         .replace('<!--ssr-head-->', headTags || fallbackHead)
         .replace('<!--ssr-outlet-->', cleanedHtml)
 
-      // Determine output path
+      // Inject dehydrated React Query state for client hydration
+      if (prefetchedData && dehydratedState?.queries?.length > 0) {
+        const stateJson = JSON.stringify(dehydratedState)
+        const script = `<script>window.__REACT_QUERY_STATE__=${stateJson}</script>`
+        page = page.replace('</head>', `${script}\n</head>`)
+      }
+
       const isRoot = route === '/'
       const filePath = isRoot
         ? path.join(distDir, 'index.html')
@@ -294,15 +323,15 @@ async function main() {
       fs.mkdirSync(path.dirname(filePath), { recursive: true })
       fs.writeFileSync(filePath, page, 'utf-8')
 
-      console.log(`  ✓  ${route}`)
+      console.log(`  ${prefetchedData ? '++' : ' ✓'}  ${route}${prefetchedData ? ` (${prefetchedData[0].data.providers.length} providers)` : ''}`)
       ok++
     } catch (err) {
-      console.error(`  ✗  ${route}  —  ${err.message}`)
+      console.error(`  X  ${route}  --  ${err.message}`)
       failed++
     }
   }
 
-  console.log(`\nDone. ${ok} rendered, ${failed} failed.\n`)
+  console.log(`\nDone. ${ok} rendered, ${failed} failed, ${dataFetched} category pages with live data.\n`)
   if (failed > 0) process.exit(1)
 }
 

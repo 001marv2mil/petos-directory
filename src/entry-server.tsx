@@ -1,11 +1,12 @@
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider, dehydrate } from '@tanstack/react-query'
 import { HelmetProvider } from 'react-helmet-async'
 import type { HelmetServerState } from 'react-helmet-async'
 import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '@/context/AuthContext'
 import { PageShell } from '@/components/layout/PageShell'
+import { getCityMeta, getCategoryMeta } from '@/lib/constants'
 import HomePage from '@/pages/HomePage'
 import SearchPage from '@/pages/SearchPage'
 import CityPage from '@/pages/CityPage'
@@ -20,11 +21,25 @@ import NotFoundPage from '@/pages/NotFoundPage'
 
 type SSRHelmetContext = { helmet?: HelmetServerState }
 
-export function render(url: string) {
+interface PrefetchEntry {
+  queryKey: unknown[]
+  data: unknown
+}
+
+export { getCityMeta, getCategoryMeta }
+
+export function render(url: string, prefetchedData?: PrefetchEntry[]) {
   const helmetContext: SSRHelmetContext = {}
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false, staleTime: Infinity } },
   })
+
+  // Pre-populate React Query cache so components render with real data
+  if (prefetchedData) {
+    for (const entry of prefetchedData) {
+      queryClient.setQueryData(entry.queryKey, entry.data)
+    }
+  }
 
   const html = renderToString(
     <HelmetProvider context={helmetContext}>
@@ -54,5 +69,11 @@ export function render(url: string) {
     </HelmetProvider>
   )
 
-  return { html, helmet: helmetContext.helmet as HelmetServerState | undefined }
+  const dehydratedState = dehydrate(queryClient)
+
+  return {
+    html,
+    helmet: helmetContext.helmet as HelmetServerState | undefined,
+    dehydratedState,
+  }
 }
