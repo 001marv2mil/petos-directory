@@ -138,24 +138,6 @@ function getHtml(emailNum: number, p: Provider, stats?: ProviderStats): string {
           </a>
         </p>
 
-        <div style="border-top:1px solid #e5e7eb;margin:28px 0;padding-top:24px;">
-          <p style="font-size:15px;line-height:1.6;font-weight:600;color:#111827;">
-            Want to stand out from other ${catLabel}s in ${p.city}?
-          </p>
-          <p style="font-size:14px;line-height:1.6;color:#374151;">
-            Featured businesses get <strong>top placement</strong>, a highlighted card
-            with photo, and <strong>priority in search results</strong> across the directory.
-          </p>
-          <p style="text-align:center;margin:20px 0;">
-            <a href="${FEATURED_URL}" style="display:inline-block;background:#16a34a;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
-              Get Featured — $99/mo
-            </a>
-          </p>
-          <p style="font-size:13px;color:#6b7280;text-align:center;">
-            Cancel anytime. Your basic listing stays free, always.
-          </p>
-        </div>
-
         <p style="font-size:15px;line-height:1.6;">Best,<br/>Malak<br/>PetOS Directory</p>
       ${footer}`
 
