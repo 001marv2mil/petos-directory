@@ -111,9 +111,22 @@ export default function ProviderPage() {
   const isGoogleListed = provider.source === 'google_places'
 
   const pageUrl = `https://petosdirectory.com/provider/${provider.slug}`
+
+  // Map category to specific schema.org type for richer search results
+  const schemaTypeMap: Record<string, string> = {
+    veterinarians: 'VeterinaryCare',
+    emergency_vets: 'EmergencyService',
+    groomers: 'LocalBusiness',
+    boarding: 'LodgingBusiness',
+    daycare: 'LocalBusiness',
+    trainers: 'ProfessionalService',
+    pet_pharmacies: 'Pharmacy',
+  }
+  const schemaType = schemaTypeMap[provider.category] || 'LocalBusiness'
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': schemaType,
     name: provider.business_name,
     description: provider.description ?? undefined,
     image: img,
@@ -127,6 +140,17 @@ export default function ProviderPage() {
       postalCode: provider.zip ?? undefined,
       addressCountry: 'US',
     },
+    priceRange: '$$',
+    ...(provider.hours && {
+      openingHoursSpecification: Object.entries(provider.hours as Record<string, string>)
+        .filter(([, v]) => v && v !== 'Closed')
+        .map(([day, hours]) => ({
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: day,
+          opens: (hours as string).split('-')[0]?.trim(),
+          closes: (hours as string).split('-')[1]?.trim(),
+        })),
+    }),
     ...(provider.rating !== null && {
       aggregateRating: {
         '@type': 'AggregateRating',
