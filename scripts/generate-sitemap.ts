@@ -106,6 +106,10 @@ async function generate() {
   const categoryUrls = [...categorySet].map(c => urlEntry(`/${c}`, '0.8', 'weekly'))
   writeUrlset('sitemap-categories.xml', categoryUrls)
 
+  // --- Best-of guides (city + category combos) ---
+  const bestOfUrls = [...categorySet].map(c => urlEntry(`/${c.replace(/\/([^/]+)$/, '/best/$1')}`, '0.9', 'monthly'))
+  writeUrlset('sitemap-guides.xml', bestOfUrls)
+
   // --- Providers (chunked) ---
   const providerFiles: string[] = []
   for (let i = 0; i < providerSlugs.length; i += PROVIDERS_PER_SITEMAP) {
@@ -116,7 +120,7 @@ async function generate() {
   }
 
   // --- Index ---
-  const indexFiles = ['sitemap-static.xml', 'sitemap-cities.xml', 'sitemap-categories.xml', ...providerFiles]
+  const indexFiles = ['sitemap-static.xml', 'sitemap-cities.xml', 'sitemap-categories.xml', 'sitemap-guides.xml', ...providerFiles]
   writeSitemapIndex(indexFiles)
 
   console.log(`✓ Sitemap index written with ${indexFiles.length} sub-sitemaps`)

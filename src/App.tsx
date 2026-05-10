@@ -18,6 +18,7 @@ const ClaimPage = lazy(() => import('@/pages/ClaimPage'))
 const BusinessDashboardPage = lazy(() => import('@/pages/BusinessDashboardPage'))
 const AdminClaimsPage = lazy(() => import('@/pages/AdminClaimsPage'))
 const AdminDashboardPage = lazy(() => import('@/pages/AdminDashboardPage'))
+const BestOfPage = lazy(() => import('@/pages/BestOfPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 const FaqPage = lazy(() => import('@/pages/FaqPage'))
 const CostCalculatorPage = lazy(() => import('@/pages/CostCalculatorPage'))
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="/:state" element={<StatePage />} />
               <Route path="/:state/:city/faq" element={<FaqPage />} />
               <Route path="/:state/:city" element={<CityPage />} />
+              <Route path="/:state/:city/best/:category" element={<BestOfPage />} />
               <Route path="/:state/:city/:category" element={<CategoryPage />} />
               <Route path="/provider/:slug" element={<ProviderPage />} />
               <Route path="/faq" element={<FaqPage />} />

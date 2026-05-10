@@ -138,6 +138,13 @@ function buildRouteList() {
     }
   }
 
+  // Best-of guide pages (city + category combos)
+  for (const [state, city] of CITIES) {
+    for (const cat of CATEGORIES) {
+      routes.push(`/${state}/${city}/best/${cat}`)
+    }
+  }
+
   return routes
 }
 
