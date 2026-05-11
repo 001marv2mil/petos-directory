@@ -142,14 +142,18 @@ export default function ProviderPage() {
     },
     priceRange: '$$',
     ...(provider.hours && {
-      openingHoursSpecification: Object.entries(provider.hours as unknown as Record<string, string>)
+      openingHoursSpecification: Object.entries(provider.hours as unknown as Record<string, unknown>)
         .filter(([, v]) => v && v !== 'Closed')
-        .map(([day, hours]) => ({
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: day,
-          opens: (hours as string).split('-')[0]?.trim(),
-          closes: (hours as string).split('-')[1]?.trim(),
-        })),
+        .map(([day, val]) => {
+          const h = typeof val === 'string' ? val : ''
+          return {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: day,
+            opens: h.includes('-') ? h.split('-')[0]?.trim() : undefined,
+            closes: h.includes('-') ? h.split('-')[1]?.trim() : undefined,
+          }
+        })
+        .filter(spec => spec.opens && spec.closes),
     }),
     ...(provider.rating !== null && {
       aggregateRating: {
