@@ -138,14 +138,6 @@ function getHtml(emailNum: number, p: Provider, stats?: ProviderStats): string {
           </a>
         </p>
 
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin:24px 0;">
-          <p style="font-size:14px;color:#166534;margin:0 0 8px 0;font-weight:600;">Want to help more pet owners find you?</p>
-          <p style="font-size:13px;color:#374151;margin:0 0 8px 0;">Add a link to your listing on your website or social media:</p>
-          <p style="background:#fff;border:1px solid #d1d5db;border-radius:4px;padding:8px 12px;font-size:12px;font-family:monospace;color:#374151;margin:0;word-break:break-all;">
-            &lt;a href="${listingUrl}"&gt;Find us on PetOS Directory&lt;/a&gt;
-          </p>
-        </div>
-
         <p style="font-size:15px;line-height:1.6;">Best,<br/>Malak<br/>PetOS Directory</p>
       ${footer}`
 
