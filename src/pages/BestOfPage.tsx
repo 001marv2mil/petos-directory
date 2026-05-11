@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd, ItemListJsonLd } from '@/components/common/JsonLd'
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs'
 import { getProviderImage } from '@/lib/images'
 import type { Provider } from '@/types'
-import { Star, MapPin, Phone, ExternalLink, Clock, ChevronRight } from 'lucide-react'
+import { Star, MapPin, Phone, ChevronRight } from 'lucide-react'
 
 const CURRENT_YEAR = new Date().getFullYear()
 

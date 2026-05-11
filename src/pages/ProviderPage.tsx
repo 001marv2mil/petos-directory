@@ -142,7 +142,7 @@ export default function ProviderPage() {
     },
     priceRange: '$$',
     ...(provider.hours && {
-      openingHoursSpecification: Object.entries(provider.hours as Record<string, string>)
+      openingHoursSpecification: Object.entries(provider.hours as unknown as Record<string, string>)
         .filter(([, v]) => v && v !== 'Closed')
         .map(([day, hours]) => ({
           '@type': 'OpeningHoursSpecification',

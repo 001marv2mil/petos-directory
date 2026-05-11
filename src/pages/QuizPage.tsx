@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
-import { CITIES, CATEGORIES, getCityMeta } from '@/lib/constants'
+import { CITIES, CATEGORIES } from '@/lib/constants'
 import { PageMeta } from '@/components/common/PageMeta'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { assignProviderImages } from '@/lib/images'
@@ -30,19 +30,7 @@ const NEEDS = [
   { id: 'pet_pharmacies' as CategorySlug, label: 'Pharmacy', desc: 'Medications and supplements', icon: Pill },
 ]
 
-// Group cities by state for the selector
-const STATES_WITH_CITIES = (() => {
-  const map = new Map<string, typeof CITIES[number][]>()
-  for (const c of CITIES) {
-    const arr = map.get(c.stateAbbr) || []
-    arr.push(c)
-    map.set(c.stateAbbr, arr)
-  }
-  return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0]))
-})()
-
 export default function QuizPage() {
-  const navigate = useNavigate()
   const [step, setStep] = useState<Step>('pet')
   const [petType, setPetType] = useState('')
   const [need, setNeed] = useState<CategorySlug | ''>('')
@@ -51,7 +39,7 @@ export default function QuizPage() {
 
   const cityMeta = selectedCity ? CITIES.find(c => `${c.stateAbbr}-${c.citySlug}` === selectedCity) : null
 
-  const { data: results = [], isLoading } = useQuery({
+  const { data: results = [] as Provider[], isLoading } = useQuery({
     queryKey: ['quiz-results', cityMeta?.city, cityMeta?.stateAbbr, need],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -64,7 +52,7 @@ export default function QuizPage() {
         .order('review_count', { ascending: false, nullsFirst: false })
         .limit(6)
       if (error) throw error
-      return assignProviderImages((data ?? []) as Provider[])
+      return (data ?? []) as Provider[]
     },
     enabled: step === 'results' && !!cityMeta && !!need,
     staleTime: 1000 * 60 * 10,
@@ -236,9 +224,12 @@ export default function QuizPage() {
 
             {!isLoading && results.length > 0 && (
               <div className="space-y-4">
-                {results.map(p => (
-                  <ProviderCard key={p.id} provider={p} />
-                ))}
+                {(() => {
+                  const imgs = assignProviderImages(results)
+                  return results.map((p, i) => (
+                    <ProviderCard key={p.id} provider={p} precomputedImage={imgs[i]} />
+                  ))
+                })()}
               </div>
             )}
 
