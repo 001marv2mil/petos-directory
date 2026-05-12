@@ -374,6 +374,44 @@ export default function ProviderPage() {
 
           <NearbyProviders providers={nearby} />
 
+          {/* Cross-linking section for SEO — links to best-of, other categories, city page */}
+          {categoryMeta && cityMeta && (
+            <div className="space-y-4">
+              <h2 className="text-base font-semibold text-gray-900">
+                Explore Pet Services in {provider.city}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <Link
+                  to={`/${cityMeta.stateSlug}/${cityMeta.citySlug}/best/${provider.category as CategorySlug}`}
+                  className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium text-green-800"
+                >
+                  <Star className="w-4 h-4 text-green-600" />
+                  Best {categoryMeta.pluralLabel} in {provider.city}
+                  <ChevronRight className="w-4 h-4 ml-auto text-green-400" />
+                </Link>
+                <Link
+                  to={`/${cityMeta.stateSlug}/${cityMeta.citySlug}`}
+                  className="flex items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium text-blue-800"
+                >
+                  <MapPin className="w-4 h-4 text-blue-600" />
+                  All Pet Services in {provider.city}
+                  <ChevronRight className="w-4 h-4 ml-auto text-blue-400" />
+                </Link>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.filter(c => c.slug !== provider.category).slice(0, 5).map(cat => (
+                  <Link
+                    key={cat.slug}
+                    to={`/${cityMeta.stateSlug}/${cityMeta.citySlug}/${cat.slug}`}
+                    className="text-xs px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors"
+                  >
+                    {cat.pluralLabel} in {provider.city}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Category guide + FAQs + related searches — adds ~500 words of unique
               content per page so Google has more to index. Includes FAQ schema.org
               JSON-LD for FAQ rich snippets in search results. */}
