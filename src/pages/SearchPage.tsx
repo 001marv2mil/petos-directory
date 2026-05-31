@@ -62,6 +62,7 @@ export default function SearchPage() {
         title={pageTitle}
         description={`Search for ${categoryMeta?.pluralLabel.toLowerCase() ?? 'pet services'}${cityParam ? ` in ${cityParam}` : ''} — browse real listings with ratings, hours, and contact info.`}
         path="/search"
+        noindex
       />
 
       <Breadcrumbs items={[{ label: 'Search' }]} />

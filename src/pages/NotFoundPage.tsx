@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom'
 import { PawPrint } from 'lucide-react'
+import { PageMeta } from '@/components/common/PageMeta'
 
 export default function NotFoundPage() {
   return (
     <div className="max-w-lg mx-auto px-4 py-24 text-center">
+      <PageMeta
+        title="Page Not Found"
+        description="The page you're looking for doesn't exist on PetOS Directory."
+        noindex
+      />
       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
         <PawPrint className="w-10 h-10 text-blue-700" />
       </div>

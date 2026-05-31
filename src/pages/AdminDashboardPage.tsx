@@ -60,7 +60,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
-      <PageMeta title="Admin — Dashboard" description="PetOS Directory admin dashboard" path="/admin/dashboard" />
+      <PageMeta title="Admin — Dashboard" description="PetOS Directory admin dashboard" path="/admin/dashboard" noindex />
 
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">

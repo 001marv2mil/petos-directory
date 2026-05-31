@@ -150,7 +150,7 @@ export default function BusinessDashboardPage() {
   if (providers.length === 0) {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <PageMeta title="Business Dashboard" description="Manage your business listings" path="/dashboard" />
+        <PageMeta title="Business Dashboard" description="Manage your business listings" path="/dashboard" noindex />
         <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <Briefcase className="w-7 h-7 text-blue-700" />
         </div>
@@ -171,7 +171,7 @@ export default function BusinessDashboardPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
-      <PageMeta title="Business Dashboard" description="Manage your business listings" path="/dashboard" />
+      <PageMeta title="Business Dashboard" description="Manage your business listings" path="/dashboard" noindex />
 
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Your Business Dashboard</h1>

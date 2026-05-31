@@ -19,6 +19,7 @@ export default function AccountPage() {
         title="My Account — PetOS Directory"
         description="Manage your pets, favorites, and alerts on PetOS Directory."
         path="/account"
+        noindex
       />
 
       {/* Header */}

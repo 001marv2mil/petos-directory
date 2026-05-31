@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, useSearchParams, Link } from 'react-router-dom'
 import { Shield, CheckCircle, Building2, Mail, Phone, User, ChevronDown } from 'lucide-react'
+import { PageMeta } from '@/components/common/PageMeta'
 
 export default function ClaimPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -75,6 +76,11 @@ export default function ClaimPage() {
 
   return (
     <div className="max-w-xl mx-auto px-4 py-12">
+      <PageMeta
+        title={`Claim ${businessName}`}
+        description="Verify ownership and claim your business listing on PetOS Directory."
+        noindex
+      />
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 text-blue-700 text-sm font-semibold mb-3">

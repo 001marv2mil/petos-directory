@@ -9,9 +9,17 @@ interface PageMetaProps {
   image?: string
   path?: string
   type?: 'website' | 'profile'
+  /**
+   * When true, emits <meta name="robots" content="noindex, follow"> so Google
+   * drops the URL from its index but still follows internal links. Use for
+   * thin/duplicate pages: search results, account/admin/dashboard, not-found,
+   * claim flow, etc. Indexed pages (homepage, city/category/provider) leave
+   * this false so default "index, follow" applies.
+   */
+  noindex?: boolean
 }
 
-export function PageMeta({ title, description, image, path, type = 'website' }: PageMetaProps) {
+export function PageMeta({ title, description, image, path, type = 'website', noindex = false }: PageMetaProps) {
   const fullTitle = `${title} | PetOS Directory`
   const img = image ?? DEFAULT_IMAGE
   const url = path ? `${SITE_URL}${path}` : SITE_URL
@@ -20,6 +28,7 @@ export function PageMeta({ title, description, image, path, type = 'website' }: 
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      {noindex && <meta name="robots" content="noindex, follow" />}
       <link rel="canonical" href={url} />
 
       {/* Open Graph */}
