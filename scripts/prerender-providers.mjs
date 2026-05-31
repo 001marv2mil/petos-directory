@@ -30,9 +30,15 @@ const ssrBuildDir = path.join(root, 'ssr-build')
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY
 
+// Soft-fail when credentials are missing OR Supabase is unreachable. Earlier
+// versions hard-exited, which broke every Vercel deploy when the upstream
+// project was paused/deleted. Now we log a warning and produce zero provider
+// pages — the rest of the build (static routes, category pages with skeletons,
+// previously prerendered HTML) still ships, so the site doesn't go dark while
+// Supabase is being restored.
 if (!SUPABASE_URL || !SUPABASE_KEY) {
-  console.error('Missing Supabase credentials. Set VITE_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY')
-  process.exit(1)
+  console.warn('[prerender-providers] Missing Supabase credentials. Skipping provider page generation.')
+  process.exit(0)
 }
 
 // ── Head-tag extraction (same as prerender.mjs) ─────────────────────────────
@@ -76,16 +82,24 @@ async function fetchAllProviders() {
       'limit': String(PAGE_SIZE),
     })
 
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/providers?${params}`, {
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-      },
-    })
+    let res
+    try {
+      res = await fetch(`${SUPABASE_URL}/rest/v1/providers?${params}`, {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+        },
+      })
+    } catch (err) {
+      // Network-level failure (DNS, timeout, TLS). Treat as "no providers to
+      // render" rather than killing the whole deploy.
+      console.warn(`[prerender-providers] Supabase unreachable (${err.code || err.message}). Skipping provider page generation.`)
+      return null
+    }
 
     if (!res.ok) {
-      console.error(`Supabase fetch error: ${res.status} ${res.statusText}`)
-      process.exit(1)
+      console.warn(`[prerender-providers] Supabase responded ${res.status} ${res.statusText}. Skipping provider page generation.`)
+      return null
     }
 
     const data = await res.json()
@@ -130,6 +144,10 @@ async function main() {
 
   console.log('Fetching all providers from Supabase...')
   const providers = await fetchAllProviders()
+  if (providers === null) {
+    console.log('  Supabase fetch returned no usable result — exiting cleanly so the rest of the deploy continues.\n')
+    process.exit(0)
+  }
   console.log(`  Found ${providers.length} providers\n`)
   console.log(`Pre-rendering ${providers.length} provider pages...\n`)
 
