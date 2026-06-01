@@ -55,6 +55,7 @@ export default function CategoryPage() {
         title={`${categoryMeta.pluralLabel} in ${cityMeta.city}, ${cityMeta.stateAbbr}`}
         description={`Find the best ${categoryMeta.pluralLabel.toLowerCase()} in ${cityMeta.city}, ${cityMeta.state}. Browse ${data?.total ?? 'local'} listings with real ratings, hours, and contact info.`}
         path={`/${cityMeta.stateSlug}/${cityMeta.citySlug}/${categoryMeta.slug}`}
+        noindex={!isLoading && (data?.providers?.length ?? 0) === 0}
       />
       <BreadcrumbJsonLd items={[
         { label: 'Home', href: '/' },

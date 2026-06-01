@@ -57,6 +57,7 @@ export default function CityPage() {
         description={`Find trusted veterinarians, groomers, pet boarding, dog daycare, trainers, and emergency vets in ${cityMeta.city}, ${cityMeta.state}. Browse real listings with ratings and reviews.`}
         path={`/${cityMeta.stateSlug}/${cityMeta.citySlug}`}
         image={cityMeta.heroImage}
+        noindex={!isLoading && topProviders.length === 0}
       />
       <BreadcrumbJsonLd items={[
         { label: 'Home', href: '/' },

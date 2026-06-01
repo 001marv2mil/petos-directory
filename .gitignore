@@ -60,3 +60,6 @@ supabase/.temp/
 gcp-service-account.json
 .firecrawl
 public/lead-magnet-previews/
+
+.supabase-db-password.txt
+

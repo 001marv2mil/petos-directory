@@ -1,10 +1,12 @@
 import { Navigate, useParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
-import { getCityMeta, getCategoryMeta, CATEGORIES } from '@/lib/constants'
+import { getCityMeta, getCategoryMeta } from '@/lib/constants'
 import { PageMeta } from '@/components/common/PageMeta'
 import { BreadcrumbJsonLd, ItemListJsonLd } from '@/components/common/JsonLd'
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs'
+import { OtherServicesInCity } from '@/components/seo/OtherServicesInCity'
+import { NearbyCitiesForService } from '@/components/seo/NearbyCitiesForService'
 import { getProviderImage } from '@/lib/images'
 import type { Provider } from '@/types'
 import { Star, MapPin, Phone, ChevronRight } from 'lucide-react'
@@ -64,15 +66,13 @@ export default function BestOfPage() {
   const path = `/${cityMeta.stateSlug}/${cityMeta.citySlug}/best/${catMeta.slug}`
   const catPagePath = `/${cityMeta.stateSlug}/${cityMeta.citySlug}/${catMeta.slug}`
 
-  // Other categories in this city for internal linking
-  const otherCategories = CATEGORIES.filter(c => c.slug !== catMeta.slug)
-
   return (
     <div>
       <PageMeta
         title={title}
         description={`Looking for the best ${catMeta.pluralLabel.toLowerCase()} in ${cityMeta.city}? We ranked the top ${Math.min(providers.length, 10)} ${catMeta.pluralLabel.toLowerCase()} based on ratings, reviews, and trust signals. Updated for ${CURRENT_YEAR}.`}
         path={path}
+        noindex={!isLoading && providers.length === 0}
       />
       <BreadcrumbJsonLd items={[
         { label: 'Home', href: '/' },
@@ -247,23 +247,11 @@ export default function BestOfPage() {
           </ul>
         </section>
 
-        {/* Related categories */}
-        <section className="mt-12 border-t border-gray-200 pt-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
-            More pet services in {cityMeta.city}
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {otherCategories.map(cat => (
-              <Link
-                key={cat.slug}
-                to={`/${cityMeta.stateSlug}/${cityMeta.citySlug}/best/${cat.slug}`}
-                className="bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-200 rounded-lg p-3 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors"
-              >
-                Best {cat.pluralLabel}
-              </Link>
-            ))}
-          </div>
-        </section>
+        {/* Related categories — same city, other services */}
+        <OtherServicesInCity cityMeta={cityMeta} currentCategorySlug={catMeta.slug} />
+
+        {/* Same service, nearby cities */}
+        <NearbyCitiesForService cityMeta={cityMeta} categoryMeta={catMeta} />
 
         {/* CTA */}
         <section className="mt-12 bg-green-50 border border-green-200 rounded-xl p-6 text-center">
