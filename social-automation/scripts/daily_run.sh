@@ -9,6 +9,20 @@
 
 set -e
 
+# === DISABLED 2026-05-31 ===
+# Auto-posting to Instagram is paused. Owner flagged unwanted posts
+# appearing in their accounts; this script is the prime suspect even
+# though we couldn't confirm. To re-enable, delete this guard block
+# AND confirm no other scheduler (Buffer/Later/Meta-native/n8n) is
+# still queued.
+if [[ "$1" != "--i-confirm-posting-is-intended" ]]; then
+    echo "ERROR: daily_run.sh is DISABLED. See header comment."
+    echo "Re-enable with the --i-confirm-posting-is-intended flag,"
+    echo "but verify no other scheduler is queued first."
+    exit 2
+fi
+shift  # consume the guard flag so downstream parsing still works
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
 OUTPUT_DIR="$BASE_DIR/output"
