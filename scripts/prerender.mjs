@@ -109,14 +109,11 @@ const CITIES = [
   ['wy', 'cheyenne'],
 ]
 
+// Narrowed 2026-05-31 from 7 → 2 categories. Keep in sync with
+// src/lib/constants.ts CATEGORIES.
 const CATEGORIES = [
   'veterinarians',
   'emergency_vets',
-  'groomers',
-  'boarding',
-  'daycare',
-  'trainers',
-  'pet_pharmacies',
 ]
 
 function buildRouteList() {

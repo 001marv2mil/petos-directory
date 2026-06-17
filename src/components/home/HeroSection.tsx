@@ -39,10 +39,10 @@ export function HeroSection() {
 
       <div className="relative w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
         <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mx-auto max-w-3xl">
-          Find trusted pet care near you.
+          Find a trusted vet — or a 24/7 emergency vet — near you.
         </h1>
         <p className="mt-5 text-lg text-gray-300 max-w-xl mx-auto leading-relaxed">
-          Search 9,400+ verified vets, groomers, boarding, and emergency care providers across 50 states.
+          Verified veterinarians and emergency animal hospitals across 50 states. When your pet needs help, you need the right phone number in 10 seconds.
         </p>
 
         <div className="mt-10 max-w-3xl mx-auto">
@@ -50,7 +50,7 @@ export function HeroSection() {
         </div>
 
         <p className="mt-6 text-sm text-gray-400">
-          Trusted by pet owners in 113 cities with 286,000+ verified reviews
+          Real listings · real reviews · real phone numbers
         </p>
       </div>
     </section>

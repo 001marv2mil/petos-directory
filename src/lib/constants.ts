@@ -168,6 +168,10 @@ export const CITIES: CityMeta[] = [
   { city: 'Cheyenne',       state: 'Wyoming',        stateAbbr: 'WY', stateSlug: 'wy', citySlug: 'cheyenne',       heroImage: img('1546156929-a4c0ac411f47') },
 ]
 
+// Narrowed 2026-05-31 from 7 categories to 2 (vets + emergency vets only).
+// Pivot reason: directory businesses need a tight niche to break through
+// Yelp/Google Maps dominance. Vets-only positioning gives Petos a single
+// clear value prop and reduces ingest cost ~3.5x.
 export const CATEGORIES: CategoryMeta[] = [
   {
     slug: 'veterinarians',
@@ -184,46 +188,6 @@ export const CATEGORIES: CategoryMeta[] = [
     icon: 'AlertCircle',
     description: '24/7 emergency and critical care animal hospitals',
     color: 'bg-red-50 text-red-700 border-red-100',
-  },
-  {
-    slug: 'groomers',
-    label: 'Pet Groomer',
-    pluralLabel: 'Pet Groomers',
-    icon: 'Scissors',
-    description: 'Bathing, haircuts, nail trims, and full grooming services',
-    color: 'bg-pink-50 text-pink-700 border-pink-100',
-  },
-  {
-    slug: 'boarding',
-    label: 'Pet Boarding',
-    pluralLabel: 'Pet Boarding',
-    icon: 'Home',
-    description: 'Overnight and extended stays for dogs, cats, and small animals',
-    color: 'bg-amber-50 text-amber-700 border-amber-100',
-  },
-  {
-    slug: 'daycare',
-    label: 'Dog Daycare',
-    pluralLabel: 'Dog Daycares',
-    icon: 'Sun',
-    description: 'Supervised daytime play and socialization for dogs',
-    color: 'bg-yellow-50 text-yellow-700 border-yellow-100',
-  },
-  {
-    slug: 'trainers',
-    label: 'Pet Trainer',
-    pluralLabel: 'Pet Trainers',
-    icon: 'Award',
-    description: 'Obedience training, behavioral correction, and puppy classes',
-    color: 'bg-purple-50 text-purple-700 border-purple-100',
-  },
-  {
-    slug: 'pet_pharmacies',
-    label: 'Pet Pharmacy',
-    pluralLabel: 'Pet Pharmacies',
-    icon: 'Pill',
-    description: 'Prescription medications and supplements for pets',
-    color: 'bg-teal-50 text-teal-700 border-teal-100',
   },
 ]
 

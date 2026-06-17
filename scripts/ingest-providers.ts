@@ -14,8 +14,11 @@ import { normalizeNewPlace } from './lib/normalizer.js'
 import { CITY_CENTERS, type CityCenter } from './lib/categories.js'
 import type { CategorySlug } from '../src/types/index.js'
 
+// Narrowed 2026-05-31 from 7 → 2. Keep in sync with src/lib/constants.ts.
+// The CATEGORY_QUERIES map below retains all 7 entries so a future widen
+// just needs adding the slug back to this array.
 const CATEGORIES: CategorySlug[] = [
-  'veterinarians', 'emergency_vets', 'groomers', 'boarding', 'daycare', 'trainers', 'pet_pharmacies',
+  'veterinarians', 'emergency_vets',
 ]
 
 const CATEGORY_QUERIES: Record<CategorySlug, string> = {
