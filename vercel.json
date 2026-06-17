@@ -1,32 +1,10 @@
 {
   "trailingSlash": false,
-  "crons": [
-    {
-      "path": "/api/outreach-cron",
-      "schedule": "0 14 * * *"
-    }
-  ],
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.petosdirectory.com" }],
-      "destination": "https://petosdirectory.com/:path*",
+      "destination": "https://petoshealth.com/:path*",
       "permanent": true
     }
-  ],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/account", "destination": "/index.html" },
-    { "source": "/account/(.*)", "destination": "/index.html" },
-    { "source": "/dashboard", "destination": "/index.html" },
-    { "source": "/dashboard/(.*)", "destination": "/index.html" },
-    { "source": "/admin/(.*)", "destination": "/index.html" },
-    { "source": "/claim/(.*)", "destination": "/index.html" },
-    { "source": "/search", "destination": "/index.html" },
-    { "source": "/search/(.*)", "destination": "/index.html" },
-    { "source": "/provider/(.*)", "destination": "/index.html" },
-    { "source": "/quiz", "destination": "/index.html" },
-    { "source": "/calculator", "destination": "/index.html" },
-    { "source": "/not-found", "destination": "/index.html" }
   ]
 }
