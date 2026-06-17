@@ -29,26 +29,31 @@ export function CategoryGrid() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900">
-            Every service your pet needs
+            Routine care or an emergency?
           </h2>
           <p className="mt-3 text-gray-500 text-lg">
-            Browse by category to find the right provider
+            Two questions, two answers.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {CATEGORIES.map(cat => (
             <Link
               key={cat.slug}
               to={`/search?category=${cat.slug}`}
-              className="group flex flex-col items-center gap-3 p-5 rounded-2xl hover:shadow-md transition-all duration-200"
+              className="group flex flex-col items-center gap-4 p-8 rounded-2xl border border-gray-200 hover:border-emerald-300 hover:shadow-md transition-all duration-200"
             >
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${CATEGORY_COLORS[cat.slug]}`}>
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-colors ${CATEGORY_COLORS[cat.slug]}`}>
                 {CATEGORY_ICONS[cat.slug]}
               </div>
-              <span className="text-sm font-semibold text-gray-700 text-center leading-tight">
-                {cat.pluralLabel}
-              </span>
+              <div className="text-center">
+                <div className="text-lg font-semibold text-gray-900 leading-tight">
+                  {cat.pluralLabel}
+                </div>
+                <div className="text-sm text-gray-500 mt-1">
+                  {cat.description}
+                </div>
+              </div>
             </Link>
           ))}
         </div>

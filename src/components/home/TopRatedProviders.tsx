@@ -22,7 +22,7 @@ async function fetchTopRated(): Promise<Provider[]> {
   const { data: extra } = await supabase
     .from('providers')
     .select('*')
-    .in('category', ['veterinarians', 'groomers', 'trainers', 'boarding', 'daycare'])
+    .in('category', ['veterinarians', 'emergency_vets'])
     .gte('rating', 4.5)
     .gte('review_count', 100)
     .order('review_count', { ascending: false })
@@ -47,10 +47,10 @@ export function TopRatedProviders() {
         <div className="flex items-end justify-between mb-12">
           <div>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900">
-              Top rated providers
+              Top rated vets
             </h2>
             <p className="mt-3 text-gray-500 text-lg">
-              Highest-reviewed pet services across our directory
+              Highest-reviewed veterinarians across the directory
             </p>
           </div>
           <Link
